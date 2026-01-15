@@ -307,7 +307,7 @@
         <hr class="my-2 d-none d-lg-block" />
         <div class="collapse navbar-collapse scrollbar py-lg-2" id="navbarDoubleTop">
             <ul class="navbar-nav" data-top-nav-dropdowns="data-top-nav-dropdowns">
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dashboards">Dashboard</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dashboards">Organization</a>
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="dashboards">
                         <div class="bg-white dark__bg-1000 rounded-3 py-2"><a class="dropdown-item link-600 fw-medium" href="index.html">Default</a><a class="dropdown-item link-600 fw-medium" href="dashboard/analytics.html">Analytics</a><a class="dropdown-item link-600 fw-medium" href="dashboard/crm.html">CRM</a><a class="dropdown-item link-600 fw-medium" href="dashboard/e-commerce.html">E commerce</a><a class="dropdown-item link-600 fw-medium" href="dashboard/lms.html">LMS<span class="badge rounded-pill ms-2 badge-subtle-success">New</span></a><a class="dropdown-item link-600 fw-medium" href="dashboard/project-management.html">Management</a><a class="dropdown-item link-600 fw-medium" href="dashboard/saas.html">SaaS</a><a class="dropdown-item link-600 fw-medium" href="dashboard/support-desk.html">Support desk<span class="badge rounded-pill ms-2 badge-subtle-success">New</span></a></div>
                     </div>
@@ -480,13 +480,28 @@
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                <li class="nav-item"><!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span></div>
+                <li class="nav-item">
+                    <!-- parent pages-->
+                    <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Organization</span></div>
                     </a>
                     <ul class="nav collapse show" id="dashboard">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span></div>
-                            </a><!-- more inner pages--></li>
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.disciplines.*') ? 'active' : '' }}"
+                               href="{{ route('admin.disciplines.index') }}">
+                                <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-layer-group"></span>
+                                </span>
+                                    <span class="nav-link-text ps-1">Disciplines</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endrole
+{{--                        <li class="nav-item"><a class="nav-link active" href="index.html">--}}
+{{--                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span></div>--}}
+{{--                            </a><!-- more inner pages--></li>--}}
                         <li class="nav-item"><a class="nav-link" href="dashboard/analytics.html">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span></div>
                             </a><!-- more inner pages--></li>
@@ -516,9 +531,12 @@
                         <div class="col ps-0">
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
-                    </div><!-- parent pages--><a class="nav-link" href="app/calendar.html" role="button">
+                    </div>
+                    <!-- parent pages-->
+                    <a class="nav-link" href="app/calendar.html" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-alt"></span></span><span class="nav-link-text ps-1">Calendar</span></div>
-                    </a><!-- parent pages--><a class="nav-link" href="app/chat.html" role="button">
+                    </a>
+                    <!-- parent pages--><a class="nav-link" href="app/chat.html" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-comments"></span></span><span class="nav-link-text ps-1">Chat</span></div>
                     </a><!-- parent pages--><a class="nav-link dropdown-indicator" href="#email" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-envelope-open"></span></span><span class="nav-link-text ps-1">Email</span></div>

@@ -14,20 +14,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="manifest" href="falcon/images/manifest.json">
-    <meta name="msapplication-TileImage" content="falcon/images/mstile-150x150.png">
+    <link rel="manifest" href="{{ asset('falcon/images/manifest.json')}}">
+    <meta name="msapplication-TileImage" content="{{ asset('falcon/images/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
-    <script src="falcon/js/config.js"></script>
-    <script src="falcon/js/simplebar.min.js"></script>
+    <script src="{{ asset('falcon/js/config.js')}}"></script>
+    <script src="{{ asset('falcon/js/simplebar.min.js')}}"></script>
 
     <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
-    <link href="falcon/css/simplebar.min.css" rel="stylesheet">
-    <link href="falcon/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
-    <link href="falcon/css/theme.min.css" rel="stylesheet" id="style-default">
-    <link href="falcon/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
-    <link href="falcon/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="{{ asset('falcon/css/simplebar.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('falcon/css/theme-rtl.min.css')}}" rel="stylesheet" id="style-rtl">
+    <link href="{{ asset('falcon/css/theme.min.css')}}" rel="stylesheet" id="style-default">
+    <link href="{{ asset('falcon/css/user-rtl.min.css')}}" rel="stylesheet" id="user-style-rtl">
+    <link href="{{ asset('falcon/css/user.min.css')}}" rel="stylesheet" id="user-style-default">
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {
@@ -181,16 +181,16 @@
 
 <!-- Falcon JS -->
 <!-- ===============================================--><!--    JavaScripts--><!-- ===============================================-->
-<script src="falcon/js/popper.min.js"></script>
-<script src="falcon/js/bootstrap.min.js"></script>
-<script src="falcon/js/anchor.min.js"></script>
-<script src="falcon/js/is.min.js"></script>
-<script src="falcon/js/echarts.min.js"></script>
-<script src="falcon/js/all.min.js"></script>
-<script src="falcon/js/lodash.min.js"></script>
+<script src="{{ asset('falcon/js/popper.min.js')}}"></script>
+<script src="{{ asset('falcon/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('falcon/js/anchor.min.js')}}"></script>
+<script src="{{ asset('falcon/js/is.min.js')}}"></script>
+<script src="{{ asset('falcon/js/echarts.min.js')}}"></script>
+<script src="{{ asset('falcon/js/all.min.js')}}"></script>
+<script src="{{ asset('falcon/js/lodash.min.js')}}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="falcon/js/list.min.js"></script>
-<script src="falcon/js/theme.js"></script>
+<script src="{{ asset('falcon/js/list.min.js')}}"></script>
+<script src="{{ asset('falcon/js/theme.js')}}"></script>
 </body>
 </html>
 
