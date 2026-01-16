@@ -10,17 +10,21 @@
     <title>Falcon | Dashboard &amp; Web App Template</title>
 
     <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('falcon/images/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('falcon/images/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('falcon/images/favicon-16x16.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('falcon/images/favicon.ico')}}">
     <link rel="manifest" href="{{ asset('falcon/images/manifest.json')}}">
     <meta name="msapplication-TileImage" content="{{ asset('falcon/images/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('falcon/js/config.js')}}"></script>
     <script src="{{ asset('falcon/js/simplebar.min.js')}}"></script>
 
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link href="{{ asset('falcon/vendors/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <link href="{{ asset('falcon/css/simplebar.min.css')}}" rel="stylesheet">
@@ -181,10 +185,12 @@
 
 <!-- Falcon JS -->
 <!-- ===============================================--><!--    JavaScripts--><!-- ===============================================-->
+
 <script src="{{ asset('falcon/js/popper.min.js')}}"></script>
 <script src="{{ asset('falcon/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('falcon/js/anchor.min.js')}}"></script>
 <script src="{{ asset('falcon/js/is.min.js')}}"></script>
+<script src="{{ asset('falcon/vendors/glightbox/js/glightbox.min.js')}}"> </script>
 <script src="{{ asset('falcon/js/echarts.min.js')}}"></script>
 <script src="{{ asset('falcon/js/all.min.js')}}"></script>
 <script src="{{ asset('falcon/js/lodash.min.js')}}"></script>

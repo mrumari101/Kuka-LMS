@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Level extends Model
 {
@@ -12,6 +13,26 @@ class Level extends Model
     protected $fillable = [
         'discipline_id','name','slug','description','image','status'
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($level) {
+
+            $baseSlug = Str::slug($level->name);
+            $slug = $baseSlug;
+            $counter = 1;
+
+            while (
+            Level::withTrashed()
+                ->where('slug', $slug)
+                ->exists()
+            ) {
+                $slug = $baseSlug . '-' . $counter++;
+            }
+
+            $level->slug = $slug;
+        });
+    }
 
     public function discipline()
     {

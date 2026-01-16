@@ -3,70 +3,85 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DisciplineRequest;
+use App\Http\Requests\LevelRequest;
 use App\Models\Discipline;
+use App\Models\Level;
+use App\Services\DisciplineService;
+use App\Services\LevelService;
+use App\Traits\CommonFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LevelController extends Controller
 {
+    protected $levelService;
+    protected $disciplineService;
+
+    public function __construct(
+        LevelService $levelService,
+        DisciplineService $disciplineService,
+    ) {
+        $this->levelService = $levelService;
+        $this->disciplineService = $disciplineService;
+    }
+
     public function index()
     {
-        $disciplines = Discipline::latest()->paginate(10);
-        return view('admin.disciplines.index', compact('disciplines'));
+        $levels = $this->levelService->all();
+
+        return view('admin.levels.index', compact('levels'));
     }
 
     public function create()
     {
-        $disciplines = Discipline::active()->get();
+        $disciplines = $this->disciplineService->all();
         return view('admin.levels.create', compact('disciplines'));
     }
 
-    public function store(Request $request)
+    public function store(LevelRequest $request)
     {
-        $data = $request->validate([
-            'name'=>'required',
-            'description'=>'nullable',
-            'image'=>'nullable|image',
-            'status'=>'required'
-        ]);
 
-        $data['slug'] = Str::slug($data['name']);
-
-        Discipline::create($data);
-
-        return redirect()->route('admin.disciplines.index')
-            ->with('success','Discipline created');
+        try {
+            $result = $this->levelService->create($request->all());
+            return redirect()
+                ->route('admin.levels.index')
+                ->with('success', 'Level created successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Level $level)
     {
-        //
+        $disciplines = $this->disciplineService->all();
+        return view('admin.levels.edit', compact('level','disciplines'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function update(LevelRequest $request, $levelId)
     {
-        //
+        $level = $this->levelService->get($levelId);
+
+        try {
+            $this->levelService->update($level, $request->all());
+
+            return redirect()
+                ->route('admin.levels.index')
+                ->with('success', 'Level updated successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Level $level)
     {
-        //
-    }
+        try {
+            $this->levelService->delete($level);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return redirect()->route('admin.levels.index')->with('success', 'Level deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

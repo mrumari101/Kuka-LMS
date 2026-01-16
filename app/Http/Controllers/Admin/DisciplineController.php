@@ -3,69 +3,78 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DisciplineRequest;
 use App\Models\Discipline;
+use App\Services\DisciplineService;
+use App\Traits\CommonFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class DisciplineController extends Controller
 {
+    protected $disciplineService;
+
+    public function __construct(
+        DisciplineService $disciplineService,
+    ) {
+        $this->disciplineService = $disciplineService;
+    }
+
     public function index()
     {
-        $disciplines = Discipline::latest()->paginate(10);
+        $disciplines = $this->disciplineService->all();
+
         return view('admin.disciplines.index', compact('disciplines'));
     }
 
     public function create()
     {
+
         return view('admin.disciplines.create');
     }
 
-    public function store(Request $request)
+    public function store(DisciplineRequest $request)
     {
-        $data = $request->validate([
-            'name'=>'required',
-            'description'=>'nullable',
-            'image'=>'nullable|image',
-            'status'=>'required'
-        ]);
 
-        $data['slug'] = Str::slug($data['name']);
-
-        Discipline::create($data);
-
-        return redirect()->route('admin.disciplines.index')
-            ->with('success','Discipline created');
+        try {
+            $result = $this->disciplineService->create($request->all());
+            return redirect()
+                ->route('admin.disciplines.index')
+                ->with('success', 'Discipline created successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Discipline $discipline)
     {
-        //
+        return view('admin.disciplines.edit', compact('discipline'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(DisciplineRequest $request, $disciplineId)
     {
-        //
+        $discipline = $this->disciplineService->get($disciplineId);
+
+        try {
+            $this->disciplineService->update($discipline, $request->all());
+
+            return redirect()
+                ->route('admin.disciplines.index')
+                ->with('success', 'Discipline updated successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Discipline $discipline)
     {
-        //
-    }
+        try {
+            $this->disciplineService->delete($discipline);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return redirect()->route('admin.disciplines.index')->with('success', 'Discipline deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }
+

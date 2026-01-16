@@ -58,11 +58,28 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+        Route::prefix('disciplines')->group(function () {
+            Route::get('/', [DisciplineController::class, 'index'])->name('disciplines.index');
+            Route::get('/create', [DisciplineController::class, 'create'])->name('disciplines.create');
+            Route::post('/store', [DisciplineController::class, 'store'])->name('disciplines.store');
+            Route::get('/edit/{discipline}', [DisciplineController::class, 'show'])->name('disciplines.edit');
+            Route::post('/update/{discipline}', [DisciplineController::class, 'update'])->name('disciplines.update');
+            Route::post('/delete/{discipline}', [DisciplineController::class, 'destroy'])->name('disciplines.delete');
+        });
 
-        Route::resource('disciplines', DisciplineController::class);
-        Route::resource('levels', LevelController::class);
-        Route::resource('chapters', ChapterController::class);
-        Route::resource('topics', TopicController::class);
+        Route::prefix('levels')->group(function () {
+            Route::get('/', [LevelController::class, 'index'])->name('levels.index');
+            Route::get('/create', [LevelController::class, 'create'])->name('levels.create');
+            Route::post('/store', [LevelController::class, 'store'])->name('levels.store');
+            Route::get('/edit/{level}', [LevelController::class, 'show'])->name('levels.edit');
+            Route::post('/update/{level}', [LevelController::class, 'update'])->name('levels.update');
+            Route::post('/delete/{level}', [LevelController::class, 'destroy'])->name('levels.delete');
+        });
+
+
+//        Route::resource('levels', LevelController::class);
+//        Route::resource('chapters', ChapterController::class);
+//        Route::resource('topics', TopicController::class);
 
     });
 
