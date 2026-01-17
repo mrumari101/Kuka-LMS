@@ -64,7 +64,9 @@
                     <form action="{{ route('admin.disciplines.update', ['discipline' => $discipline->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="name">Name</label>
+                            <label class="form-label" for="name">
+                                Name <span class="text-danger">*</span>
+                            </label>
                             <input class="form-control @error('name') is-invalid @enderror" name="name" id="name" type="text" value="{{ old('name',$discipline->name) }}" placeholder="Name">
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -78,7 +80,9 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="status">Status</label>
+                            <label class="form-label" for="status">
+                                Status <span class="text-danger">*</span>
+                            </label>
                             <select class="form-select @error('status') is-invalid @enderror" name="status" id="status" aria-label="Default select example">
                                 <option selected="selected">Select Status</option>
                                 <option value="1" {{ old('status',$discipline->status) == '1' ? 'selected' : '' }}>Active</option>

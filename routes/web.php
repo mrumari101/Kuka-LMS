@@ -24,7 +24,6 @@ Route::get('/', function () {
 // Unified Dashboard (Role-based)
 Route::get('/dashboard', function () {
     $user = auth()->user();
-
     if ($user->hasRole('admin')) {
         return view('dashboard.admin');
     }
@@ -74,6 +73,17 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/edit/{level}', [LevelController::class, 'show'])->name('levels.edit');
             Route::post('/update/{level}', [LevelController::class, 'update'])->name('levels.update');
             Route::post('/delete/{level}', [LevelController::class, 'destroy'])->name('levels.delete');
+            Route::post('/levels-by', [LevelController::class, 'levelsBy'])->name('levels.by');
+        });
+
+
+        Route::prefix('chapters')->group(function () {
+            Route::get('/', [ChapterController::class, 'index'])->name('chapters.index');
+            Route::get('/create', [ChapterController::class, 'create'])->name('chapters.create');
+            Route::post('/store', [ChapterController::class, 'store'])->name('chapters.store');
+            Route::get('/edit/{chapter}', [ChapterController::class, 'show'])->name('chapters.edit');
+            Route::post('/update/{chapter}', [ChapterController::class, 'update'])->name('chapters.update');
+            Route::post('/delete/{chapter}', [ChapterController::class, 'destroy'])->name('chapters.delete');
         });
 
 

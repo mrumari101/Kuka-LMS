@@ -305,7 +305,7 @@
         </div>
         <div class="col-lg-6 col-xl-5 col-xxl-4 mb-3 ps-lg-2">
             <div class="card h-lg-100">
-                <div class="bg-holder bg-card" style="background-image:url(images/corner-1.png);"></div><!--/.bg-holder-->
+                <div class="bg-holder bg-card" style="background-image:url({{ asset('falcon/images/corner-1.png')}});"></div><!--/.bg-holder-->
                 <div class="card-body position-relative">
                     <h5 class="text-warning">Running out of your space?</h5>
                     <p class="fs-10 mb-0">Your storage will be running out soon. Get more space and powerful productivity features.</p><a class="btn btn-link fs-10 text-warning mt-lg-3 ps-0" href="#!">Upgrade storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>

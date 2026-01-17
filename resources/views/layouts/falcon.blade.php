@@ -17,11 +17,11 @@
     <link rel="manifest" href="{{ asset('falcon/images/manifest.json')}}">
     <meta name="msapplication-TileImage" content="{{ asset('falcon/images/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('falcon/js/config.js')}}"></script>
     <script src="{{ asset('falcon/js/simplebar.min.js')}}"></script>
 
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
     <link href="{{ asset('falcon/vendors/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
@@ -119,14 +119,14 @@
         <p class="fs-10">Choose the perfect color mode for your app.</p>
         <div class="btn-group d-block w-100 btn-group-navbar-style">
             <div class="row gx-2">
-                <div class="col-4"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="images/falcon-mode-default.jpg" alt=""/></span><span class="label-text">Light</span></label></div>
-                <div class="col-4"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="images/falcon-mode-dark.jpg" alt=""/></span><span class="label-text"> Dark</span></label></div>
-                <div class="col-4"><input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherAuto"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="images/falcon-mode-auto.jpg" alt=""/></span><span class="label-text"> Auto</span></label></div>
+                <div class="col-4"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{asset('falcon/images/falcon-mode-default.jpg')}}" alt=""/></span><span class="label-text">Light</span></label></div>
+                <div class="col-4"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{asset('falcon/images/falcon-mode-dark.jpg')}}" alt=""/></span><span class="label-text"> Dark</span></label></div>
+                <div class="col-4"><input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="theme" /><label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherAuto"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{asset('falcon/images/falcon-mode-auto.jpg')}}" alt=""/></span><span class="label-text"> Auto</span></label></div>
             </div>
         </div>
         <hr />
         <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-start"><img class="me-2" src="falcon/images/left-arrow-from-left.svg" width="20" alt="" />
+            <div class="d-flex align-items-start"><img class="me-2" src="{{ asset('falcon/images/left-arrow-from-left.svg')}}" width="20" alt="" />
                 <div class="flex-1">
                     <h5 class="fs-9">RTL Mode</h5>
                     <p class="fs-10 mb-0">Switch your language direction </p><a class="fs-10" href="documentation/customization/configuration.html">RTL Documentation</a>
@@ -136,7 +136,7 @@
         </div>
         <hr />
         <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-start"><img class="me-2" src="falcon/images/arrows-h.svg" width="20" alt="" />
+            <div class="d-flex align-items-start"><img class="me-2" src="{{ asset('falcon/images/arrows-h.svg')}}" width="20" alt="" />
                 <div class="flex-1">
                     <h5 class="fs-9">Fluid Layout</h5>
                     <p class="fs-10 mb-0">Toggle container layout system </p><a class="fs-10" href="documentation/customization/configuration.html">Fluid Documentation</a>
@@ -145,7 +145,7 @@
             <div class="form-check form-switch"><input class="form-check-input ms-0" id="mode-fluid" type="checkbox" data-theme-control="isFluid" /></div>
         </div>
         <hr />
-        <div class="d-flex align-items-start"><img class="me-2" src="falcon/images/paragraph.svg" width="20" alt="" />
+        <div class="d-flex align-items-start"><img class="me-2" src="{{ asset('falcon/images/paragraph.svg')}}" width="20" alt="" />
             <div class="flex-1">
                 <h5 class="fs-9 d-flex align-items-center">Navigation Position</h5>
                 <p class="fs-10 mb-2">Select a suitable navigation system for your web application </p>
@@ -163,13 +163,13 @@
         <p> <a class="fs-10" href="modules/components/navs-and-tabs/vertical-navbar.html#navbar-styles">See Documentation</a></p>
         <div class="btn-group d-block w-100 btn-group-navbar-style">
             <div class="row gx-2">
-                <div class="col-6"><input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle" value="transparent" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-transparent"> <img class="img-fluid img-prototype" src="images/default.png" alt="" /><span class="label-text"> Transparent</span></label></div>
-                <div class="col-6"><input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-inverted"> <img class="img-fluid img-prototype" src="images/inverted.png" alt="" /><span class="label-text"> Inverted</span></label></div>
-                <div class="col-6"><input class="btn-check" id="navbar-style-card" type="radio" name="navbarStyle" value="card" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-card"> <img class="img-fluid img-prototype" src="images/card.png" alt="" /><span class="label-text"> Card</span></label></div>
-                <div class="col-6"><input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-vibrant"> <img class="img-fluid img-prototype" src="images/vibrant.png" alt="" /><span class="label-text"> Vibrant</span></label></div>
+                <div class="col-6"><input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle" value="transparent" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-transparent"> <img class="img-fluid img-prototype" src="{{asset('falcon/images/default.png')}}" alt="" /><span class="label-text"> Transparent</span></label></div>
+                <div class="col-6"><input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-inverted"> <img class="img-fluid img-prototype" src="{{asset('falcon/images/inverted.png')}}" alt="" /><span class="label-text"> Inverted</span></label></div>
+                <div class="col-6"><input class="btn-check" id="navbar-style-card" type="radio" name="navbarStyle" value="card" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-card"> <img class="img-fluid img-prototype" src="{{asset('falcon/images/card.png')}}" alt="" /><span class="label-text"> Card</span></label></div>
+                <div class="col-6"><input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant" data-theme-control="navbarStyle" /><label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-vibrant"> <img class="img-fluid img-prototype" src="{{asset('falcon/images/vibrant.png')}}" alt="" /><span class="label-text"> Vibrant</span></label></div>
             </div>
         </div>
-        <div class="text-center mt-5"><img class="mb-4" src="falcon/images/47.png" alt="" width="120" />
+        <div class="text-center mt-5"><img class="mb-4" src="{{ asset('falcon/images/47.png')}}" alt="" width="120" />
             <h5>Like What You See?</h5>
             <p class="fs-10">Get Falcon now and create beautiful dashboards with hundreds of widgets.</p><a class="mb-3 btn btn-primary" href="https://therichpost.com" target="_blank">Free Admins</a>
         </div>

@@ -23,7 +23,7 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                    <h5 class="mb-0">Listing</h5>
+                    <h5 class="mb-0">All Disciplines</h5>
                 </div>
                 <div class="col-auto ms-auto">
                     <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">

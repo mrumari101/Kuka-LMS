@@ -55,6 +55,29 @@ class LevelService
         return $this->levelRepository->find($levelId);
     }
 
+    public function levelsBy($disciplineId){
+
+        $conditions = [
+            'discipline_id' => $disciplineId,
+            // ['capacity', '>', 4],
+            // 'status' => 'available',
+        ];
+
+        $relations = [];
+        //  $relations = ['restaurant', 'orders'];
+        return $this->levelRepository->all(
+            $conditions,
+            ['id', 'name'],
+            $relations,
+            'id',
+            'desc',
+            null
+        );
+
+    }
+
+
+
     public function update($level, $data)
     {
         $path = "levels";

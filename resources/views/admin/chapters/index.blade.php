@@ -1,6 +1,6 @@
 @extends('layouts.falcon')
 
-@section('title', 'Dashboard - Levels')
+@section('title', 'Dashboard - Chapters')
 
 @section('content')
 
@@ -14,7 +14,7 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Levels', 'url' => route('admin.levels.index')]
+                ['label' => 'Chapters', 'url' => route('admin.chapters.index')]
             ]"
     />
 
@@ -23,11 +23,11 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                    <h5 class="mb-0">All Levels</h5>
+                    <h5 class="mb-0">All Chapters</h5>
                 </div>
                 <div class="col-auto ms-auto">
                     <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                        <a href="{{ route('admin.levels.create') }}"
+                        <a href="{{ route('admin.chapters.create') }}"
                            class="btn btn-falcon-success btn-sm">
                             <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                             <span class="ms-1">New</span>
@@ -50,6 +50,7 @@
                                         </th>
                                         <th class="text-black dark__text-white align-middle">Name</th>
                                         <th class="text-black dark__text-white align-middle">Discipline</th>
+                                        <th class="text-black dark__text-white align-middle">Level</th>
                                         <th>Image</th>
                                         <th class="text-black dark__text-white align-middle">Description </th>
                                         <th class="text-black dark__text-white align-middle">Status</th>
@@ -57,27 +58,28 @@
                                     </tr>
                                     </thead>
                                     <tbody id="bulk-select-body">
-                                    @if (count($levels) > 0)
-                                        @foreach ($levels as $level)
+                                    @if (count($chapters) > 0)
+                                        @foreach ($chapters as $chapter)
                                     <tr>
                                         <td class="align-middle white-space-nowrap">{{ $loop->iteration }}</td> <!-- Serial number -->
-                                        <th class="align-middle">{{$level->name}}</th>
-                                        <th class="align-middle">{{$level->discipline->name}}</th>
+                                        <th class="align-middle">{{$chapter->name}}</th>
+                                        <th class="align-middle">{{$chapter->level->discipline->name}}</th>
+                                        <th class="align-middle">{{$chapter->level->name}}</th>
                                         <td class="align-middle white-space-nowrap">
-                                        <a href="{{ $level->image
-                                                    ? asset('storage/'.$level->image)
+                                        <a href="{{ $chapter->image
+                                                    ? asset('storage/'.$chapter->image)
                                                     : asset('assets/img/default.png') }}" data-gallery="gallery-2" class="glightbox">
-                                            <img class="img-fluid rounded" src="{{ $level->image
-                                                    ? asset('storage/'.$level->image)
+                                            <img class="img-fluid rounded" src="{{ $chapter->image
+                                                    ? asset('storage/'.$chapter->image)
                                                     : asset('assets/falcon/images/default.png') }}" alt="" width="300" />
                                         </a>
                                         </td>
 
 
-                                        <td class="align-middle">{{$level->description}}</td>
+                                        <td class="align-middle">{{$chapter->description}}</td>
                                         <td class="align-middle">
-                                            <span class="badge badge rounded-pill d-block p-2 @if($level->status) badge-subtle-success @else badge-subtle-danger @endif ">
-                                                <span class="ms-1 fas @if($level->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2">
+                                            <span class="badge badge rounded-pill d-block p-2 @if($chapter->status) badge-subtle-success @else badge-subtle-danger @endif ">
+                                                <span class="ms-1 fas @if($chapter->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2">
 
                                             </span>
                                         </td>
@@ -85,7 +87,7 @@
                                             <div class="d-inline-flex align-items-center gap-2">
 
                                                 {{-- Edit --}}
-                                                <a href="{{ route('admin.levels.edit', $level->id) }}"
+                                                <a href="{{ route('admin.chapters.edit', $chapter->id) }}"
                                                    class="btn btn-link p-0"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="top"
@@ -98,8 +100,8 @@
                                                     class="btn btn-link p-0 ms-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
-                                                    data-delete-id="{{ $level->id }}"
-                                                    data-route="{{ route('admin.levels.delete', ':level') }}"
+                                                    data-delete-id="{{ $chapter->id }}"
+                                                    data-route="{{ route('admin.chapters.delete', ':chapter') }}"
                                                     onclick="handleDeleteValue(event)"
                                                     title="Delete">
                                                     <span class="fas fa-trash-alt text-500"></span>
@@ -182,8 +184,8 @@
                                 <!-- REQUIRED by your JS -->
                                 <input
                                     type="hidden"
-                                    name="deleteLevelId"
-                                    id="deleteLevelId">
+                                    name="deleteChapterId"
+                                    id="deleteChapterId">
 
                                 <button type="submit" class="btn btn-danger">
                                     Yes, Delete It
@@ -211,8 +213,8 @@
             var form = document.querySelector('#deleteModal form');
             var value = e.currentTarget.dataset.deleteId;
             var url = e.currentTarget.dataset.route;
-            form.action = url.replace(':level', value);
-            var deleteInput = document.getElementById('deleteLevelId');
+            form.action = url.replace(':chapter', value);
+            var deleteInput = document.getElementById('deleteChapterId');
             deleteInput.value = value;
         }
     </script>

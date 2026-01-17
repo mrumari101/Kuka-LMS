@@ -9,12 +9,14 @@ use App\Models\Discipline;
 use App\Models\Level;
 use App\Services\DisciplineService;
 use App\Services\LevelService;
+use App\Traits\ApiResponse;
 use App\Traits\CommonFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LevelController extends Controller
 {
+    use ApiResponse;
     protected $levelService;
     protected $disciplineService;
 
@@ -84,4 +86,30 @@ class LevelController extends Controller
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+    public function LevelsBy(Request $request)
+    {
+
+        $request->validate([
+            'discipline_id' => 'required|exists:disciplines,id',
+        ]);
+
+        $message = 'unknow server error';
+        $errorCode = 400;
+        $data = [];
+        try {
+            $disciplineId = $request->discipline_id;
+            $data['levels'] = $this->levelService->levelsBy($disciplineId);
+            $errorCode = 200;
+            $message = 'Successfully data fetched';
+        } catch (\Exception $e) {
+            $message = 'Operation failed: '.$e->getMessage();
+        }
+
+        $response = $this->apiResponse($data, $message, $errorCode);
+        $response = $this->setResponseHeaders($response);
+
+        return $response;
+    }
+
 }

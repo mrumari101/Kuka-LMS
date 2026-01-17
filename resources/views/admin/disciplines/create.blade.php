@@ -21,14 +21,6 @@
     <x-alert type="danger" message="Your form has some fields missing or contains invalid data." />
 @endif
 
-
-
-{{--    @if ($errors->any())--}}
-{{--        @foreach ($errors->all() as $error)--}}
-{{--            <x-alert type="danger" :message="$error" />--}}
-{{--        @endforeach--}}
-{{--    @endif--}}
-
     <x-breadcrumb
         title="Dashboard"
         :items="[
@@ -37,16 +29,6 @@
                 ['label' => 'Add', 'url' => route('admin.disciplines.create')]
             ]"
     />
-
-
-{{--    <x-breadcrumb--}}
-{{--        title="Dashboard"--}}
-{{--        :items="[--}}
-{{--        ['label' => 'Disciplines', 'url' => route('admin.disciplines.index')],--}}
-{{--        ['label' => 'Add']--}}
-{{--    ]"--}}
-{{--    />--}}
-
 
 <div class="card mb-3">
     <div class="card-header">
@@ -74,7 +56,9 @@
                 <form action="{{ route('admin.disciplines.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="name">Name</label>
+                        <label class="form-label" for="name">
+                            Name <span class="text-danger">*</span>
+                        </label>
                         <input class="form-control @error('name') is-invalid @enderror" name="name" id="name" type="text" value="{{ old('name') }}" placeholder="Name">
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -88,7 +72,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="status">Status</label>
+                        <label class="form-label" for="status">
+                            Status <span class="text-danger">*</span>
+                        </label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status" id="status" aria-label="Default select example">
                             <option selected="selected">Select Status</option>
                             <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
@@ -99,7 +85,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Image</label>
+                        <label class="form-label">
+                            Image <span class="text-danger">*</span>
+                        </label>
                         <input class="form-control @error('image') is-invalid @enderror" name="image" type="file">
                         @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>

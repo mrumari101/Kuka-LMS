@@ -3,70 +3,82 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Discipline;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Http\Requests\ChapterRequest;
+use App\Http\Requests\LevelRequest;
+use App\Models\Chapter;
+use App\Models\Level;
+use App\Services\ChapterService;
+use App\Services\DisciplineService;
+use App\Services\LevelService;
 
 class ChapterController extends Controller
 {
+    protected $chapterService;
+    protected $disciplineService;
+
+    public function __construct(
+        ChapterService $chapterService,
+        DisciplineService $disciplineService,
+    ) {
+        $this->chapterService = $chapterService;
+        $this->disciplineService = $disciplineService;
+    }
+
     public function index()
     {
-        $disciplines = Discipline::latest()->paginate(10);
-        return view('admin.disciplines.index', compact('disciplines'));
+        $chapters = $this->chapterService->all();
+
+        return view('admin.chapters.index', compact('chapters'));
     }
 
     public function create()
     {
-        $disciplines = Discipline::active()->get();
-        return view('admin.levels.create', compact('disciplines'));
+        $disciplines = $this->disciplineService->all();
+        return view('admin.chapters.create', compact('disciplines'));
     }
 
-    public function store(Request $request)
+    public function store(ChapterRequest $request)
     {
-        $data = $request->validate([
-            'name'=>'required',
-            'description'=>'nullable',
-            'image'=>'nullable|image',
-            'status'=>'required'
-        ]);
-
-        $data['slug'] = Str::slug($data['name']);
-
-        Discipline::create($data);
-
-        return redirect()->route('admin.disciplines.index')
-            ->with('success','Discipline created');
+        try {
+            $result = $this->chapterService->create($request->all());
+            return redirect()
+                ->route('admin.chapters.index')
+                ->with('success', 'Chapter created successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Chapter $chapter)
     {
-        //
+        $disciplines = $this->disciplineService->all();
+        return view('admin.chapters.edit', compact('chapter','disciplines'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function update(ChapterRequest $request, $chapterId)
     {
-        //
+        $chapter = $this->chapterService->get($chapterId);
+
+        try {
+            $this->chapterService->update($chapter, $request->all());
+
+            return redirect()
+                ->route('admin.chapters.index')
+                ->with('success', 'Chapter updated successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Chapter $chapter)
     {
-        //
-    }
+        try {
+            $this->chapterService->delete($chapter);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return redirect()->route('admin.chapters.index')->with('success', 'Chapter deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }
