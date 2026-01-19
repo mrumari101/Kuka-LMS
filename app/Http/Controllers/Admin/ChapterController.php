@@ -10,9 +10,12 @@ use App\Models\Level;
 use App\Services\ChapterService;
 use App\Services\DisciplineService;
 use App\Services\LevelService;
+use App\Traits\ApiResponse;
+use Illuminate\Http\Request;
 
 class ChapterController extends Controller
 {
+    use ApiResponse;
     protected $chapterService;
     protected $disciplineService;
 
@@ -80,5 +83,30 @@ class ChapterController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+
+    public function ChaptersBy(Request $request)
+    {
+
+        $request->validate([
+            'level_id' => 'required|exists:levels,id',
+        ]);
+
+        $message = 'unknow server error';
+        $errorCode = 400;
+        $data = [];
+        try {
+            $levelId = $request->level_id;
+            $data['chapters'] = $this->chapterService->chaptersBy($levelId);
+            $errorCode = 200;
+            $message = 'Successfully data fetched';
+        } catch (\Exception $e) {
+            $message = 'Operation failed: '.$e->getMessage();
+        }
+
+        $response = $this->apiResponse($data, $message, $errorCode);
+        $response = $this->setResponseHeaders($response);
+
+        return $response;
     }
 }

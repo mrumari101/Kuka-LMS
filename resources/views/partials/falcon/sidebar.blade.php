@@ -219,56 +219,56 @@
                                 <div class="card-body px-3">
                                     <div class="row text-center gx-0 gy-0">
                                         <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="pages/user/profile.html" target="_blank">
-                                                <div class="avatar avatar-2xl"> <img class="rounded-circle" src="images/3.jpg" alt="" /></div>
+                                                <div class="avatar avatar-2xl"> <img class="rounded-circle" src="{{asset('falcon/images/3.jpg')}}" alt="" /></div>
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11">Account</p>
                                             </a></div>
 
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/google.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/google.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Google</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/spotify.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/spotify.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Spotify</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/steam.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/steam.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Steam</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/github-light.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/github-light.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Github</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/discord.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/discord.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Discord</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/xbox.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/xbox.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">xbox</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/trello.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/trello.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Kanban</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/hp.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/hp.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Hp</p>
                                             </a></div>
                                         <div class="col-12">
                                             <hr class="my-3 mx-n3 bg-200" />
                                         </div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/linkedin.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/linkedin.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Linkedin</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/twitter.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/twitter.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Twitter</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/facebook.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/facebook.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Facebook</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/instagram.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/instagram.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Instagram</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/pinterest.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/pinterest.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Pinterest</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/slack.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/slack.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Slack</p>
                                             </a></div>
-                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="falcon/images/deviantart.png" alt="" width="40" height="40" />
+                                        <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{asset('falcon/images/deviantart.png')}}" alt="" width="40" height="40" />
                                                 <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Deviantart</p>
                                             </a></div>
                                         <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="app/events/event-detail.html" target="_blank">
@@ -286,7 +286,7 @@
                 </li>
                 <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-xl">
-                            <img class="rounded-circle" src="falcon/images/3-thumb.png" alt="" />
+                            <img class="rounded-circle" src="{{asset('falcon/images/3-thumb.png')}}" alt="" />
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
@@ -315,7 +315,7 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="apps">App</a>
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="apps">
                         <div class="card navbar-card-app shadow-none dark__bg-1000">
-                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="falcon/images/authentication-corner.png" width="130" alt="" />
+                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="{{asset('falcon/images/authentication-corner.png')}}" width="130" alt="" />
                                 <div class="row">
                                     <div class="col-6 col-md-4">
                                         <div class="nav flex-column"><a class="nav-link py-1 link-600 fw-medium" href="app/calendar.html">Calendar</a><a class="nav-link py-1 link-600 fw-medium" href="app/chat.html">Chat</a><a class="nav-link py-1 link-600 fw-medium" href="app/kanban.html">Kanban</a>
@@ -343,7 +343,7 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="pagess">Pages</a>
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="pagess">
                         <div class="card navbar-card-pages shadow-none dark__bg-1000">
-                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="falcon/images/authentication-corner.png" width="130" alt="" />
+                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="{{asset('falcon/images/authentication-corner.png')}}" width="130" alt="" />
                                 <div class="row">
                                     <div class="col-6 col-xxl-3">
                                         <div class="nav flex-column">
@@ -408,7 +408,7 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="moduless">Modules</a>
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0" aria-labelledby="moduless">
                         <div class="card navbar-card-components shadow-none dark__bg-1000">
-                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="falcon/images/authentication-corner.png" width="130" alt="" />
+                            <div class="card-body scrollbar max-h-dropdown"><img class="img-dropdown" src="{{asset('falcon/images/authentication-corner.png')}}" width="130" alt="" />
                                 <div class="row">
                                     <div class="col-6 col-xxl-3">
                                         <div class="nav flex-column">
@@ -474,7 +474,7 @@
         <div class="toggle-icon-wrapper">
             <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
         </div><a class="navbar-brand" href="index.html">
-            <div class="d-flex align-items-center py-3"><img class="me-2" src="falcon/images/falcon.png" alt="" width="40" /><span class="font-sans-serif text-primary">falcon</span></div>
+            <div class="d-flex align-items-center py-3"><img class="me-2" src="{{asset('falcon/images/falcon.png')}}" alt="" width="40" /><span class="font-sans-serif text-primary">falcon</span></div>
         </a>
     </div>
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -525,6 +525,20 @@
                                     <span class="fas fa-layer-group"></span>
                                 </span>
                                     <span class="nav-link-text ps-1">Chapters</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endrole
+
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.topics.*') ? 'active' : '' }}"
+                               href="{{ route('admin.topics.index') }}">
+                                <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-layer-group"></span>
+                                </span>
+                                    <span class="nav-link-text ps-1">Topics</span>
                                 </div>
                             </a>
                         </li>

@@ -2,20 +2,18 @@
 
 namespace App\Services;
 
-
-
-use App\Repositories\ChapterRepository;
+use App\Repositories\TopicRepository;
 use App\Traits\CommonFunctions;
 
-class ChapterService
+class TopicService
 {
     use CommonFunctions;
 
-    protected $chapterRepository;
+    protected $topicRepository;
 
-    public function __construct(ChapterRepository $chapterRepository)
+    public function __construct(TopicRepository $topicRepository)
     {
-        $this->chapterRepository = $chapterRepository;
+        $this->topicRepository = $topicRepository;
     }
 
     public function all()
@@ -26,11 +24,11 @@ class ChapterService
             // 'status' => 'available',
         ];
 
-        $relations = ['level'];
+        $relations = ['chapter'];
         //  $relations = ['restaurant', 'orders'];
-        return $this->chapterRepository->all(
+        return $this->topicRepository->all(
             $conditions,
-            ['id', 'name','description', 'image', 'status','level_id'],
+            ['id', 'name','description', 'image', 'status','chapter_id'],
             $relations,
             'id',
             'desc',
@@ -41,16 +39,16 @@ class ChapterService
 
     public function create($data)
     {
-        $path = "chapters";
+        $path = "topics";
         $imagePath = $this->ImageUpload($data['image'], $path);
         $data['image'] = $imagePath;
-        return $this->chapterRepository->create($data);
+        return $this->topicRepository->create($data);
     }
 
 
-    public function get($chapterId)
+    public function get($topicId)
     {
-        return $this->chapterRepository->find($chapterId);
+        return $this->topicRepository->find($topicId);
     }
 
     public function chaptersBy($levelId){
@@ -63,7 +61,7 @@ class ChapterService
 
         $relations = [];
         //  $relations = ['restaurant', 'orders'];
-        return $this->chapterRepository->all(
+        return $this->topicRepository->all(
             $conditions,
             ['id', 'name'],
             $relations,
@@ -74,21 +72,21 @@ class ChapterService
 
     }
 
-    public function update($chapter, $data)
+    public function update($topic, $data)
     {
-        $path = "chapters";
+        $path = "topics";
         if (isset($data['image'])) {
-            $this->ImageDelete($chapter->image);
+            $this->ImageDelete($topic->image);
             $newImagePath = $this->ImageUpload($data['image'], $path);
             $data['image'] = $newImagePath;
         }
 
-        return $this->chapterRepository->update($chapter->id, $data);
+        return $this->topicRepository->update($topic->id, $data);
     }
 
-    public function delete($chapter)
+    public function delete($topic)
     {
-        $this->ImageDelete($chapter->image);
-        return $this->chapterRepository->delete($chapter->id);
+        $this->ImageDelete($topic->image);
+        return $this->topicRepository->delete($topic->id);
     }
 }

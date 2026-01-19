@@ -77,6 +77,7 @@ Route::middleware(['auth', 'role:admin'])
         });
 
 
+
         Route::prefix('chapters')->group(function () {
             Route::get('/', [ChapterController::class, 'index'])->name('chapters.index');
             Route::get('/create', [ChapterController::class, 'create'])->name('chapters.create');
@@ -84,12 +85,18 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/edit/{chapter}', [ChapterController::class, 'show'])->name('chapters.edit');
             Route::post('/update/{chapter}', [ChapterController::class, 'update'])->name('chapters.update');
             Route::post('/delete/{chapter}', [ChapterController::class, 'destroy'])->name('chapters.delete');
+            Route::post('/chapters-by', [ChapterController::class, 'chaptersBy'])->name('chapters.by');
         });
 
+        Route::prefix('topics')->group(function () {
+            Route::get('/', [TopicController::class, 'index'])->name('topics.index');
+            Route::get('/create', [TopicController::class, 'create'])->name('topics.create');
+            Route::post('/store', [TopicController::class, 'store'])->name('topics.store');
+            Route::get('/edit/{topic}', [TopicController::class, 'show'])->name('topics.edit');
+            Route::post('/update/{topic}', [TopicController::class, 'update'])->name('topics.update');
+            Route::post('/delete/{topic}', [TopicController::class, 'destroy'])->name('topics.delete');
+        });
 
-//        Route::resource('levels', LevelController::class);
-//        Route::resource('chapters', ChapterController::class);
-//        Route::resource('topics', TopicController::class);
 
     });
 
