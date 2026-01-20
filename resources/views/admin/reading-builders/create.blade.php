@@ -62,11 +62,11 @@
         <div class="tab-content">
             <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-43631251-35c6-4416-9d8b-497c94bd83a2" id="dom-43631251-35c6-4416-9d8b-497c94bd83a2">
 
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <x-alert type="danger" :message="$error" />
-                        @endforeach
-                    @endif
+{{--                    @if ($errors->any())--}}
+{{--                        @foreach ($errors->all() as $error)--}}
+{{--                            <x-alert type="danger" :message="$error" />--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
 
 
                 <form action="{{ route('admin.reading-builders.store') }}" method="POST" enctype="multipart/form-data" id="myForm">
