@@ -51,10 +51,10 @@ class TopicService
         return $this->topicRepository->find($topicId);
     }
 
-    public function chaptersBy($levelId){
+    public function topicsBy($chapterId){
 
         $conditions = [
-            'level_id' => $levelId,
+            'chapter_id' => $chapterId,
             // ['capacity', '>', 4],
             // 'status' => 'available',
         ];

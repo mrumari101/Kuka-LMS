@@ -38,6 +38,52 @@ trait CommonFunctions
 
     }
 
+    public function FileUpload($file, $path)
+    {
+        if (! $file->isValid()) {
+            throw new \Exception('File upload failed.');
+        }
+
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+
+        // Store file in the given path inside storage/app/public
+        $file->storeAs($path, $filename, 'public');
+
+        // Return the public path for access
+        return $path . '/' . $filename;
+    }
+
+
+//    public function FileUpload($file, $path)
+//    {
+//        if (! $file->isValid()) {
+//            throw new \Exception('File upload failed.');
+//        }
+//
+//        //  $filename = uniqid().'.'.$file->getClientOriginalExtension();
+//
+//        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+//
+//        // Read image using Intervention v3
+//        $image = Image::read($file->getRealPath());
+//
+//        // Resize (maintain aspect ratio)
+////        $image->resize($width, $height, function ($constraint) {
+////            $constraint->aspectRatio();
+////            $constraint->upsize();
+////        });
+//
+//        // Encode and save
+//        Storage::disk('public')->put($path . '/' . $filename, $image->encode());
+//
+//        // Return public URL (ex: /storage/hotel/restaurants/categories/abc123.jpg)
+//        return $path . '/' . $filename;
+//        // return Storage::url($path . '/' . $filename);
+//
+//    }
+
+
+
     public function ImageDelete($path)
     {
         if (empty($path)) {

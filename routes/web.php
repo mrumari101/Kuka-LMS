@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DisciplineController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\ChapterController;
 use App\Http\Controllers\Admin\TopicController;
+use App\Http\Controllers\Admin\ReadingBuilderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,17 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/edit/{topic}', [TopicController::class, 'show'])->name('topics.edit');
             Route::post('/update/{topic}', [TopicController::class, 'update'])->name('topics.update');
             Route::post('/delete/{topic}', [TopicController::class, 'destroy'])->name('topics.delete');
+            Route::post('/topics-by', [TopicController::class, 'topicsBy'])->name('topics.by');
+        });
+
+
+        Route::prefix('reading-builders')->group(function () {
+            Route::get('/', [ReadingBuilderController::class, 'index'])->name('reading-builders.index');
+            Route::get('/create', [ReadingBuilderController::class, 'create'])->name('reading-builders.create');
+            Route::post('/store', [ReadingBuilderController::class, 'store'])->name('reading-builders.store');
+            Route::get('/edit/{readingBuilder}', [ReadingBuilderController::class, 'show'])->name('reading-builders.edit');
+            Route::post('/update/{readingBuilder}', [ReadingBuilderController::class, 'update'])->name('reading-builders.update');
+            Route::post('/delete/{readingBuilder}', [ReadingBuilderController::class, 'destroy'])->name('reading-builders.delete');
         });
 
 

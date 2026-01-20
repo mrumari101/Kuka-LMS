@@ -24,6 +24,7 @@
 
 
     <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link href="{{ asset('falcon/vendors/dropzone/css/dropzone.css')}}" rel="stylesheet">
     <link href="{{ asset('falcon/vendors/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
@@ -47,6 +48,7 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
+    @stack('styles')
 </head>
 <body>
 <!-- ===============================================--><!--    Main Content--><!-- ===============================================-->
@@ -191,12 +193,17 @@
 <script src="{{ asset('falcon/js/anchor.min.js')}}"></script>
 <script src="{{ asset('falcon/js/is.min.js')}}"></script>
 <script src="{{ asset('falcon/vendors/glightbox/js/glightbox.min.js')}}"> </script>
+<script src="{{ asset('falcon/vendors/dropzone/js/dropzone-min.js')}}"></script>
 <script src="{{ asset('falcon/js/echarts.min.js')}}"></script>
 <script src="{{ asset('falcon/js/all.min.js')}}"></script>
 <script src="{{ asset('falcon/js/lodash.min.js')}}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 <script src="{{ asset('falcon/js/list.min.js')}}"></script>
 <script src="{{ asset('falcon/js/theme.js')}}"></script>
+
+
+
+@stack('script')
 </body>
 </html>
 

@@ -543,6 +543,20 @@
                             </a>
                         </li>
                         @endrole
+
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.reading-builders.*') ? 'active' : '' }}"
+                               href="{{ route('admin.reading-builders.index') }}">
+                                <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-layer-group"></span>
+                                </span>
+                                    <span class="nav-link-text ps-1">Reading Builders</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endrole
 {{--                        <li class="nav-item"><a class="nav-link" href="dashboard/crm.html">--}}
 {{--                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span></div>--}}
 {{--                            </a><!-- more inner pages--></li>--}}
@@ -1769,7 +1783,7 @@
         </li>
         <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="{{asset('falcon/images/3-thumb.png" alt="" />
+                    <img class="rounded-circle" src="{{asset('falcon/images/3-thumb.png')}}" alt="" />
                 </div>
             </a>
             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">

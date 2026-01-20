@@ -84,28 +84,28 @@ class TopicController extends Controller
         }
     }
 
-//    public function LevelsBy(Request $request)
-//    {
-//
-//        $request->validate([
-//            'level_id' => 'required|exists:levels,id',
-//        ]);
-//
-//        $message = 'unknow server error';
-//        $errorCode = 400;
-//        $data = [];
-//        try {
-//            $levelId = $request->level_id;
-//            $data['chapters'] = $this->chapterService->chaptersBy($levelId);
-//            $errorCode = 200;
-//            $message = 'Successfully data fetched';
-//        } catch (\Exception $e) {
-//            $message = 'Operation failed: '.$e->getMessage();
-//        }
-//
-//        $response = $this->apiResponse($data, $message, $errorCode);
-//        $response = $this->setResponseHeaders($response);
-//
-//        return $response;
-//    }
+    public function topicsBy(Request $request)
+    {
+
+        $request->validate([
+            'chapter_id' => 'required|exists:chapters,id',
+        ]);
+
+        $message = 'unknow server error';
+        $errorCode = 400;
+        $data = [];
+        try {
+            $chapterId = $request->chapter_id;
+            $data['topics'] = $this->topicService->topicsBy($chapterId);
+            $errorCode = 200;
+            $message = 'Successfully data fetched';
+        } catch (\Exception $e) {
+            $message = 'Operation failed: '.$e->getMessage();
+        }
+
+        $response = $this->apiResponse($data, $message, $errorCode);
+        $response = $this->setResponseHeaders($response);
+
+        return $response;
+    }
 }
