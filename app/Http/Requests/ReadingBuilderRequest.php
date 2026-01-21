@@ -28,6 +28,7 @@ class ReadingBuilderRequest extends FormRequest
             'level_id' => 'required|exists:levels,id',
             'chapter_id' => 'required|exists:chapters,id',
             'topic_id' => 'required|exists:topics,id',
+            'name' => 'required|string|max:255',
             'description' => 'required|string',
             'file' => $isUpdate ? 'nullable|mimes:pdf|max:20480' : 'required|mimes:pdf|max:20480',
             'status' => 'required|integer',

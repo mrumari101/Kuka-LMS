@@ -28,7 +28,7 @@ class ReadingBuilderService
         //  $relations = ['restaurant', 'orders'];
         return $this->readingBuilderRepository->all(
             $conditions,
-            ['id', 'description', 'file', 'status','topic_id'],
+            ['id', 'name', 'description', 'file', 'status','topic_id'],
             $relations,
             'id',
             'desc',

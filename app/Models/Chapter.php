@@ -16,9 +16,9 @@ class Chapter extends Model
 
     protected static function booted()
     {
-        static::creating(function ($discipline) {
+        static::creating(function ($chapter) {
 
-            $baseSlug = Str::slug($discipline->name);
+            $baseSlug = Str::slug($chapter->name);
             $slug = $baseSlug;
             $counter = 1;
 
@@ -30,7 +30,7 @@ class Chapter extends Model
                 $slug = $baseSlug . '-' . $counter++;
             }
 
-            $discipline->slug = $slug;
+            $chapter->slug = $slug;
         });
     }
 

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('reading_builders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('topic_id');
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->longText('description')->nullable(); // Rich text editor
             $table->string('file')->nullable();
             $table->tinyInteger('status')->default(1);

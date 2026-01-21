@@ -52,7 +52,7 @@
                                         <th class="text-black dark__text-white align-middle">Level</th>
                                         <th class="text-black dark__text-white align-middle">Chapter</th>
                                         <th class="text-black dark__text-white align-middle">Topic</th>
-{{--                                        <th>File</th>--}}
+                                        <th class="text-black dark__text-white align-middle">Title</th>
                                         <th class="text-black dark__text-white align-middle">Description </th>
                                         <th class="text-black dark__text-white align-middle">Status</th>
                                         <th class="text-black dark__text-white align-middle white-space-nowrap pe-3">Actions</th>
@@ -67,6 +67,7 @@
                                         <th class="align-middle">{{$readingBuilder->topic->chapter->level->name}}</th>
                                         <th class="align-middle">{{$readingBuilder->topic->chapter->name}}</th>
                                         <th class="align-middle">{{$readingBuilder->topic->name}}</th>
+                                        <th class="align-middle">{{ $readingBuilder->name }}</th>
                                         <th class="align-middle">{!! $readingBuilder->description !!}</th>
 {{--                                        <td class="align-middle white-space-nowrap">--}}
 {{--                                        <a href="{{ $readingBuilder->file--}}

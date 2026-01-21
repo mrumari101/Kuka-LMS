@@ -16,9 +16,9 @@ class Topic extends Model
 
     protected static function booted()
     {
-        static::creating(function ($discipline) {
+        static::creating(function ($topic) {
 
-            $baseSlug = Str::slug($discipline->name);
+            $baseSlug = Str::slug($topic->name);
             $slug = $baseSlug;
             $counter = 1;
 
@@ -30,7 +30,7 @@ class Topic extends Model
                 $slug = $baseSlug . '-' . $counter++;
             }
 
-            $discipline->slug = $slug;
+            $topic->slug = $slug;
         });
     }
 
