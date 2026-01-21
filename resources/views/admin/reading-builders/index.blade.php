@@ -46,7 +46,7 @@
                                     <thead class="bg-200">
                                     <tr>
                                         <th class="align-middle white-space-nowrap">
-                                            Sr.
+                                            RID.
                                         </th>
                                         <th class="text-black dark__text-white align-middle">Discipline</th>
                                         <th class="text-black dark__text-white align-middle">Level</th>
@@ -62,7 +62,7 @@
                                     @if (count($readingBuilders) > 0)
                                         @foreach ($readingBuilders as $readingBuilder)
                                     <tr>
-                                        <td class="align-middle white-space-nowrap">{{ $loop->iteration }}</td> <!-- Serial number -->
+                                        <td class="align-middle white-space-nowrap">{{ 'R'.$readingBuilder->id.'.'.$readingBuilder->topic->chapter->level->discipline->id.'.'.$readingBuilder->topic->chapter->level->id.'.'. $readingBuilder->topic->chapter->id.'.'.$readingBuilder->topic->id}}</td> <!-- Serial number -->
                                         <th class="align-middle">{{$readingBuilder->topic->chapter->level->discipline->name}}</th>
                                         <th class="align-middle">{{$readingBuilder->topic->chapter->level->name}}</th>
                                         <th class="align-middle">{{$readingBuilder->topic->chapter->name}}</th>
