@@ -30,7 +30,9 @@ class ReadingBuilderRequest extends FormRequest
             'topic_id' => 'required|exists:topics,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'file' => $isUpdate ? 'nullable|mimes:pdf|max:20480' : 'required|mimes:pdf|max:20480',
+            'file' => $isUpdate
+                ? 'nullable|file|mimes:pdf,doc,docx|max:10240'
+                : 'required|file|mimes:pdf,doc,docx|max:10240',
             'status' => 'required|integer',
         ];
     }

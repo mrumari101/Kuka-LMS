@@ -181,35 +181,10 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            File (PDF) <span class="text-danger">*</span>
+                            File (PDF/DOCX) <span class="text-danger">*</span>
                         </label>
-
-
-{{--                        <div class="dropzone dropzone-single p-0" data-dropzone="data-dropzone"--}}
-{{--                             data-options='{--}}
-{{--                                       "url":"valid/url",--}}
-{{--                                       "maxFiles":1,--}}
-{{--                                       "acceptedFiles":".pdf,.doc,.docx",--}}
-{{--                                       "dictDefaultMessage":"Choose or Drop a file here"--}}
-{{--                                     }'--}}
-{{--                        >--}}
-{{--                            <div class="fallback"><input type="file" name="file" /></div>--}}
-{{--                            <div class="dz-preview dz-preview-single">--}}
-{{--                                <div class="dz-preview-cover dz-complete"><img class="dz-preview-img" src="../../../assets/img/generic/image-file-2.png" alt="..." data-dz-thumbnail="" /><a class="dz-remove text-danger" href="#!" data-dz-remove="data-dz-remove"><span class="fas fa-times"></span></a>--}}
-{{--                                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>--}}
-{{--                                    <div class="dz-errormessage m-1"><span data-dz-errormessage="data-dz-errormessage"></span></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="dz-message" data-dz-message="data-dz-message">--}}
-{{--                                <div class="dz-message-text"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your file here</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-
-
-
-                        <input class="form-control @error('file') is-invalid @enderror" name="file" type="file" accept="application/pdf">
+                        
+                        <input class="form-control @error('file') is-invalid @enderror" name="file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                         <div class="small text-muted">
                             Upload specs: PDF/DOCX · Max size as defined · Letter size (21.59cm × H up to 11)
                         </div>

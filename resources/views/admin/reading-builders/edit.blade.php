@@ -172,9 +172,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">
-                                File (PDF) <span class="text-danger">*</span>
+                                File (PDF/DOCX) <span class="text-danger">*</span>
                             </label>
-                            <input class="form-control @error('file') is-invalid @enderror" name="file" type="file" accept="application/pdf">
+                            <input class="form-control @error('file') is-invalid @enderror" name="file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                             <div class="small text-muted">
                                 Upload specs: PDF/DOCX · Max size as defined · Letter size (21.59cm × H up to 11)
                             </div>
