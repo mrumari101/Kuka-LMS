@@ -8,7 +8,7 @@
 {{--@php die @endphp--}}
 
 
-@section('title', 'Dashboard - Reading Builders')
+@section('title', 'Dashboard - Readings')
 
 @section('content')
 
@@ -33,8 +33,8 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Reading Builder', 'url' => route('admin.reading-builders.index')],
-                ['label' => 'Add', 'url' => route('admin.reading-builders.create')]
+                ['label' => 'Reading', 'url' => route('admin.readings.index')],
+                ['label' => 'Add', 'url' => route('admin.readings.create')]
             ]"
     />
 
@@ -46,7 +46,7 @@
             </div>
             <div class="col-auto ms-auto">
                 <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                    <a href="{{ route('admin.reading-builders.index') }}"
+                    <a href="{{ route('admin.readings.index') }}"
                        class="btn btn-falcon-success btn-sm">
                         <span class="fas fa-list-ul" data-fa-transform="shrink-3 down-2"></span>
                         <span class="ms-1">List</span>
@@ -69,7 +69,7 @@
                     @endif
 
 
-                <form action="{{ route('admin.reading-builders.store') }}" method="POST" enctype="multipart/form-data" id="myForm">
+                <form action="{{ route('admin.readings.store') }}" method="POST" enctype="multipart/form-data" id="myForm">
                     @csrf
 
                     <div class="mb-3">
@@ -183,7 +183,7 @@
                         <label class="form-label">
                             File (PDF/DOCX) <span class="text-danger">*</span>
                         </label>
-                        
+
                         <input class="form-control @error('file') is-invalid @enderror" name="file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                         <div class="small text-muted">
                             Upload specs: PDF/DOCX · Max size as defined · Letter size (21.59cm × H up to 11)
@@ -193,7 +193,7 @@
                         @enderror
                     </div>
                     <div class="d-flex justify-content-start gap-2 mt-4">
-                        <a href="{{ route('admin.reading-builders.index') }}"
+                        <a href="{{ route('admin.readings.index') }}"
                            class="btn btn-falcon-default btn-sm">
                             <span class="fas fa-arrow-left me-1"></span>
                             Cancel

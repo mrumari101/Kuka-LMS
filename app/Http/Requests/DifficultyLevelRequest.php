@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LevelRequest extends FormRequest
+class DifficultyLevelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,11 @@ class LevelRequest extends FormRequest
      */
     public function rules()
     {
-        $isUpdate = $this->route('level') !== null;
+        $isUpdate = $this->route('difficultyLevel') !== null;
 
         return [
-            'discipline_id' => 'required|exists:disciplines,id',
-            'sequence' => $isUpdate ? 'nullable|integer|min:1|max:99|unique:levels,sequence' : 'required|integer|min:1|max:99|unique:levels,sequence',
+            'sequence' => $isUpdate ? 'nullable|integer|min:1|max:99|unique:difficulty_levels,sequence' : 'required|integer|min:1|max:99|unique:difficulty_levels,sequence',
             'name' => 'required|string|max:255',
-            'discription' => 'nullable|string',
-            'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048' : 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'status' => 'required|integer',
         ];
     }

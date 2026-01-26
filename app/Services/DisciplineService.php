@@ -31,7 +31,7 @@ class DisciplineService
         //  $relations = ['restaurant', 'orders'];
         return $this->disciplineRepository->all(
             $conditions,
-            ['id', 'name','description', 'image', 'status'],
+            ['id', 'name','sequence', 'description', 'image', 'status'],
             $relations,
             'id',
             'desc',

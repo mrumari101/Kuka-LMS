@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReadingBuilderRequest extends FormRequest
+class ReadingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class ReadingBuilderRequest extends FormRequest
      */
     public function rules()
     {
-        $isUpdate = $this->route('readingBuilder') !== null;
+        $isUpdate = $this->route('reading') !== null;
 
         return [
             'discipline_id' => 'required|exists:disciplines,id',

@@ -8,7 +8,7 @@
 {{--@php die @endphp--}}
 
 
-@section('title', 'Dashboard - Disciplines')
+@section('title', 'Dashboard - Difficulty Levels')
 
 @section('content')
 
@@ -25,8 +25,8 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Disciplines', 'url' => route('admin.disciplines.index')],
-                ['label' => 'Add', 'url' => route('admin.disciplines.create')]
+                ['label' => 'Difficulty Levels', 'url' => route('admin.difficulty-levels.index')],
+                ['label' => 'Add', 'url' => route('admin.difficulty-levels.create')]
             ]"
     />
 
@@ -34,11 +34,11 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0" data-anchor="data-anchor" id="basic-form">Add Discipline<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#basic-form" style="margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h5>
+                <h5 class="mb-0" data-anchor="data-anchor" id="basic-form">Add Difficulty Level<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#basic-form" style="margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h5>
             </div>
             <div class="col-auto ms-auto">
                 <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                    <a href="{{ route('admin.disciplines.index') }}"
+                    <a href="{{ route('admin.difficulty-levels.index') }}"
                        class="btn btn-falcon-success btn-sm">
                         <span class="fas fa-list-ul" data-fa-transform="shrink-3 down-2"></span>
                         <span class="ms-1">List</span>
@@ -53,7 +53,7 @@
     <div class="card-body bg-body-tertiary">
         <div class="tab-content">
             <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-43631251-35c6-4416-9d8b-497c94bd83a2" id="dom-43631251-35c6-4416-9d8b-497c94bd83a2">
-                <form action="{{ route('admin.disciplines.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.difficulty-levels.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="name">
@@ -73,13 +73,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="description">Description</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3" placeholder="Description">{{ old('description') }}</textarea>
-                        @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="status">
                             Status <span class="text-danger">*</span>
@@ -93,17 +87,8 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Image <span class="text-danger">*</span>
-                        </label>
-                        <input class="form-control @error('image') is-invalid @enderror" name="image" type="file">
-                        @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="d-flex justify-content-start gap-2 mt-4">
-                        <a href="{{ route('admin.disciplines.index') }}"
+                        <a href="{{ route('admin.difficulty-levels.index') }}"
                            class="btn btn-falcon-default btn-sm">
                             <span class="fas fa-arrow-left me-1"></span>
                             Cancel

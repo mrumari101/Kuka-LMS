@@ -32,7 +32,7 @@ class LevelService
         //  $relations = ['restaurant', 'orders'];
         return $this->levelRepository->all(
             $conditions,
-            ['id', 'name','description', 'image', 'status','discipline_id'],
+            ['id', 'name','sequence','description', 'image', 'status','discipline_id'],
             $relations,
             'id',
             'desc',
@@ -67,7 +67,7 @@ class LevelService
         //  $relations = ['restaurant', 'orders'];
         return $this->levelRepository->all(
             $conditions,
-            ['id', 'name'],
+            ['id', 'name','sequence'],
             $relations,
             'id',
             'desc',

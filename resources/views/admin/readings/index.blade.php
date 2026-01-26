@@ -14,7 +14,7 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Reading Builders', 'url' => route('admin.reading-builders.index')]
+                ['label' => 'Readings', 'url' => route('admin.readings.index')]
             ]"
     />
 
@@ -23,11 +23,11 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                    <h5 class="mb-0">All Reading Builders</h5>
+                    <h5 class="mb-0">All Readings</h5>
                 </div>
                 <div class="col-auto ms-auto">
                     <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                        <a href="{{ route('admin.reading-builders.create') }}"
+                        <a href="{{ route('admin.readings.create') }}"
                            class="btn btn-falcon-success btn-sm">
                             <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                             <span class="ms-1">New</span>
@@ -53,34 +53,27 @@
                                         <th class="text-black dark__text-white align-middle">Chapter</th>
                                         <th class="text-black dark__text-white align-middle">Topic</th>
                                         <th class="text-black dark__text-white align-middle">Title</th>
+                                        <th class="text-black dark__text-white align-middle">Code</th>
                                         <th class="text-black dark__text-white align-middle">Description </th>
                                         <th class="text-black dark__text-white align-middle">Status</th>
                                         <th class="text-black dark__text-white align-middle white-space-nowrap pe-3">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody id="bulk-select-body">
-                                    @if (count($readingBuilders) > 0)
-                                        @foreach ($readingBuilders as $readingBuilder)
+                                    @if (count($readings) > 0)
+                                        @foreach ($readings as $reading)
                                     <tr>
-                                        <td class="align-middle white-space-nowrap">{{ 'R'.$readingBuilder->id.'.'.$readingBuilder->topic->chapter->level->discipline->id.'.'.$readingBuilder->topic->chapter->level->id.'.'. $readingBuilder->topic->chapter->id.'.'.$readingBuilder->topic->id}}</td> <!-- Serial number -->
-                                        <th class="align-middle">{{$readingBuilder->topic->chapter->level->discipline->name}}</th>
-                                        <th class="align-middle">{{$readingBuilder->topic->chapter->level->name}}</th>
-                                        <th class="align-middle">{{$readingBuilder->topic->chapter->name}}</th>
-                                        <th class="align-middle">{{$readingBuilder->topic->name}}</th>
-                                        <th class="align-middle">{{ $readingBuilder->name }}</th>
-                                        <th class="align-middle">{!! $readingBuilder->description !!}</th>
-{{--                                        <td class="align-middle white-space-nowrap">--}}
-{{--                                        <a href="{{ $readingBuilder->file--}}
-{{--                                                    ? asset('storage/'.$readingBuilder->file)--}}
-{{--                                                    : asset('assets/img/default.png') }}" data-gallery="gallery-2" class="glightbox">--}}
-{{--                                            <img class="img-fluid rounded" src="{{ $readingBuilder->file--}}
-{{--                                                    ? asset('storage/'.$readingBuilder->image)--}}
-{{--                                                    : asset('assets/falcon/images/default.png') }}" alt="" width="300" />--}}
-{{--                                        </a>--}}
-{{--                                        </td>--}}
+                                        <td class="align-middle white-space-nowrap">{{$reading->reading_uid}}</td>
+                                        <td class="align-middle">{{$reading->topic->chapter->level->discipline->name}}</td>
+                                        <td class="align-middle">{{$reading->topic->chapter->level->name}}</td>
+                                        <td class="align-middle">{{$reading->topic->chapter->name}}</td>
+                                        <td class="align-middle">{{$reading->topic->name}}</td>
+                                        <td class="align-middle">{{ $reading->name }}</td>
+                                        <td class="align-middle">{{ $reading->code }}</td>
+                                        <td class="align-middle">{!! $reading->description !!}</td>
                                         <td class="align-middle">
-                                            <span class="badge badge rounded-pill d-block p-2 @if($readingBuilder->status) badge-subtle-success @else badge-subtle-danger @endif ">
-                                                <span class="ms-1 fas @if($readingBuilder->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2">
+                                            <span class="badge badge rounded-pill d-block p-2 @if($reading->status) badge-subtle-success @else badge-subtle-danger @endif ">
+                                                <span class="ms-1 fas @if($reading->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2"></span>
 
                                             </span>
                                         </td>
@@ -88,7 +81,7 @@
                                             <div class="d-inline-flex align-items-center gap-2">
 
                                                 {{-- Edit --}}
-                                                <a href="{{ route('admin.reading-builders.edit', $readingBuilder->id) }}"
+                                                <a href="{{ route('admin.readings.edit', $reading->id) }}"
                                                    class="btn btn-link p-0"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="top"
@@ -101,8 +94,8 @@
                                                     class="btn btn-link p-0 ms-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
-                                                    data-delete-id="{{ $readingBuilder->id }}"
-                                                    data-route="{{ route('admin.reading-builders.delete', ':readingBuilder') }}"
+                                                    data-delete-id="{{ $reading->id }}"
+                                                    data-route="{{ route('admin.readings.delete', ':reading') }}"
                                                     onclick="handleDeleteValue(event)"
                                                     title="Delete">
                                                     <span class="fas fa-trash-alt text-500"></span>
@@ -185,8 +178,8 @@
                                 <!-- REQUIRED by your JS -->
                                 <input
                                     type="hidden"
-                                    name="deleteReadingBuilderId"
-                                    id="deleteReadingBuilderId">
+                                    name="deleteReadingId"
+                                    id="deleteReadingId">
 
                                 <button type="submit" class="btn btn-danger">
                                     Yes, Delete It
@@ -214,8 +207,8 @@
             var form = document.querySelector('#deleteModal form');
             var value = e.currentTarget.dataset.deleteId;
             var url = e.currentTarget.dataset.route;
-            form.action = url.replace(':readingBuilder', value);
-            var deleteInput = document.getElementById('deleteReadingBuilderId');
+            form.action = url.replace(':reading', value);
+            var deleteInput = document.getElementById('deleteReadingId');
             deleteInput.value = value;
         }
     </script>

@@ -28,7 +28,7 @@ class TopicService
         //  $relations = ['restaurant', 'orders'];
         return $this->topicRepository->all(
             $conditions,
-            ['id', 'name','description', 'image', 'status','chapter_id'],
+            ['id', 'name','sequence','description', 'image', 'status','chapter_id'],
             $relations,
             'id',
             'desc',
@@ -63,7 +63,7 @@ class TopicService
         //  $relations = ['restaurant', 'orders'];
         return $this->topicRepository->all(
             $conditions,
-            ['id', 'name'],
+            ['id', 'name','sequence'],
             $relations,
             'id',
             'desc',

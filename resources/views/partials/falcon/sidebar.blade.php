@@ -546,8 +546,8 @@
 
                         @role('admin')
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.reading-builders.*') ? 'active' : '' }}"
-                               href="{{ route('admin.reading-builders.index') }}">
+                            <a class="nav-link {{ request()->routeIs('admin.readings.*') ? 'active' : '' }}"
+                               href="{{ route('admin.readings.index') }}">
                                 <div class="d-flex align-items-center">
                                 <span class="nav-link-icon">
                                     <span class="fas fa-layer-group"></span>
@@ -557,6 +557,22 @@
                             </a>
                         </li>
                         @endrole
+
+
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.difficulty-levels.*') ? 'active' : '' }}"
+                               href="{{ route('admin.difficulty-levels.index') }}">
+                                <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-layer-group"></span>
+                                </span>
+                                    <span class="nav-link-text ps-1">Difficulty Levels</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endrole
+
 {{--                        <li class="nav-item"><a class="nav-link" href="dashboard/crm.html">--}}
 {{--                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span></div>--}}
 {{--                            </a><!-- more inner pages--></li>--}}

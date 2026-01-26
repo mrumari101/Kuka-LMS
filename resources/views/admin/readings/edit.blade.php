@@ -8,7 +8,7 @@
 {{--@php die @endphp--}}
 
 
-@section('title', 'Dashboard - Reading Builders')
+@section('title', 'Dashboard - Readings')
 
 @section('content')
 
@@ -26,8 +26,8 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Reading Builders', 'url' => route('admin.reading-builders.index')],
-                ['label' => 'Update', 'url' => route('admin.reading-builders.edit',['readingBuilder'=>$readingBuilder->id])]
+                ['label' => 'Readings', 'url' => route('admin.readings.index')],
+                ['label' => 'Update', 'url' => route('admin.readings.edit',['reading'=>$reading->id])]
             ]"
     />
 
@@ -35,11 +35,11 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                    <h5 class="mb-0" data-anchor="data-anchor" id="basic-form">Edit Reading Builder<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#basic-form" style="margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h5>
+                    <h5 class="mb-0" data-anchor="data-anchor" id="basic-form">Edit Reading<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="#" href="#basic-form" style="margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h5>
                 </div>
                 <div class="col-auto ms-auto">
                     <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                        <a href="{{ route('admin.reading-builders.index') }}"
+                        <a href="{{ route('admin.readings.index') }}"
                            class="btn btn-falcon-success btn-sm">
                             <span class="fas fa-list-ul" data-fa-transform="shrink-3 down-2"></span>
                             <span class="ms-1">List</span>
@@ -54,18 +54,18 @@
         <div class="card-body bg-body-tertiary">
             <div class="tab-content">
                 <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-43631251-35c6-4416-9d8b-497c94bd83a2" id="dom-43631251-35c6-4416-9d8b-497c94bd83a2">
-                    <form action="{{ route('admin.reading-builders.update', ['readingBuilder' => $readingBuilder->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.readings.update', ['reading' => $reading->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
                             <label class="form-label" for="discipline_id">
                                 Discipline <span class="text-danger">*</span>
                             </label>
-                            <select  data-old="{{ old('discipline_id', $readingBuilder->topic->chapter->level->discipline->id) }}" class="form-select @error('discipline_id') is-invalid @enderror" name="discipline_id" id="discipline_id" aria-label="Default select example">
+                            <select  data-old="{{ old('discipline_id', $reading->topic->chapter->level->discipline->id) }}" class="form-select @error('discipline_id') is-invalid @enderror" name="discipline_id" id="discipline_id" aria-label="Default select example">
                                 @if ($disciplines->count() > 0)
                                     <option >Select Discipline</option>
                                     @foreach ($disciplines as $item)
-                                        <option value="{{ $item->id }}" {{ old('discipline_id',$readingBuilder->topic->chapter->level->discipline->id) == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" {{ old('discipline_id',$reading->topic->chapter->level->discipline->id) == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
                                 @else
                                     <option selected="selected">Not Found</option>
@@ -84,7 +84,7 @@
                             <select id="level_id" name="level_id"
                                     class="form-select @error('level_id') is-invalid @enderror"
                                     disabled
-                                    data-old="{{ old('level_id', $readingBuilder->topic->chapter->level->id) }}">
+                                    data-old="{{ old('level_id', $reading->topic->chapter->level->id) }}">
                                 <option value="">Select Level</option>
                             </select>
                             @error('level_id')
@@ -102,7 +102,7 @@
                             <select id="chapter_id" name="chapter_id"
                                     class="form-select @error('level_id') is-invalid @enderror"
                                     disabled
-                                    data-old="{{ old('chapter_id', $readingBuilder->topic->chapter->id) }}">
+                                    data-old="{{ old('chapter_id', $reading->topic->chapter->id) }}">
                                 <option value="">Select Chapter</option>
                             </select>
                             @error('level_id')
@@ -118,7 +118,7 @@
                             <select id="topic_id" name="topic_id"
                                     class="form-select @error('topic_id') is-invalid @enderror"
                                     disabled
-                                    data-old="{{ old('topic_id', $readingBuilder->topic->id) }}">
+                                    data-old="{{ old('topic_id', $reading->topic->id) }}">
                                 <option value="">Select Topic</option>
                             </select>
                             @error('topic_id')
@@ -150,7 +150,7 @@
                                 name="description"
                                 label="Description"
                                 placeholder="Write your reading content..."
-                                value="{!! old('description',$readingBuilder->description)  !!}"
+                                value="{!! old('description',$reading->description)  !!}"
                             />
                             @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -163,8 +163,8 @@
                             </label>
                             <select class="form-select @error('status') is-invalid @enderror" name="status" id="status" aria-label="Default select example">
                                 <option selected="selected">Select Status</option>
-                                <option value="1" {{ old('status',$readingBuilder->status) == '1' ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ old('status',$readingBuilder->status) == '0' ? 'selected' : '' }}>Unactive</option>
+                                <option value="1" {{ old('status',$reading->status) == '1' ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ old('status',$reading->status) == '0' ? 'selected' : '' }}>Unactive</option>
                             </select>
                             @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="d-flex justify-content-start gap-2 mt-4">
-                            <a href="{{ route('admin.reading-builders.index') }}"
+                            <a href="{{ route('admin.readings.index') }}"
                                class="btn btn-falcon-default btn-sm">
                                 <span class="fas fa-arrow-left me-1"></span>
                                 Cancel

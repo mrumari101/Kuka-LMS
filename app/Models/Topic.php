@@ -11,8 +11,14 @@ class Topic extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'chapter_id','name','slug','description','image','status'
+        'chapter_id','name','sequence', 'slug','description','image','status'
     ];
+    protected $appends = ['code'];
+
+    public function getCodeAttribute()
+    {
+        return str_pad($this->sequence, 2, '0', STR_PAD_LEFT);
+    }
 
     protected static function booted()
     {

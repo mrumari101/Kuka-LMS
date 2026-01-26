@@ -24,6 +24,9 @@ class DisciplineRequest extends FormRequest
         $isUpdate = $this->route('discipline') !== null;
 
         return [
+           // 'sequence' => 'required|integer|min:1|max:99|unique:disciplines,sequence',
+            //'sequence'      => 'required|integer|min:1|max:99|unique:levels,sequence,NULL,id,discipline_id,' . request('discipline_id'),
+            'sequence' => $isUpdate ? 'nullable|integer|min:1|max:99|unique:disciplines,sequence' : 'required|integer|min:1|max:99|unique:disciplines,sequence',
             'name' => 'required|string|max:255',
             'discription' => 'nullable|string',
             'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048' : 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',

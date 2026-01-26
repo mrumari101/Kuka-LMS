@@ -49,6 +49,7 @@
                                             Sr.
                                         </th>
                                         <th class="text-black dark__text-white align-middle">Name</th>
+                                        <th class="text-black dark__text-white align-middle">Code</th>
                                         <th class="text-black dark__text-white align-middle">Discipline</th>
                                         <th class="text-black dark__text-white align-middle">Level</th>
                                         <th>Image</th>
@@ -63,6 +64,7 @@
                                     <tr>
                                         <td class="align-middle white-space-nowrap">{{ $loop->iteration }}</td> <!-- Serial number -->
                                         <th class="align-middle">{{$chapter->name}}</th>
+                                        <th class="align-middle">{{$chapter->code}}</th>
                                         <th class="align-middle">{{$chapter->level->discipline->name}}</th>
                                         <th class="align-middle">{{$chapter->level->name}}</th>
                                         <td class="align-middle white-space-nowrap">

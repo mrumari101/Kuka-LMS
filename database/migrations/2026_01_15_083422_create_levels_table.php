@@ -13,15 +13,32 @@ return new class extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('discipline_id')->constrained()->cascadeOnDelete();
+
+            $table->foreignId('discipline_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->string('name');
-            $table->string('slug')->unique();
+
+            // Stored as 1, 2, 3 → rendered as 01, 02, 03
+            $table->unsignedTinyInteger('sequence');
+
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+
             $table->tinyInteger('status')->default(1);
+
             $table->timestamps();
             $table->softDeletes();
+
+            // Critical constraints
+            $table->unique(['discipline_id', 'sequence']);
+            $table->unique(['discipline_id', 'slug']);
+
+            $table->index('status');
         });
+
     }
 
     /**

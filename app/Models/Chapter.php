@@ -11,8 +11,15 @@ class Chapter extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'level_id','name','slug','description','image','status'
+        'level_id','name','sequence','slug','description','image','status'
     ];
+
+    protected $appends = ['code'];
+
+    public function getCodeAttribute()
+    {
+        return str_pad($this->sequence, 3, '0', STR_PAD_LEFT);
+    }
 
     protected static function booted()
     {

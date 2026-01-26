@@ -27,6 +27,7 @@ class ChapterRequest extends FormRequest
             'discipline_id' => 'required|exists:disciplines,id',
             'level_id' => 'required|exists:levels,id',
             'name' => 'required|string|max:255',
+            'sequence' => $isUpdate ? 'nullable|integer|min:1|max:99|unique:chapters,sequence' : 'required|integer|min:1|max:99|unique:chapters,sequence',
             'discription' => 'nullable|string',
             'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048' : 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'status' => 'required|integer',

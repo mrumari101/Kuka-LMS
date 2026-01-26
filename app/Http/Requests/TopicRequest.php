@@ -27,6 +27,7 @@ class TopicRequest extends FormRequest
             'discipline_id' => 'required|exists:disciplines,id',
             'level_id' => 'required|exists:levels,id',
             'chapter_id' => 'required|exists:chapters,id',
+            'sequence' => $isUpdate ? 'nullable|integer|min:1|max:99|unique:topics,sequence' : 'required|integer|min:1|max:99|unique:topics,sequence',
             'name' => 'required|string|max:255',
             'discription' => 'nullable|string',
             'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048' : 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',

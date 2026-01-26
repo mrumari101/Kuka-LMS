@@ -6,31 +6,38 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class ReadingBuilder extends Model
+class Reading extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'topic_id','name', 'description','file','status'
+      'reading_uid',  'reading_no','chapter_id', 'topic_id','name','sequence', 'description','file','status'
     ];
+
+    protected $appends = ['code'];
+
+    public function getCodeAttribute()
+    {
+        return str_pad($this->reading_no, 2, '0', STR_PAD_LEFT);
+    }
 
     protected static function booted()
     {
-        static::creating(function ($readingBuilder) {
+        static::creating(function ($reading) {
 
-            $baseSlug = Str::slug($readingBuilder->name);
+            $baseSlug = Str::slug($reading->name);
             $slug = $baseSlug;
             $counter = 1;
 
             while (
-            ReadingBuilder::withTrashed()
+            Reading::withTrashed()
                 ->where('slug', $slug)
                 ->exists()
             ) {
                 $slug = $baseSlug . '-' . $counter++;
             }
 
-            $readingBuilder->slug = $slug;
+            $reading->slug = $slug;
         });
     }
 

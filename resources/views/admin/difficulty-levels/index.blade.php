@@ -1,6 +1,6 @@
 @extends('layouts.falcon')
 
-@section('title', 'Dashboard - Topics')
+@section('title', 'Dashboard - Difficulty Levels')
 
 @section('content')
 
@@ -14,7 +14,7 @@
         title="Dashboard"
         :items="[
                 ['label' => 'Dashboard', 'url' => route('dashboard')],
-                ['label' => 'Topics', 'url' => route('admin.topics.index')]
+                ['label' => 'Difficulty Levels', 'url' => route('admin.difficulty-levels.index')]
             ]"
     />
 
@@ -23,11 +23,11 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                    <h5 class="mb-0">All Topics</h5>
+                    <h5 class="mb-0">All Difficulty Levels</h5>
                 </div>
                 <div class="col-auto ms-auto">
                     <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                        <a href="{{ route('admin.topics.create') }}"
+                        <a href="{{ route('admin.difficulty-levels.create') }}"
                            class="btn btn-falcon-success btn-sm">
                             <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                             <span class="ms-1">New</span>
@@ -41,6 +41,26 @@
                 <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-89b5a08b-76a9-43a0-9878-2cf3fec68e75" id="dom-89b5a08b-76a9-43a0-9878-2cf3fec68e75">
                     <div class="card shadow-none">
                         <div class="card-body p-0 pb-3">
+{{--                            <div class="d-flex align-items-center justify-content-end my-3">--}}
+{{--                                <div id="bulk-select-replace-element">--}}
+
+{{--                                   --}}
+
+{{--                                    <button class="btn btn-falcon-success btn-sm" type="button"><svg class="svg-inline--fa fa-plus fa-w-14" data-fa-transform="shrink-3 down-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" style="transform-origin: 0.4375em 0.625em;"><g transform="translate(224 256)"><g transform="translate(0, 64)  scale(0.8125, 0.8125)  rotate(0 0 0)"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" transform="translate(-224 -256)"></path></g></g></svg><!-- <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com --><span class="ms-1">New</span></button>--}}
+
+{{--                                   --}}
+
+
+
+{{--                                </div>--}}
+{{--                                <div class="d-none ms-3" id="bulk-select-actions">--}}
+{{--                                    <div class="d-flex"><select class="form-select form-select-sm" aria-label="Bulk actions">--}}
+{{--                                            <option selected="selected">Bulk actions</option>--}}
+{{--                                            <option value="Delete">Delete</option>--}}
+{{--                                            <option value="Archive">Archive</option>--}}
+{{--                                        </select><button class="btn btn-falcon-danger btn-sm ms-2" type="button">Apply</button></div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="table-responsive scrollbar mt-4">
                                 <table class="table mb-0">
                                     <thead class="bg-200">
@@ -50,40 +70,20 @@
                                         </th>
                                         <th class="text-black dark__text-white align-middle">Name</th>
                                         <th class="text-black dark__text-white align-middle">Code</th>
-                                        <th class="text-black dark__text-white align-middle">Discipline</th>
-                                        <th class="text-black dark__text-white align-middle">Level</th>
-                                        <th class="text-black dark__text-white align-middle">Chapter</th>
-                                        <th>Image</th>
-                                        <th class="text-black dark__text-white align-middle">Description </th>
                                         <th class="text-black dark__text-white align-middle">Status</th>
                                         <th class="text-black dark__text-white align-middle white-space-nowrap pe-3">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody id="bulk-select-body">
-                                    @if (count($topics) > 0)
-                                        @foreach ($topics as $topic)
+                                    @if (count($difficultyLevels) > 0)
+                                        @foreach ($difficultyLevels as $difficultyLevel)
                                     <tr>
                                         <td class="align-middle white-space-nowrap">{{ $loop->iteration }}</td> <!-- Serial number -->
-                                        <th class="align-middle">{{$topic->name}}</th>
-                                        <th class="align-middle">{{$topic->code}}</th>
-                                        <th class="align-middle">{{$topic->chapter->level->discipline->name}}</th>
-                                        <th class="align-middle">{{$topic->chapter->level->name}}</th>
-                                        <th class="align-middle">{{$topic->chapter->name}}</th>
-                                        <td class="align-middle white-space-nowrap">
-                                        <a href="{{ $topic->image
-                                                    ? asset('storage/'.$topic->image)
-                                                    : asset('assets/img/default.png') }}" data-gallery="gallery-2" class="glightbox">
-                                            <img class="img-fluid rounded" src="{{ $topic->image
-                                                    ? asset('storage/'.$topic->image)
-                                                    : asset('assets/falcon/images/default.png') }}" alt="" width="300" />
-                                        </a>
-                                        </td>
-
-
-                                        <td class="align-middle">{{$topic->description}}</td>
+                                        <th class="align-middle">{{$difficultyLevel->name}}</th>
+                                        <th class="align-middle">{{$difficultyLevel->code}}</th>
                                         <td class="align-middle">
-                                            <span class="badge badge rounded-pill d-block p-2 @if($topic->status) badge-subtle-success @else badge-subtle-danger @endif ">
-                                                <span class="ms-1 fas @if($topic->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2">
+                                            <span class="badge badge rounded-pill d-block p-2 @if($difficultyLevel->status) badge-subtle-success @else badge-subtle-danger @endif ">
+                                                <span class="ms-1 fas @if($difficultyLevel->status) fa-check @else fa-times-circle @endif" data-fa-transform="shrink-2">
 
                                             </span>
                                         </td>
@@ -91,7 +91,7 @@
                                             <div class="d-inline-flex align-items-center gap-2">
 
                                                 {{-- Edit --}}
-                                                <a href="{{ route('admin.topics.edit', $topic->id) }}"
+                                                <a href="{{ route('admin.difficulty-levels.edit', $difficultyLevel->id) }}"
                                                    class="btn btn-link p-0"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="top"
@@ -104,15 +104,34 @@
                                                     class="btn btn-link p-0 ms-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
-                                                    data-delete-id="{{ $topic->id }}"
-                                                    data-route="{{ route('admin.topics.delete', ':topic') }}"
+                                                    data-delete-id="{{ $difficultyLevel->id }}"
+                                                    data-route="{{ route('admin.difficulty-levels.delete', ':difficultyLevel') }}"
                                                     onclick="handleDeleteValue(event)"
                                                     title="Delete">
                                                     <span class="fas fa-trash-alt text-500"></span>
                                                 </button>
+{{--                                                <button--}}
+{{--                                                    type="button"--}}
+{{--                                                    class="btn btn-link p-0"--}}
+{{--                                                    data-bs-toggle="tooltip"--}}
+{{--                                                    data-bs-placement="top"--}}
+{{--                                                    title="Delete"--}}
+{{--                                                    data-bs-target="#deleteModal"--}}
+{{--                                                    data-delete-id="{{ $discipline->id }}"--}}
+{{--                                                    data-route="{{ route('admin.disciplines.destroy', $discipline->id) }}"--}}
+{{--                                                    onclick="handleDeleteValue(event)">--}}
+{{--                                                    <span class="text-500 fas fa-trash-alt"></span>--}}
+{{--                                                </button>--}}
 
                                             </div>
                                         </td>
+
+                                        {{--                                        <td class="text-end">--}}
+{{--                                            <div>--}}
+{{--                                                <button class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><span class="text-500 fas fa-edit"></span></button>--}}
+{{--                                                <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete"><span class="text-500 fas fa-trash-alt"></span></button>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
                                     </tr>
                                         @endforeach
                                     @else
@@ -125,6 +144,7 @@
                                     @endif
                                     </tbody>
                                 </table>
+{{--                                <p class="mt-3 mb-2">Click the button to get selected rows</p><button class="btn btn-warning" data-selected-rows="data-selected-rows">Get Selected Rows</button><pre id="selectedRows"></pre>--}}
                             </div>
                         </div>
                     </div>
@@ -188,8 +208,8 @@
                                 <!-- REQUIRED by your JS -->
                                 <input
                                     type="hidden"
-                                    name="deleteTopicId"
-                                    id="deleteTopicId">
+                                    name="deleteDifficultyLevelId"
+                                    id="deleteDifficultyLevelId">
 
                                 <button type="submit" class="btn btn-danger">
                                     Yes, Delete It
@@ -205,20 +225,14 @@
 
 
 
-
-
-
-
-
-
     <script>
         function handleDeleteValue(e) {
             e.preventDefault();
             var form = document.querySelector('#deleteModal form');
             var value = e.currentTarget.dataset.deleteId;
             var url = e.currentTarget.dataset.route;
-            form.action = url.replace(':topic', value);
-            var deleteInput = document.getElementById('deleteTopicId');
+            form.action = url.replace(':difficultyLevel', value);
+            var deleteInput = document.getElementById('deleteDifficultyLevelId');
             deleteInput.value = value;
         }
     </script>

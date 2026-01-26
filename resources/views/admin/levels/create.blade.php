@@ -105,6 +105,17 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="sequence">
+                            Sequence# <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control @error('name') is-invalid @enderror" name="sequence" id="sequence" min="1" max="99" type="number" value="{{ old('sequence') }}" placeholder="Sequence#">
+                        @error('sequence')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="description">Description</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3" placeholder="Description">{{ old('description') }}</textarea>

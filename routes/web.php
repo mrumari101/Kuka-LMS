@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\DisciplineController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\ChapterController;
 use App\Http\Controllers\Admin\TopicController;
-use App\Http\Controllers\Admin\ReadingBuilderController;
+use App\Http\Controllers\Admin\ReadingController;
+use App\Http\Controllers\Admin\DifficultyLevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,13 +101,23 @@ Route::middleware(['auth', 'role:admin'])
         });
 
 
-        Route::prefix('reading-builders')->group(function () {
-            Route::get('/', [ReadingBuilderController::class, 'index'])->name('reading-builders.index');
-            Route::get('/create', [ReadingBuilderController::class, 'create'])->name('reading-builders.create');
-            Route::post('/store', [ReadingBuilderController::class, 'store'])->name('reading-builders.store');
-            Route::get('/edit/{readingBuilder}', [ReadingBuilderController::class, 'show'])->name('reading-builders.edit');
-            Route::post('/update/{readingBuilder}', [ReadingBuilderController::class, 'update'])->name('reading-builders.update');
-            Route::post('/delete/{readingBuilder}', [ReadingBuilderController::class, 'destroy'])->name('reading-builders.delete');
+        Route::prefix('readings')->group(function () {
+            Route::get('/', [ReadingController::class, 'index'])->name('readings.index');
+            Route::get('/create', [ReadingController::class, 'create'])->name('readings.create');
+            Route::post('/store', [ReadingController::class, 'store'])->name('readings.store');
+            Route::get('/edit/{reading}', [ReadingController::class, 'show'])->name('readings.edit');
+            Route::post('/update/{reading}', [ReadingController::class, 'update'])->name('readings.update');
+            Route::post('/delete/{reading}', [ReadingController::class, 'destroy'])->name('readings.delete');
+        });
+
+
+        Route::prefix('difficulty-levels')->group(function () {
+            Route::get('/', [DifficultyLevelController::class, 'index'])->name('difficulty-levels.index');
+            Route::get('/create', [DifficultyLevelController::class, 'create'])->name('difficulty-levels.create');
+            Route::post('/store', [DifficultyLevelController::class, 'store'])->name('difficulty-levels.store');
+            Route::get('/edit/{difficultyLevel}', [DifficultyLevelController::class, 'show'])->name('difficulty-levels.edit');
+            Route::post('/update/{difficultyLevel}', [DifficultyLevelController::class, 'update'])->name('difficulty-levels.update');
+            Route::post('/delete/{difficultyLevel}', [DifficultyLevelController::class, 'destroy'])->name('difficulty-levels.delete');
         });
 
 

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('disciplines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedTinyInteger('sequence')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1); // 1=active, 0=inactive
             $table->timestamps();
             $table->softDeletes();
+            $table->index('status');
         });
     }
 

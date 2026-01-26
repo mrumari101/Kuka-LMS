@@ -11,20 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reading_builders', function (Blueprint $table) {
+        Schema::create('difficulty_levels', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('topic_id');
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->longText('description')->nullable(); // Rich text editor
-            $table->string('file')->nullable();
+            // Stored as 1–99 → rendered as 01–99
+            $table->unsignedTinyInteger('sequence');
             $table->tinyInteger('status')->default(1);
-            $table->foreign('topic_id')
-                ->references('id')
-                ->on('topics') // make sure your topics table exists
-                ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reading_builders');
+        Schema::dropIfExists('difficulty_levels');
     }
 };

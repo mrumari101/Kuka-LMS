@@ -30,7 +30,7 @@ class ChapterService
         //  $relations = ['restaurant', 'orders'];
         return $this->chapterRepository->all(
             $conditions,
-            ['id', 'name','description', 'image', 'status','level_id'],
+            ['id', 'name','sequence','description', 'image', 'status','level_id'],
             $relations,
             'id',
             'desc',
@@ -65,7 +65,7 @@ class ChapterService
         //  $relations = ['restaurant', 'orders'];
         return $this->chapterRepository->all(
             $conditions,
-            ['id', 'name'],
+            ['id', 'name','sequence'],
             $relations,
             'id',
             'desc',
