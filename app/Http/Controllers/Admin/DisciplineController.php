@@ -9,6 +9,8 @@ use App\Services\DisciplineService;
 use App\Traits\CommonFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DisciplineController extends Controller
 {
@@ -22,6 +24,12 @@ class DisciplineController extends Controller
 
     public function index()
     {
+
+//        $role = Role::findByName('admin');
+//        $permission = Permission::findByName('manage questions');
+//
+//        $role->givePermissionTo($permission);
+
         $disciplines = $this->disciplineService->all();
 
         return view('admin.disciplines.index', compact('disciplines'));

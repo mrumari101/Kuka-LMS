@@ -24,6 +24,7 @@ class RolePermissionSeeder extends Seeder
             'manage chapters',
             'manage topics',
             'view dashboard',
+            'manage questions',
             'view courses',       // example for teacher/student
             'enroll courses',     // student only
         ];

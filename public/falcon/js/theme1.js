@@ -1,26 +1,24 @@
 "use strict";
 
 var _excluded = ["endValue"];
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
-function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (e.includes(n)) continue; t[n] = r[n]; } return t; }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 /* -------------------------------------------------------------------------- */
 /*                                    Utils                                   */
 /* -------------------------------------------------------------------------- */
@@ -39,11 +37,8 @@ var isIterableArray = function isIterableArray(array) {
   return Array.isArray(array) && !!array.length;
 };
 var camelize = function camelize(str) {
-  var text = str.replace(/[-_\s.]+(.)?/g, function (match, capture) {
-    if (capture) {
-      return capture.toUpperCase();
-    }
-    return '';
+  var text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
+    return c ? c.toUpperCase() : '';
   });
   return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
 };
@@ -169,9 +164,7 @@ var getBreakpoint = function getBreakpoint(el) {
 var getSystemTheme = function getSystemTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
-var isDark = function isDark() {
-  return localStorage.getItem('theme') === 'auto' ? getSystemTheme() : localStorage.getItem('theme');
-};
+
 /* --------------------------------- Cookie --------------------------------- */
 
 var setCookie = function setCookie(name, value, expire) {
@@ -284,8 +277,7 @@ var utils = {
   getPastDates: getPastDates,
   getRandomNumber: getRandomNumber,
   removeClass: removeClass,
-  getSystemTheme: getSystemTheme,
-  isDark: isDark
+  getSystemTheme: getSystemTheme
 };
 
 /* -------------------------------------------------------------------------- */
@@ -319,7 +311,7 @@ var DomNode = /*#__PURE__*/function () {
     _classCallCheck(this, DomNode);
     this.node = node;
   }
-  return _createClass(DomNode, [{
+  _createClass(DomNode, [{
     key: "addClass",
     value: function addClass(className) {
       this.isValidNode() && this.node.classList.add(className);
@@ -392,7 +384,9 @@ var DomNode = /*#__PURE__*/function () {
       return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
     }
   }]);
+  return DomNode;
 }();
+/* eslint-disable */
 var orders = [{
   id: 1,
   dropdownId: 'order-dropdown-1',
@@ -876,9 +870,8 @@ var orders = [{
 }];
 var advanceAjaxTableInit = function advanceAjaxTableInit() {
   var togglePaginationButtonDisable = function togglePaginationButtonDisable(button, disabled) {
-    var updatedButton = button;
-    updatedButton.disabled = disabled;
-    updatedButton.classList[disabled ? 'add' : 'remove']('disabled');
+    button.disabled = disabled;
+    button.classList[disabled ? 'add' : 'remove']('disabled');
   };
   // Selectors
   var table = document.getElementById('advanceAjaxTable');
@@ -933,9 +926,7 @@ var advanceAjaxTableInit = function advanceAjaxTableInit() {
     var updateListControls = function updateListControls() {
       listInfo && (listInfo.innerHTML = "".concat(orderList.i, " to ").concat(numberOfcurrentItems, " of ").concat(totalItem));
       paginationButtonPrev && togglePaginationButtonDisable(paginationButtonPrev, pageCount === 1);
-      if (paginationButtonNext) {
-        togglePaginationButtonDisable(paginationButtonNext, pageCount === pageQuantity);
-      }
+      paginationButtonNext && togglePaginationButtonDisable(paginationButtonNext, pageCount === pageQuantity);
       if (pageCount > 1 && pageCount < pageQuantity) {
         togglePaginationButtonDisable(paginationButtonNext, false);
         togglePaginationButtonDisable(paginationButtonPrev, false);
@@ -1090,7 +1081,7 @@ var BulkSelect = /*#__PURE__*/function () {
   }
 
   // Static
-  return _createClass(BulkSelect, [{
+  _createClass(BulkSelect, [{
     key: "init",
     value: function init() {
       this.attachNodes();
@@ -1141,15 +1132,9 @@ var BulkSelect = /*#__PURE__*/function () {
         }
         _this.toggleDisplay();
         _this.bulkSelectRows.forEach(function (el) {
+          // eslint-disable-next-line
           el.checked = _this.element.checked;
         });
-        if (_this.element.checked) {
-          _this.actions.removeClass(_this.option.displayNoneClassName);
-          _this.replacedElement.addClass(_this.option.displayNoneClassName);
-        } else {
-          _this.actions.addClass(_this.option.displayNoneClassName);
-          _this.replacedElement.removeClass(_this.option.displayNoneClassName);
-        }
       });
     }
   }, {
@@ -1206,6 +1191,7 @@ var BulkSelect = /*#__PURE__*/function () {
       return null;
     }
   }]);
+  return BulkSelect;
 }();
 function bulkSelectInit() {
   var bulkSelects = document.querySelectorAll('[data-bulk-select');
@@ -1213,16 +1199,6 @@ function bulkSelectInit() {
     bulkSelects.forEach(function (el) {
       var bulkSelect = new BulkSelect(el);
       bulkSelect.init();
-    });
-  }
-  var selectedRowsBtn = document.querySelector('[data-selected-rows]');
-  var selectedRows = document.getElementById('selectedRows');
-  if (selectedRowsBtn) {
-    var bulkSelectEl = document.getElementById('bulk-select-example');
-    var bulkSelectInstance = window.BulkSelect.getInstance(bulkSelectEl);
-    selectedRowsBtn.addEventListener('click', function () {
-      console.log(bulkSelectInstance);
-      selectedRows.innerHTML = JSON.stringify(bulkSelectInstance.getSelectedRows(), undefined, 2);
     });
   }
 }
@@ -1365,10 +1341,7 @@ var choicesInit = function choicesInit() {
               }
               //----- for multiple select only ----------
               if (multipleSelect) {
-                var selectedOptions = item.selectedOptions;
-                if (selectedOptions.length > 0 && _toConsumableArray(selectedOptions).some(function (opt) {
-                  return opt.value !== '';
-                })) {
+                if (choicesItem.getElementsByTagName('option').length) {
                   choicesItem.classList.remove('invalid');
                   choicesItem.classList.add('valid');
                 } else {
@@ -1381,6 +1354,7 @@ var choicesInit = function choicesInit() {
             }
           });
         };
+
         validationItem.addEventListener('submit', function () {
           selectFormValidation();
         });
@@ -1439,21 +1413,19 @@ var cookieNoticeInit = function cookieNoticeInit() {
         cookieExpireTime: 3600000,
         showOnce: false
       }, utils.getData(el, DataKeys.OPTIONS));
-      if (toastOptions.showOnce) {
-        utils.setCookie('notice', false, toastOptions.cookieExpireTime);
-      }
+      toastOptions.showOnce && utils.setCookie('notice', false, toastOptions.cookieExpireTime);
     });
   });
   var btnNoticeToggle = document.querySelector(Selector.DATA_TOGGLE_Notice);
-  if (btnNoticeToggle) {
-    btnNoticeToggle.addEventListener(Events.CLICK, function (_ref) {
-      var currentTarget = _ref.currentTarget;
-      var id = currentTarget.getAttribute('href');
-      var notice = new window.bootstrap.Toast(document.querySelector(id));
-      var el = notice._element;
-      utils.hasClass(el, ClassNames.HIDE) ? notice.show() : notice.hide();
-    });
-  }
+  btnNoticeToggle && btnNoticeToggle.addEventListener(Events.CLICK, function (_ref) {
+    var currentTarget = _ref.currentTarget;
+    var id = currentTarget.getAttribute('href');
+    var notice = new window.bootstrap.Toast(document.querySelector(id));
+
+    /*eslint-disable-next-line*/
+    var el = notice._element;
+    utils.hasClass(el, ClassNames.HIDE) ? notice.show() : notice.hide();
+  });
 };
 
 /* -------------------------------------------------------------------------- */
@@ -1529,12 +1501,66 @@ var dataTablesInit = function dataTablesInit() {
         dom: "<'row mx-0'<'col-md-6'l><'col-md-6'f>>" + "<'table-responsive scrollbar'tr>" + "<'row g-0 align-items-center justify-content-center justify-content-sm-between'<'col-auto mb-2 mb-sm-0 px-3'i><'col-auto px-3'p>>"
       }, $this.data('datatables'));
       $this.DataTable(options);
-      bulkSelectInit();
-      var $wrpper = $this.closest('.dt-container');
+      var $wrpper = $this.closest('.dataTables_wrapper');
       customDataTable($wrpper);
       $this.on('draw.dt', function () {
         return customDataTable($wrpper);
       });
+    });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                  Draggable                                 */
+/* -------------------------------------------------------------------------- */
+
+var draggableInit = function draggableInit() {
+  var Selectors = {
+    BODY: 'body',
+    KANBAN_CONTAINER: '.kanban-container',
+    KABNBAN_COLUMN: '.kanban-column',
+    KANBAN_ITEMS_CONTAINER: '.kanban-items-container',
+    KANBAN_ITEM: '.kanban-item',
+    ADD_CARD_FORM: '.add-card-form'
+  };
+  var Events = {
+    DRAG_START: 'drag:start',
+    DRAG_STOP: 'drag:stop'
+  };
+  var ClassNames = {
+    FORM_ADDED: 'form-added'
+  };
+  var columns = document.querySelectorAll(Selectors.KABNBAN_COLUMN);
+  var columnContainers = document.querySelectorAll(Selectors.KANBAN_ITEMS_CONTAINER);
+  var container = document.querySelector(Selectors.KANBAN_CONTAINER);
+  if (columnContainers.length) {
+    // Initialize Sortable
+    var sortable = new window.Draggable.Sortable(columnContainers, {
+      draggable: Selectors.KANBAN_ITEM,
+      delay: 200,
+      mirror: {
+        appendTo: Selectors.BODY,
+        constrainDimensions: true
+      },
+      scrollable: {
+        draggable: Selectors.KANBAN_ITEM,
+        scrollableElements: [].concat(_toConsumableArray(columnContainers), [container])
+      }
+    });
+
+    // Hide form when drag start
+    sortable.on(Events.DRAG_START, function () {
+      columns.forEach(function (column) {
+        utils.hasClass(column, ClassNames.FORM_ADDED) && column.classList.remove(ClassNames.FORM_ADDED);
+      });
+    });
+
+    // Place forms and other contents bottom of the sortable container
+    sortable.on(Events.DRAG_STOP, function (_ref2) {
+      var el = _ref2.data.source;
+      var columnContainer = el.closest(Selectors.KANBAN_ITEMS_CONTAINER);
+      var form = columnContainer.querySelector(Selectors.ADD_CARD_FORM);
+      !el.nextElementSibling && columnContainer.appendChild(form);
     });
   }
 };
@@ -1580,6 +1606,8 @@ var dropdownOnHover = function dropdownOnHover() {
     navbarArea.addEventListener('mouseover', function (e) {
       if (e.target.className.includes('dropdown-toggle') && window.innerWidth > 992) {
         var dropdownInstance = new window.bootstrap.Dropdown(e.target);
+
+        /* eslint-disable no-underscore-dangle */
         dropdownInstance._element.classList.add('show');
         dropdownInstance._menu.classList.add('show');
         dropdownInstance._menu.setAttribute('data-bs-popper', 'none');
@@ -1590,6 +1618,8 @@ var dropdownOnHover = function dropdownOnHover() {
     });
   }
 };
+
+/* eslint-disable */
 
 /*-----------------------------------------------
 |   Dropzone
@@ -1622,7 +1652,7 @@ var dropzoneInit = function dropzoneInit() {
   var dropzones = document.querySelectorAll(Selector.DROPZONE);
   !!dropzones.length && dropzones.forEach(function (item) {
     var userOptions = utils.getData(item, DATA_KEY.OPTIONS);
-    userOptions = userOptions || {};
+    userOptions = userOptions ? userOptions : {};
     var data = userOptions.data ? userOptions.data : {};
     var options = merge({
       url: '/assets/php/',
@@ -1663,13 +1693,22 @@ var dropzoneInit = function dropzoneInit() {
           if (typeof message !== 'string' && message.error) {
             message = message.error;
           }
-          var errorNodes = Array.from(file.previewElement.querySelectorAll('[data-dz-errormessage]'));
-          errorNodes.forEach(function (node) {
-            node.textContent = message;
-          });
+          var _iterator = _createForOfIteratorHelper(file.previewElement.querySelectorAll('[data-dz-errormessage]')),
+            _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var node = _step.value;
+              node.textContent = message;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
         }
       }
     }, userOptions);
+    // eslint-disable-next-line
     item.querySelector(Selector.DZ_PREVIEW).innerHTML = '';
     var dropzone = new window.Dropzone(item, options);
     dropzone.on(Events.ADDED_FILE, function () {
@@ -1694,147 +1733,12 @@ var dropzoneInit = function dropzoneInit() {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                                   Popover                                  */
-/* -------------------------------------------------------------------------- */
-
-var emojiMartInit = function emojiMartInit() {
-  var _ref2 = window.EmojiMart || {},
-    Picker = _ref2.Picker;
-  if (Picker) {
-    var emojiMartBtns = document.querySelectorAll('[data-emoji-mart]');
-    if (emojiMartBtns) {
-      Array.from(emojiMartBtns).forEach(function (btn) {
-        var inputTarget = utils.getData(btn, 'emoji-mart-input-target');
-        var input = document.querySelector(inputTarget);
-        var picker = new Picker(window._.merge(utils.getData(btn, 'emoji-mart'), {
-          previewPosition: 'none',
-          skinTonePosition: 'none',
-          onEmojiSelect: function onEmojiSelect(e) {
-            if (input) input.innerHTML += e["native"];
-          },
-          onClickOutside: function onClickOutside(e) {
-            if (!picker.contains(e.target) && !btn.contains(e.target)) {
-              picker.classList.add('d-none');
-            }
-          }
-        }));
-        picker.classList.add('d-none');
-        btn.parentElement.appendChild(picker);
-        btn.addEventListener('click', function () {
-          return picker.classList.toggle('d-none');
-        });
-      });
-    }
-  }
-};
-
-/* -------------------------------------------------------------------------- */
-/*                                  Flatpickr                                 */
-/* -------------------------------------------------------------------------- */
-
-var defaultPredefinedRanges = [{
-  id: 'today',
-  label: 'Today',
-  range: [new Date(new Date().setHours(0, 0, 0, 0)), new Date()]
-}, {
-  id: 'this_month',
-  label: 'This Month',
-  range: [new Date(new Date().getFullYear(), new Date().getMonth(), 1), new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)]
-}, {
-  id: 'last_month',
-  label: 'Last Month',
-  range: [new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1), new Date(new Date().getFullYear(), new Date().getMonth(), 0)]
-}, {
-  id: 'last_7_days',
-  label: 'Last 7 Days',
-  range: [new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), new Date()]
-}, {
-  id: 'last_30_days',
-  label: 'Last 30 Days',
-  range: [new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000), new Date()]
-}];
-var flatpickrIntit = function flatpickrIntit() {
-  var dateTimePickers = document.querySelectorAll('.datetimepicker');
-  if (dateTimePickers.length && window.flatpickr) {
-    dateTimePickers.forEach(function (item) {
-      function applyUserRange(defaultRange, userRange) {
-        var matchingDefault = defaultRange.find(function (mathItem) {
-          return mathItem.id === Object.keys(userRange)[0];
-        });
-        return matchingDefault ? _objectSpread(_objectSpread({}, matchingDefault), {}, {
-          label: userRange[Object.keys(userRange)[0]]
-        }) : userRange;
-      }
-      function findDefaultRange(defaultRange, userRange) {
-        return defaultRange.find(function (rangeItem) {
-          return rangeItem.id === userRange;
-        }) || null;
-      }
-      function generateRangeButtons(predefinedDefaultRanges) {
-        var userDefinedRanges = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-        var normalizedUserRanges = Array.isArray(userDefinedRanges) ? userDefinedRanges : predefinedDefaultRanges;
-        var mergedRanges = normalizedUserRanges.map(function (userRange) {
-          if (_typeof(userRange) === 'object') {
-            return applyUserRange(predefinedDefaultRanges, userRange);
-          }
-          return findDefaultRange(predefinedDefaultRanges, userRange);
-        }).filter(Boolean);
-        return "\n        <ul class=\"flatpickr-predefined-ranges list-group list-group-flush\">\n          ".concat(mergedRanges.map(function (_ref3) {
-          var range = _ref3.range,
-            label = _ref3.label;
-          return "\n              <button type=\"button\" \n                data-range=\"".concat(range.map(function (date) {
-            return date instanceof Date ? date.toISOString() : date;
-          }).join(','), "\" \n                class=\"nav-link list-group-item list-group-item-action\">\n                ").concat(label, "\n              </button>\n            ");
-        }).join(''), "\n        </ul>\n      ");
-      }
-      function appendRangeButtonsIfNotExists(calendarContainer, rangeButtonsHtml) {
-        if (!calendarContainer.querySelector('.flatpickr-predefined-ranges')) {
-          calendarContainer.insertAdjacentHTML('afterbegin', rangeButtonsHtml);
-        }
-      }
-      function addRangeButtonClickListeners(instance, calendarContainer) {
-        _toConsumableArray(calendarContainer.querySelectorAll('[data-range]')).map(function (btn) {
-          return btn.addEventListener('click', function () {
-            var startDate = new Date(utils.getData(btn, 'range').split(',')[0]);
-            var endDate = new Date(utils.getData(btn, 'range').split(',')[1]);
-            instance.setDate([startDate, endDate], true);
-            instance.redraw();
-          });
-        });
-      }
-      function initializeFlatpickr(element, options) {
-        function showPredefinedRanges(selectedDates, dateStr, instance) {
-          var calendarContainer = instance.calendarContainer;
-          if (options.predefinedRanges) {
-            calendarContainer.classList.add('predefinedRange');
-            var rangeButtonsHtml = generateRangeButtons(defaultPredefinedRanges, options.predefinedRanges);
-            appendRangeButtonsIfNotExists(calendarContainer, rangeButtonsHtml);
-            addRangeButtonClickListeners(instance, calendarContainer);
-          }
-        }
-        function hidePredefinedRanges(selectedDates, dateStr, instance) {
-          if (options.predefinedRanges) {
-            var calendarContainer = instance.calendarContainer;
-            calendarContainer.classList.remove('predefinedRange');
-          }
-        }
-        var instance = window.flatpickr(element, _objectSpread(_objectSpread({}, options), {}, {
-          onOpen: showPredefinedRanges,
-          onClose: hidePredefinedRanges
-        }));
-        return instance;
-      }
-      var options = utils.getData(item, 'options');
-      initializeFlatpickr(item, options);
-    });
-  }
-};
-
-/* -------------------------------------------------------------------------- */
 /*                               from-validation                              */
 /* -------------------------------------------------------------------------- */
 
 var formValidationInit = function formValidationInit() {
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation');
 
@@ -1874,7 +1778,7 @@ var renderCalendar = function renderCalendar(el, option) {
   }, option);
   var calendar = new window.FullCalendar.Calendar(el, options);
   calendar.render();
-  (_document$querySelect = document.querySelector('.navbar-vertical-toggle')) === null || _document$querySelect === void 0 || _document$querySelect.addEventListener('navbar.vertical.toggle', function () {
+  (_document$querySelect = document.querySelector('.navbar-vertical-toggle')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener('navbar.vertical.toggle', function () {
     return calendar.updateSize();
   });
   return calendar;
@@ -1907,111 +1811,968 @@ var glightboxInit = function glightboxInit() {
 |   Gooogle Map
 -----------------------------------------------*/
 
-function destroyMap(map) {
-  if (map) {
-    window.google.maps.event.clearInstanceListeners(map);
-    map = null;
-  }
-}
 function initMap() {
   var themeController = document.body;
   var $googlemaps = document.querySelectorAll('.googlemap');
   if ($googlemaps.length && window.google) {
-    $googlemaps.forEach( /*#__PURE__*/function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(itm) {
-        var _yield$window$google$, Map, InfoWindow, _yield$window$google$2, AdvancedMarkerElement, _yield$window$google$3, ColorScheme, latLng, markerPopup, zoom, mapId, mapElement, lightIconUrl, darkIconUrl, pov, _mapOptions, mapOptions, map, infowindow, iconImage, marker;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return window.google.maps.importLibrary('maps');
-            case 2:
-              _yield$window$google$ = _context.sent;
-              Map = _yield$window$google$.Map;
-              InfoWindow = _yield$window$google$.InfoWindow;
-              _context.next = 7;
-              return window.google.maps.importLibrary('marker');
-            case 7:
-              _yield$window$google$2 = _context.sent;
-              AdvancedMarkerElement = _yield$window$google$2.AdvancedMarkerElement;
-              _context.next = 11;
-              return window.google.maps.importLibrary('core');
-            case 11:
-              _yield$window$google$3 = _context.sent;
-              ColorScheme = _yield$window$google$3.ColorScheme;
-              latLng = utils.getData(itm, 'latlng').split(',');
-              markerPopup = itm.innerHTML;
-              zoom = utils.getData(itm, 'zoom');
-              mapId = utils.getData(itm, 'mapid');
-              mapElement = itm;
-              lightIconUrl = utils.getData(itm, 'icon') ? utils.getData(itm, 'icon') : 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
-              darkIconUrl = utils.getData(itm, 'dark-icon') ? utils.getData(itm, 'dark-icon') : lightIconUrl; // Fallback
-              if (!(utils.getData(itm, 'theme') === 'streetview')) {
-                _context.next = 24;
-                break;
-              }
-              pov = utils.getData(itm, 'pov');
-              _mapOptions = {
-                position: {
-                  lat: Number(latLng[0]),
-                  lng: Number(latLng[1])
-                },
-                pov: pov,
-                zoom: zoom,
-                gestureHandling: 'none',
-                scrollwheel: false,
-                linksControl: true,
-                panControl: true,
-                motionTracking: false,
-                visible: true
-              };
-              return _context.abrupt("return", new window.google.maps.StreetViewPanorama(mapElement, _mapOptions));
-            case 24:
-              mapOptions = {
-                mapId: mapId,
-                zoom: zoom,
-                scrollwheel: utils.getData(itm, 'scrollwheel'),
-                center: {
-                  lat: Number(latLng[0]),
-                  lng: Number(latLng[1])
-                },
-                colorScheme: utils.isDark() === 'dark' ? ColorScheme.DARK : ColorScheme.LIGHT
-              };
-              map = new Map(mapElement, mapOptions);
-              infowindow = new InfoWindow({
-                content: markerPopup
-              });
-              iconImage = document.createElement('img');
-              iconImage.src = utils.isDark() === 'dark' ? darkIconUrl : lightIconUrl;
-              marker = new AdvancedMarkerElement({
-                position: {
-                  lat: Number(latLng[0]),
-                  lng: Number(latLng[1])
-                },
-                content: iconImage,
-                map: map
-              });
-              marker.addListener('click', function () {
-                infowindow.open(map, marker);
-              });
-              themeController && themeController.addEventListener('clickControl', function (_ref5) {
-                var control = _ref5.detail.control;
-                if (control === 'theme') {
-                  destroyMap(map);
-                  initMap();
-                }
-              });
-              return _context.abrupt("return", null);
-            case 33:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee);
-      }));
-      return function (_x) {
-        return _ref4.apply(this, arguments);
+    // Visit https://snazzymaps.com/ for more themes
+    var mapStyles = {
+      Default: [{
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#e9e9e9'
+        }, {
+          lightness: 17
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#f5f5f5'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#ffffff'
+        }, {
+          lightness: 17
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#ffffff'
+        }, {
+          lightness: 29
+        }, {
+          weight: 0.2
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#ffffff'
+        }, {
+          lightness: 18
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#ffffff'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#f5f5f5'
+        }, {
+          lightness: 21
+        }]
+      }, {
+        featureType: 'poi.park',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#dedede'
+        }, {
+          lightness: 21
+        }]
+      }, {
+        elementType: 'labels.text.stroke',
+        stylers: [{
+          visibility: 'on'
+        }, {
+          color: '#ffffff'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        elementType: 'labels.text.fill',
+        stylers: [{
+          saturation: 36
+        }, {
+          color: '#333333'
+        }, {
+          lightness: 40
+        }]
+      }, {
+        elementType: 'labels.icon',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#f2f2f2'
+        }, {
+          lightness: 19
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#fefefe'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#fefefe'
+        }, {
+          lightness: 17
+        }, {
+          weight: 1.2
+        }]
+      }],
+      Gray: [{
+        featureType: 'all',
+        elementType: 'labels.text.fill',
+        stylers: [{
+          saturation: 36
+        }, {
+          color: '#000000'
+        }, {
+          lightness: 40
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.text.stroke',
+        stylers: [{
+          visibility: 'on'
+        }, {
+          color: '#000000'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.icon',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 17
+        }, {
+          weight: 1.2
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 21
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 17
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 29
+        }, {
+          weight: 0.2
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 18
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 19
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 17
+        }]
+      }],
+      Midnight: [{
+        featureType: 'all',
+        elementType: 'labels.text.fill',
+        stylers: [{
+          color: '#ffffff'
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.text.stroke',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 13
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#144b53'
+        }, {
+          lightness: 14
+        }, {
+          weight: 1.4
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'all',
+        stylers: [{
+          color: '#08304b'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#0c4152'
+        }, {
+          lightness: 5
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#0b434f'
+        }, {
+          lightness: 25
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#0b3d51'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'all',
+        stylers: [{
+          color: '#146474'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'all',
+        stylers: [{
+          color: '#021019'
+        }]
+      }],
+      Hopper: [{
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#165c64'
+        }, {
+          saturation: 34
+        }, {
+          lightness: -69
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#b7caaa'
+        }, {
+          saturation: -14
+        }, {
+          lightness: -18
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'landscape.man_made',
+        elementType: 'all',
+        stylers: [{
+          hue: '#cbdac1'
+        }, {
+          saturation: -6
+        }, {
+          lightness: -9
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#8d9b83'
+        }, {
+          saturation: -89
+        }, {
+          lightness: -12
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#d4dad0'
+        }, {
+          saturation: -88
+        }, {
+          lightness: 54
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#bdc5b6'
+        }, {
+          saturation: -89
+        }, {
+          lightness: -3
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#bdc5b6'
+        }, {
+          saturation: -89
+        }, {
+          lightness: -26
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#c17118'
+        }, {
+          saturation: 61
+        }, {
+          lightness: -45
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'poi.park',
+        elementType: 'all',
+        stylers: [{
+          hue: '#8ba975'
+        }, {
+          saturation: -46
+        }, {
+          lightness: -28
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#a43218'
+        }, {
+          saturation: 74
+        }, {
+          lightness: -51
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'administrative.province',
+        elementType: 'all',
+        stylers: [{
+          hue: '#ffffff'
+        }, {
+          saturation: 0
+        }, {
+          lightness: 100
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'administrative.neighborhood',
+        elementType: 'all',
+        stylers: [{
+          hue: '#ffffff'
+        }, {
+          saturation: 0
+        }, {
+          lightness: 100
+        }, {
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative.locality',
+        elementType: 'labels',
+        stylers: [{
+          hue: '#ffffff'
+        }, {
+          saturation: 0
+        }, {
+          lightness: 100
+        }, {
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative.land_parcel',
+        elementType: 'all',
+        stylers: [{
+          hue: '#ffffff'
+        }, {
+          saturation: 0
+        }, {
+          lightness: 100
+        }, {
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'all',
+        stylers: [{
+          hue: '#3a3935'
+        }, {
+          saturation: 5
+        }, {
+          lightness: -57
+        }, {
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'poi.medical',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#cba923'
+        }, {
+          saturation: 50
+        }, {
+          lightness: -46
+        }, {
+          visibility: 'on'
+        }]
+      }],
+      Beard: [{
+        featureType: 'poi.business',
+        elementType: 'labels.text',
+        stylers: [{
+          visibility: 'on'
+        }, {
+          color: '#333333'
+        }]
+      }],
+      AssassianCreed: [{
+        featureType: 'all',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels',
+        stylers: [{
+          visibility: 'off'
+        }, {
+          saturation: '-100'
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.text.fill',
+        stylers: [{
+          saturation: 36
+        }, {
+          color: '#000000'
+        }, {
+          lightness: 40
+        }, {
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.text.stroke',
+        stylers: [{
+          visibility: 'off'
+        }, {
+          color: '#000000'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'all',
+        elementType: 'labels.icon',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 17
+        }, {
+          weight: 1.2
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 20
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#4d6059'
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#4d6059'
+        }]
+      }, {
+        featureType: 'landscape.natural',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#4d6059'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+          lightness: 21
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#4d6059'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#4d6059'
+        }]
+      }, {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [{
+          visibility: 'on'
+        }, {
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'road',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#7f8d89'
+        }, {
+          lightness: 17
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#7f8d89'
+        }, {
+          lightness: 29
+        }, {
+          weight: 0.2
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 18
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 16
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#7f8d89'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#000000'
+        }, {
+          lightness: 19
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'all',
+        stylers: [{
+          color: '#2b3638'
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+          color: '#2b3638'
+        }, {
+          lightness: 17
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'geometry.fill',
+        stylers: [{
+          color: '#24282b'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'geometry.stroke',
+        stylers: [{
+          color: '#24282b'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels.text',
+        stylers: [{
+          visibility: 'off '
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels.text.fill',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels.text.stroke',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels.icon',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }],
+      SubtleGray: [{
+        featureType: 'administrative',
+        elementType: 'all',
+        stylers: [{
+          saturation: '-100'
+        }]
+      }, {
+        featureType: 'administrative.province',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'all',
+        stylers: [{
+          saturation: -100
+        }, {
+          lightness: 65
+        }, {
+          visibility: 'on'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'all',
+        stylers: [{
+          saturation: -100
+        }, {
+          lightness: '50'
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'road',
+        elementType: 'all',
+        stylers: [{
+          saturation: -100
+        }]
+      }, {
+        featureType: 'road.highway',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'road.arterial',
+        elementType: 'all',
+        stylers: [{
+          lightness: '30'
+        }]
+      }, {
+        featureType: 'road.local',
+        elementType: 'all',
+        stylers: [{
+          lightness: '40'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'all',
+        stylers: [{
+          saturation: -100
+        }, {
+          visibility: 'simplified'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+          hue: '#ffff00'
+        }, {
+          lightness: -25
+        }, {
+          saturation: -97
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'labels',
+        stylers: [{
+          lightness: -25
+        }, {
+          saturation: -100
+        }]
+      }],
+      Tripitty: [{
+        featureType: 'all',
+        elementType: 'labels',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'administrative',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'landscape',
+        elementType: 'all',
+        stylers: [{
+          color: '#2c5ca5'
+        }]
+      }, {
+        featureType: 'poi',
+        elementType: 'all',
+        stylers: [{
+          color: '#2c5ca5'
+        }]
+      }, {
+        featureType: 'road',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'transit',
+        elementType: 'all',
+        stylers: [{
+          visibility: 'off'
+        }]
+      }, {
+        featureType: 'water',
+        elementType: 'all',
+        stylers: [{
+          color: '#193a70'
+        }, {
+          visibility: 'on'
+        }]
+      }],
+      Cobalt: [{
+        featureType: 'all',
+        elementType: 'all',
+        stylers: [{
+          invert_lightness: true
+        }, {
+          saturation: 10
+        }, {
+          lightness: 30
+        }, {
+          gamma: 0.5
+        }, {
+          hue: '#435158'
+        }]
+      }]
+    };
+    $googlemaps.forEach(function (itm) {
+      var latLng = utils.getData(itm, 'latlng').split(',');
+      var markerPopup = itm.innerHTML;
+      var icon = utils.getData(itm, 'icon') ? utils.getData(itm, 'icon') : 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
+      var zoom = utils.getData(itm, 'zoom');
+      var mapElement = itm;
+      var mapStyle = utils.getData(itm, 'theme');
+      if (utils.getData(itm, 'theme') === 'streetview') {
+        var pov = utils.getData(itm, 'pov');
+        var _mapOptions = {
+          position: {
+            lat: Number(latLng[0]),
+            lng: Number(latLng[1])
+          },
+          pov: pov,
+          zoom: zoom,
+          gestureHandling: 'none',
+          scrollwheel: false
+        };
+        return new window.google.maps.StreetViewPanorama(mapElement, _mapOptions);
+      }
+      var mapOptions = {
+        zoom: zoom,
+        scrollwheel: utils.getData(itm, 'scrollwheel'),
+        center: new window.google.maps.LatLng(latLng[0], latLng[1]),
+        styles: localStorage.getItem('theme') === 'dark' ? mapStyles.Cobalt : mapStyles[mapStyle]
       };
-    }());
+      var map = new window.google.maps.Map(mapElement, mapOptions);
+      var infowindow = new window.google.maps.InfoWindow({
+        content: markerPopup
+      });
+      var marker = new window.google.maps.Marker({
+        position: new window.google.maps.LatLng(latLng[0], latLng[1]),
+        icon: icon,
+        map: map
+      });
+      marker.addListener('click', function () {
+        infowindow.open(map, marker);
+      });
+      themeController && themeController.addEventListener('clickControl', function (_ref3) {
+        var _ref3$detail = _ref3.detail,
+          control = _ref3$detail.control,
+          value = _ref3$detail.value;
+        if (control === 'theme') {
+          map.set('styles', value === 'dark' ? mapStyles.Cobalt : mapStyles[mapStyle]);
+        }
+      });
+      return null;
+    });
   }
 }
 var hideOnCollapseInit = function hideOnCollapseInit() {
@@ -2098,8 +2859,8 @@ var kanbanInit = function kanbanInit() {
 
   // Show add card form and place scrollbar bottom of the list
   addCardButtons && addCardButtons.forEach(function (button) {
-    button.addEventListener(Events.CLICK, function (_ref6) {
-      var el = _ref6.currentTarget;
+    button.addEventListener(Events.CLICK, function (_ref4) {
+      var el = _ref4.currentTarget;
       var column = el.closest(Selectors.KANBAN_COLUMN);
       var container = column.querySelector(Selectors.KANBAN_ITEMS_CONTAINER);
       var scrollHeight = container.scrollHeight;
@@ -2113,30 +2874,30 @@ var kanbanInit = function kanbanInit() {
 
   // Remove add card form
   formHideButtons.forEach(function (button) {
-    button.addEventListener(Events.CLICK, function (_ref7) {
-      var el = _ref7.currentTarget;
+    button.addEventListener(Events.CLICK, function (_ref5) {
+      var el = _ref5.currentTarget;
       el.closest(Selectors.KANBAN_COLUMN).classList.remove(ClassNames.FORM_ADDED);
     });
   });
   if (addListForm) {
     // Hide add list button when the form is going to show
-    addListForm.addEventListener(Events.SHOW_BS_COLLAPSE, function (_ref8) {
-      var el = _ref8.currentTarget;
+    addListForm.addEventListener(Events.SHOW_BS_COLLAPSE, function (_ref6) {
+      var el = _ref6.currentTarget;
       var nextElement = el.nextElementSibling;
       nextElement && nextElement.classList.add(ClassNames.D_NONE);
     });
 
     // Focus input field when the form is shown
-    addListForm.addEventListener(Events.SHOWN_BS_COLLAPSE, function (_ref9) {
-      var el = _ref9.currentTarget;
+    addListForm.addEventListener(Events.SHOWN_BS_COLLAPSE, function (_ref7) {
+      var el = _ref7.currentTarget;
       el.querySelector(Selectors.INPUT_ADD_LIST).focus();
     });
   }
 
   // Hide add list form when the dismiss button is clicked
   collapseDismissButtons.forEach(function (button) {
-    button.addEventListener(Events.CLICK, function (_ref10) {
-      var el = _ref10.currentTarget;
+    button.addEventListener(Events.CLICK, function (_ref8) {
+      var el = _ref8.currentTarget;
       var collapseElement = el.closest(Selectors.COLLAPSE);
       var collapse = window.bootstrap.Collapse.getInstance(collapseElement);
       utils.hasClass(collapseElement.nextElementSibling, ClassNames.D_NONE) && collapseElement.nextElementSibling.classList.remove(ClassNames.D_NONE);
@@ -3129,10 +3890,10 @@ var leafletActiveUserInit = function leafletActiveUserInit() {
   var mapContainer = document.getElementById('map');
   if (L && mapContainer) {
     var getFilterColor = function getFilterColor() {
-      return utils.isDark() === 'dark' ? ['invert:98%', 'grayscale:69%', 'bright:89%', 'contrast:111%', 'hue:205deg', 'saturate:1000%'] : ['bright:101%', 'contrast:101%', 'hue:23deg', 'saturate:225%'];
+      return localStorage.getItem('theme') === 'dark' ? ['invert:98%', 'grayscale:69%', 'bright:89%', 'contrast:111%', 'hue:205deg', 'saturate:1000%'] : ['bright:101%', 'contrast:101%', 'hue:23deg', 'saturate:225%'];
     };
     var tileLayerTheme = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-    var tiles = L.tileLayer(tileLayerTheme, {
+    var tiles = L.tileLayer.colorFilter(tileLayerTheme, {
       attribution: null,
       transparent: true,
       filter: getFilterColor()
@@ -3173,10 +3934,10 @@ var leafletActiveUserInit = function leafletActiveUserInit() {
     });
     map.addLayer(mcg);
     var themeController = document.body;
-    themeController.addEventListener('clickControl', function (_ref11) {
-      var _ref11$detail = _ref11.detail,
-        control = _ref11$detail.control,
-        value = _ref11$detail.value;
+    themeController.addEventListener('clickControl', function (_ref9) {
+      var _ref9$detail = _ref9.detail,
+        control = _ref9$detail.control,
+        value = _ref9$detail.value;
       if (control === 'theme') {
         tiles.updateFilter(value === 'dark' ? ['invert:98%', 'grayscale:69%', 'bright:89%', 'contrast:111%', 'hue:205deg', 'saturate:1000%'] : ['bright:101%', 'contrast:101%', 'hue:23deg', 'saturate:225%']);
       }
@@ -3187,6 +3948,7 @@ var leafletActiveUserInit = function leafletActiveUserInit() {
 /* -------------------------------------------------------------------------- */
 /*                                 Data Table                                 */
 /* -------------------------------------------------------------------------- */
+/* eslint-disable */
 
 var togglePaginationButtonDisable = function togglePaginationButtonDisable(button, disabled) {
   button.disabled = disabled;
@@ -3211,7 +3973,7 @@ var listInit = function listInit() {
         var viewAll = el.querySelector('[data-list-view="*"]');
         var viewLess = el.querySelector('[data-list-view="less"]');
         var listInfo = el.querySelector('[data-list-info]');
-        var listFilters = document.querySelectorAll('[data-list-filter]');
+        var listFilter = document.querySelector('[data-list-filter]');
         var list = new window.List(el, options);
 
         //-------fallback-----------
@@ -3303,23 +4065,14 @@ var listInit = function listInit() {
             }
           });
         }
-        if (listFilters) {
-          listFilters.forEach(function (listFilter) {
-            listFilter.addEventListener('change', function () {
-              var activeFilters = {};
-              listFilters.forEach(function (filter) {
-                var key = filter.getAttribute('data-list-filter');
-                var value = filter.value.trim().toLowerCase();
-                if (value) {
-                  activeFilters[key] = value;
-                }
-              });
-              list.filter(function (item) {
-                return Object.keys(activeFilters).every(function (key) {
-                  var itemValue = item.values()[key].toLowerCase();
-                  return itemValue.includes(activeFilters[key]);
-                });
-              });
+        if (options.filter) {
+          var key = options.filter.key;
+          listFilter.addEventListener('change', function (e) {
+            list.filter(function (item) {
+              if (e.target.value === '') {
+                return true;
+              }
+              return item.values()[key].toLowerCase().includes(e.target.value.toLowerCase());
             });
           });
         }
@@ -3463,15 +4216,15 @@ var navbarDarkenOnScroll = function navbarDarkenOnScroll() {
     };
   }
   if (navbar) {
-    var theme = utils.isDark();
+    var theme = localStorage.getItem('theme');
     var defaultColorName = theme === 'dark' ? '100' : 'dark';
     var name = utils.getData(navbar, DataKey.NAVBAR_DARKEN_ON_SCROLL);
     toggleThemeClass(theme);
     var themeController = document.body;
-    themeController.addEventListener('clickControl', function (_ref12) {
-      var _ref12$detail = _ref12.detail,
-        control = _ref12$detail.control,
-        value = _ref12$detail.value;
+    themeController.addEventListener('clickControl', function (_ref10) {
+      var _ref10$detail = _ref10.detail,
+        control = _ref10$detail.control,
+        value = _ref10$detail.value;
       if (control === 'theme') {
         toggleThemeClass(value);
         defaultColorName = value === 'dark' ? '100' : 'dark';
@@ -3496,11 +4249,6 @@ var navbarDarkenOnScroll = function navbarDarkenOnScroll() {
       alpha >= 1 && (alpha = 1);
       navbar.style.backgroundColor = "rgba(".concat(colorRgb[0], ", ").concat(colorRgb[1], ", ").concat(colorRgb[2], ", ").concat(alpha, ")");
       navbar.style.backgroundImage = alpha > 0 || utils.hasClass(navbarCollapse, 'show') ? backgroundImage : 'none';
-    });
-    window.addEventListener('resize', function () {
-      if (navbarCollapse.classList.contains('show')) {
-        navbar.classList.add(getBgClassName(name, defaultColorName).bgClassName);
-      }
     });
 
     // Toggle bg class on window resize
@@ -3672,6 +4420,38 @@ var nouisliderInit = function nouisliderInit() {
       window.noUiSlider.create(item, _objectSpread({}, options));
       sliderValue && item.noUiSlider.on('update', function (values, handle) {
         sliderValue.innerHTML = values[handle];
+      });
+    });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   Popover                                  */
+/* -------------------------------------------------------------------------- */
+var picmoInit = function picmoInit() {
+  var picmoBtns = document.querySelectorAll('[data-picmo]');
+  if (picmoBtns) {
+    Array.from(picmoBtns).forEach(function (btn) {
+      var inputTarget = utils.getData(btn, 'picmo-input-target');
+      var userOptions = utils.getData(btn, 'picmo');
+      var defaultOptions = {
+        referenceElement: btn,
+        triggerElement: btn,
+        position: 'bottom-center',
+        showCloseButton: false
+      };
+      var options = window._.merge(defaultOptions, userOptions);
+      var picker = window.picmoPopup.createPopup({
+        showPreview: false
+      }, _objectSpread({}, options));
+      btn.addEventListener('click', function () {
+        picker.toggle();
+      });
+      var input = document.querySelector(inputTarget);
+      picker.addEventListener('emoji:select', function (selection) {
+        if (input) {
+          input.innerHTML += selection.emoji;
+        }
       });
     });
   }
@@ -3857,8 +4637,8 @@ var searchInit = function searchInit() {
         dropdownMenu.classList.add(ClassName.SHOW);
       });
     }
-    document.addEventListener(Events.CLICK, function (_ref13) {
-      var target = _ref13.target;
+    document.addEventListener(Events.CLICK, function (_ref11) {
+      var target = _ref11.target;
       !searchArea.contains(target) && hideSearchSuggestion(searchArea);
     });
     btnDropdownClose && btnDropdownClose.addEventListener(Events.CLICK, function (e) {
@@ -3893,35 +4673,6 @@ var select2Init = function select2Init() {
   }
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                 SortableJS                                 */
-/* -------------------------------------------------------------------------- */
-
-var sortableInit = function sortableInit() {
-  var getData = utils.getData;
-  var sortableEl = document.querySelectorAll('[data-sortable]');
-  var defaultOptions = {
-    animation: 150,
-    group: {
-      name: 'shared'
-    },
-    delay: 100,
-    delayOnTouchOnly: true,
-    forceFallback: true,
-    onStart: function onStart() {
-      document.body.classList.add('sortable-dragging');
-    },
-    onEnd: function onEnd() {
-      document.body.classList.remove('sortable-dragging');
-    }
-  };
-  sortableEl.forEach(function (el) {
-    var userOptions = getData(el, 'sortable');
-    var options = window._.merge(defaultOptions, userOptions);
-    return window.Sortable.create(el, options);
-  });
-};
-
 /*-----------------------------------------------
 |  Swiper
 -----------------------------------------------*/
@@ -3939,7 +4690,7 @@ var swiperInit = function swiperInit() {
         slides += "\n          <div class='swiper-slide '>\n            <img class='img-fluid rounded mt-1' src=".concat(img.src, " alt=''/>\n          </div>\n        ");
       });
       var thumbs = document.createElement('div');
-      thumbs.setAttribute('class', 'swiper thumb');
+      thumbs.setAttribute('class', 'swiper-container thumb');
       thumbs.innerHTML = "<div class='swiper-wrapper'>".concat(slides, "</div>");
       if (thumbsOptions.parent) {
         var parent = document.querySelector(thumbsOptions.parent);
@@ -3967,9 +4718,15 @@ var swiperInit = function swiperInit() {
   });
 };
 
+// export default themeControl;
+// eslint-disable-next-line
+
 /* -------------------------------------------------------------------------- */
 /*                                Theme Control                               */
 /* -------------------------------------------------------------------------- */
+/* eslint-disable no-param-reassign */
+/* eslint-disable */
+
 var initialDomSetup = function initialDomSetup(element) {
   if (!element) return;
   var dataUrlDom = element.querySelector('[data-theme-control = "navbarPosition"]');
@@ -4017,12 +4774,18 @@ var changeTheme = function changeTheme(element) {
     }
   });
 };
+var localStorageValue = getItemFromStore('theme');
 var handleThemeDropdownIcon = function handleThemeDropdownIcon(value) {
   document.querySelectorAll('[data-theme-dropdown-toggle-icon]').forEach(function (el) {
-    el.classList.toggle('d-none', value !== getData(el, 'theme-dropdown-toggle-icon'));
+    var theme = getData(el, 'theme-dropdown-toggle-icon');
+    if (value === theme) {
+      el.classList.remove('d-none');
+    } else {
+      el.classList.add('d-none');
+    }
   });
 };
-handleThemeDropdownIcon(getItemFromStore('theme'));
+handleThemeDropdownIcon(localStorageValue);
 var themeControl = function themeControl() {
   var themeController = new DomNode(document.body);
   var navbarVertical = document.querySelector('.navbar-vertical');
@@ -4036,7 +4799,7 @@ var themeControl = function themeControl() {
         typeof value === 'boolean' && (value = value ? 'dark' : 'light');
       }
       if (control !== 'navbarPosition') {
-        Object.prototype.hasOwnProperty.call(CONFIG, control) && setItemToStore(control, value);
+        CONFIG.hasOwnProperty(control) && setItemToStore(control, value);
         switch (control) {
           case 'theme':
             {
@@ -4080,15 +4843,15 @@ var themeControl = function themeControl() {
   themeController.on('change', function (e) {
     var target = new DomNode(e.target);
     if (target.data('theme-control') === 'navbarPosition') {
-      Object.prototype.hasOwnProperty.call(CONFIG, 'navbarPosition') && setItemToStore('navbarPosition', e.target.value);
+      CONFIG.hasOwnProperty('navbarPosition') && setItemToStore('navbarPosition', e.target.value);
       var pageUrl = getData(target.node.selectedOptions[0], 'page-url');
-      pageUrl ? window.location.replace(pageUrl) : window.location.replace(window.location.href.split('#')[0]);
+      !!pageUrl ? window.location.replace(pageUrl) : window.location.replace(window.location.href.split('#')[0]);
     }
   });
-  themeController.on('clickControl', function (_ref14) {
-    var _ref14$detail = _ref14.detail,
-      control = _ref14$detail.control,
-      value = _ref14$detail.value;
+  themeController.on('clickControl', function (_ref12) {
+    var _ref12$detail = _ref12.detail,
+      control = _ref12$detail.control,
+      value = _ref12$detail.value;
     if (control === 'theme') {
       handleThemeDropdownIcon(value);
     }
@@ -4108,16 +4871,15 @@ var tinymceInit = function tinymceInit() {
         selector: '.tinymce',
         height: '50vh',
         menubar: false,
-        license_key: 'gpl',
         skin: utils.settings.tinymce.theme,
-        content_style: "\n          .mce-content-body {\n            color: ".concat(utils.getColors().emphasis, ";\n            background-color: ").concat(utils.getColor('tinymce-bg'), ";\n          }\n        "),
+        content_style: ".mce-content-body { color: ".concat(utils.getColors().emphasis, "; background-color: ").concat(utils.getColor('tinymce-bg'), " }"),
         mobile: {
           theme: 'mobile',
           toolbar: ['undo', 'bold']
         },
         statusbar: false,
         plugins: 'link,image,lists,table,media',
-        toolbar: 'styles | bold italic link bullist numlist image blockquote table media undo redo',
+        toolbar: 'styleselect | bold italic link bullist numlist image blockquote table media undo redo',
         directionality: utils.getItemFromStore('isRTL') ? 'rtl' : 'ltr',
         theme_advanced_toolbar_align: 'center',
         setup: function setup(editor) {
@@ -4128,17 +4890,14 @@ var tinymceInit = function tinymceInit() {
       });
     }
     var themeController = document.body;
-    if (themeController) {
-      themeController.addEventListener('clickControl', function (_ref15) {
-        var control = _ref15.detail.control;
-        if (control === 'theme') {
-          tinymces.forEach(function (tinymceEl) {
-            var instance = window.tinymce.get(tinymceEl.id);
-            instance.dom.addStyle("\n                .mce-content-body {\n                  color: ".concat(utils.getColors().emphasis, " !important;\n                  background-color: ").concat(utils.getColor('tinymce-bg'), " !important;\n                }\n              "));
-          });
-        }
-      });
-    }
+    themeController && themeController.addEventListener('clickControl', function (_ref13) {
+      var control = _ref13.detail.control;
+      if (control === 'theme') {
+        window.tinyMCE.editors.forEach(function (el) {
+          el.dom.addStyle(".mce-content-body{color: ".concat(utils.getColors().emphasis, " !important; background-color: ").concat(utils.getColor('tinymce-bg'), " !important;}"));
+        });
+      }
+    });
   }
 };
 
@@ -4171,6 +4930,8 @@ var tooltipInit = function tooltipInit() {
     });
   });
 };
+
+/* eslint-disable no-param-reassign */
 
 /* -------------------------------------------------------------------------- */
 /*                                   Treeview                                  */
@@ -4261,6 +5022,7 @@ var treeviewInit = function treeviewInit() {
             makeStriped(treeview);
           } else {
             var childs = e.composedPath()[2].querySelectorAll(Selector.CHILD_SELECTOR);
+            // eslint-disable-next-line
             if (!e.composedPath()[2].classList.contains(ClassName.TREEVIEW) && childs.length === 0) {
               e.composedPath()[2].classList.remove(ClassName.TREEVIEW_BORDER_TRANSPARENT);
             }
@@ -4325,6 +5087,10 @@ var unresolvedTicketsTabInit = function unresolvedTicketsTabInit() {
 /* -------------------------------------------------------------------------- */
 /*                                 step wizard                                */
 /* -------------------------------------------------------------------------- */
+/* eslint-disable no-restricted-syntax */
+/* -------------------------------------------------------------------------- */
+/*                                 step wizard                                */
+/* -------------------------------------------------------------------------- */
 
 var wizardInit = function wizardInit() {
   var getData = utils.getData;
@@ -4357,6 +5123,8 @@ var wizardInit = function wizardInit() {
       bubbles: true,
       cancelable: true
     });
+
+    // eslint-disable-next-line
     var tabs = Array.from(tabToggleButtonEl).map(function (item) {
       return window.bootstrap.Tab.getOrCreateInstance(item);
     });
@@ -4457,7 +5225,7 @@ var events = [{
   location: 'Boston Harborwalk, Christopher Columbus Park, <br /> Boston, MA 02109, United States',
   organizer: 'Boston Harbor Now'
 }, {
-  title: "Crain's New York Business",
+  title: 'Crain\'s New York Business ',
   start: "".concat(currentYear, "-").concat(currentMonth, "-11"),
   description: "Crain's 2020 Hall of Fame. Sponsored Content By Crain's Content Studio. Crain's Content Studio Presents: New Jersey: Perfect for Business. Crain's Business Forum: Letitia James, New York State Attorney General. Crain's NYC Summit: Examining racial disparities during the pandemic",
   className: 'bg-primary-subtle'
@@ -4541,8 +5309,8 @@ var appCalendarInit = function appCalendarInit() {
     DATA_VIEW_TITLE: '[data-view-title]',
     EVENT_DETAILS_MODAL: '#eventDetailsModal',
     EVENT_DETAILS_MODAL_CONTENT: '#eventDetailsModal .modal-content',
-    EVENT_START_DATE: "#addEventModal [name='startDate']",
-    INPUT_TITLE: "[name='title']"
+    EVENT_START_DATE: '#addEventModal [name="startDate"]',
+    INPUT_TITLE: '[name="title"]'
   };
   var Events = {
     CLICK: 'click',
@@ -4557,10 +5325,7 @@ var appCalendarInit = function appCalendarInit() {
     ACTIVE: 'active'
   };
   var eventList = events.reduce(function (acc, val) {
-    if (val.schedules) {
-      return acc.concat(val.schedules.concat(val));
-    }
-    return acc.concat(val);
+    return val.schedules ? acc.concat(val.schedules.concat(val)) : acc.concat(val);
   }, []);
   var updateTitle = function updateTitle(title) {
     document.querySelector(Selectors.CALENDAR_TITLE).textContent = title;
@@ -4601,6 +5366,7 @@ var appCalendarInit = function appCalendarInit() {
       dateClick: function dateClick(info) {
         var modal = new window.bootstrap.Modal(addEventModal);
         modal.show();
+        /*eslint-disable-next-line*/
         var flatpickr = document.querySelector(Selectors.EVENT_START_DATE)._flatpickr;
         flatpickr.setDate([info.dateStr]);
       }
@@ -4663,8 +5429,8 @@ var appCalendarInit = function appCalendarInit() {
       window.bootstrap.Modal.getInstance(addEventModal).hide();
     });
   }
-  addEventModal && addEventModal.addEventListener(Events.SHOWN_BS_MODAL, function (_ref16) {
-    var currentTarget = _ref16.currentTarget;
+  addEventModal && addEventModal.addEventListener(Events.SHOWN_BS_MODAL, function (_ref14) {
+    var currentTarget = _ref14.currentTarget;
     currentTarget.querySelector(Selectors.INPUT_TITLE).focus();
   });
 };
@@ -4724,7 +5490,7 @@ var managementCalendarInit = function managementCalendarInit() {
     }
     if (managementCalendarEvents) {
       managementEvents.forEach(function (e) {
-        managementCalendarEvents.innerHTML += "\n          <li class= 'border-top pt-3 mb-3 pb-1 cursor-pointer' data-calendar-events>\n            <div class= 'border-start border-3 border-".concat(e.classNames, " ps-3 mt-1'>\n              <h6 class=\"mb-1 fw-semi-bold text-700 hover-primary\">").concat(e.title, "</h6>\n              <p class= 'fs-11 text-600 mb-0'>").concat(e.startTime || '', " ").concat(e.endTime ? '-' : '', " ").concat(e.endTime || '', "</p>\n            </div>\n          </li> ");
+        managementCalendarEvents.innerHTML += "\n          <li class= 'border-top pt-3 mb-3 pb-1 cursor-pointer' data-calendar-events>\n            <div class= 'border-start border-3 border-".concat(e.classNames, " ps-3 mt-1'>\n              <h6 class=\"mb-1 fw-semi-bold text-700\">").concat(e.title, "</h6>\n              <p class= 'fs-11 text-600 mb-0'>").concat(e.startTime || '', " ").concat(e.endTime ? '-' : '', " ").concat(e.endTime || '', "</p>\n            </div>\n          </li> ");
       });
     }
     var eventManagementInfo = document.querySelectorAll(Selectors.EVENT_MANAGEMENT_INFO);
@@ -4748,6 +5514,7 @@ var managementCalendarInit = function managementCalendarInit() {
         dateClick: function dateClick(info) {
           var modal = new window.bootstrap.Modal(addEventModal);
           modal.show();
+          /*eslint-disable-next-line*/
           var flatpickr = document.querySelector(Selectors.EVENT_START_DATE)._flatpickr;
           flatpickr.setDate([info.dateStr]);
         },
@@ -4864,6 +5631,362 @@ var getTemplate = function getTemplate(event) {
 };
 
 /* -------------------------------------------------------------------------- */
+/*                          D3 Packed Bubble Chart                            */
+/* -------------------------------------------------------------------------- */
+
+var D3PackedBubbleInit = function D3PackedBubbleInit() {
+  var $d3PackedBubble = document.querySelector('.d3-packed-bubble-chart');
+  if ($d3PackedBubble) {
+    var width = 960;
+    var height = 960;
+    var itemsSpacing = 30;
+    var svg = d3.select('.d3-packed-bubble-svg');
+    var tooltip = d3.select('.d3-packed-bubble-tooltip');
+    var tooltipDot = tooltip.select('.d3-tooltip-dot');
+    var tooltipName = tooltip.select('.d3-tooltip-name');
+    var tooltipValue = tooltip.select('.d3-tooltip-value');
+    var tooltipStyles = {
+      backgroundColor: utils.getColor('gray-100'),
+      tooltipNameColor: utils.getColor('gray-700'),
+      tooltipValueColor: utils.getColor('gray-700')
+    };
+    var labelStyles = {
+      fill: '#ffffff',
+      fontSize: '1.8rem'
+    };
+    var packedBubbleData = [{
+      name: 'Blockchain',
+      value: 160,
+      color: '#2A7BE4'
+    }, {
+      name: 'NFT',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'HTML',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'Crypto',
+      value: 57,
+      color: '#2A7BE4'
+    }, {
+      name: 'Photoshop',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'UX',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'AWS',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: '3D',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'Writing',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'sql',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'Blender',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'UI/UX',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'Blockchain',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'css',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'Marketing',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'Meta',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'js',
+      value: 12,
+      color: '#0F67D9'
+    }, {
+      name: 'FOREX',
+      value: 66,
+      color: '#7FA5D5'
+    }, {
+      name: 'UI',
+      value: 33,
+      color: '#8ABBFB'
+    }, {
+      name: 'Vector',
+      value: 56,
+      color: '#85B6F5'
+    }, {
+      name: 'CAD',
+      value: 28,
+      color: '#6486B4'
+    }, {
+      name: 'Python',
+      value: 66,
+      color: '#2A7BE4'
+    }, {
+      name: 'Adobe',
+      value: 66,
+      color: '#68A0E9'
+    }, {
+      name: 'C#',
+      value: 20,
+      color: '#385780'
+    }, {
+      name: 'Branding',
+      value: 88,
+      color: '#74A2DE'
+    }, {
+      name: 'Bitcoin',
+      value: 80,
+      color: '#4E7AB4'
+    }, {
+      name: 'AI',
+      value: 34,
+      color: '#71AFFF'
+    }];
+    var generateChart = function generateChart(data) {
+      var bubble = function bubble(bubbleData) {
+        return d3.pack().size([width, height]).padding(itemsSpacing)(d3.hierarchy({
+          children: bubbleData
+        }).sum(function (d) {
+          return d.value;
+        }));
+      };
+      tooltip.style('visibility', 'hidden');
+      svg.attr('width', '100%').attr('height', '100%').attr('viewBox', "-20 10 ".concat(width, " ").concat(height));
+      var root = bubble(data);
+      var node = svg.selectAll().data(root.children).enter().append('g').style('cursor', 'pointer').style('pointer-events', 'all').attr('text-anchor', 'middle').on('mousemove', function (e) {
+        return tooltip.style('top', "".concat(e.clientY - 40, "px")).style('left', "".concat(e.clientX - 40, "px"));
+      }).attr('transform', function (d) {
+        return "translate(".concat(d.x, ", ").concat(d.y, ")");
+      });
+      var circle = node.append('circle').style('fill', function (d) {
+        return d.data.color;
+      }).on('mouseover', function (e, d) {
+        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (diagram) {
+          return diagram.r * 1.1;
+        });
+        tooltip.style('visibility', 'visible').style('z-index', '100000').style('background-color', tooltipStyles.backgroundColor).style('border', "1px solid ".concat(d.data.color));
+        tooltipDot.style('background-color', d.data.color);
+        tooltipName.text(d.data.name).style('color', tooltipStyles.tooltipNameColor);
+        tooltipValue.text(d.data.value).style('color', tooltipStyles.tooltipValueColor);
+      }).on('mouseout', function (e) {
+        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (d) {
+          return d.r;
+        });
+        tooltip.style('visibility', 'hidden');
+      });
+      var label = node.append('text').style('fill', labelStyles.fill).style('font-size', labelStyles.fontSize).style('pointer-events', 'none').style('opacity', 0).attr('dy', '.35em').text(function (d) {
+        return d.data.name;
+      });
+      node.transition().ease(d3.easeExpInOut).duration(1000);
+      circle.transition().ease(d3.easeExpInOut).duration(1000).attr('r', function (d) {
+        return d.r;
+      });
+      label.transition().delay(400).ease(d3.easeExpInOut).duration(2000).style('opacity', 1);
+    };
+    generateChart(packedBubbleData);
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                           Trending Keywords                                */
+/* -------------------------------------------------------------------------- */
+
+var trendingKeywordsInit = function trendingKeywordsInit() {
+  var $d3TrendingKeywords = document.querySelector('.d3-trending-keywords');
+  if ($d3TrendingKeywords) {
+    var width = 960;
+    var height = 960;
+    var itemsSpacing = 30;
+    var svg = d3.select('.d3-trending-keywords-svg');
+    var tooltip = d3.select('.d3-trending-keywords-tooltip');
+    var tooltipDot = tooltip.select('.d3-tooltip-dot');
+    var tooltipName = tooltip.select('.d3-tooltip-name');
+    var tooltipValue = tooltip.select('.d3-tooltip-value');
+    var tooltipStyles = {
+      backgroundColor: utils.getColor('gray-100'),
+      tooltipNameColor: utils.getColor('gray-700'),
+      tooltipValueColor: utils.getColor('gray-700')
+    };
+    var labelStyles = {
+      fill: '#ffffff',
+      fontSize: '1.8rem'
+    };
+    var trendingKeywordsData = [{
+      name: 'Blockchain',
+      value: 160,
+      color: '#2A7BE4'
+    }, {
+      name: 'NFT',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'HTML',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'Crypto',
+      value: 57,
+      color: '#2A7BE4'
+    }, {
+      name: 'Photoshop',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'UX',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'AWS',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: '3D',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'Writing',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'sql',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'Blender',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'UI/UX',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'Blockchain',
+      value: 117,
+      color: '#2A7BE4'
+    }, {
+      name: 'css',
+      value: 20,
+      color: '#1956A6'
+    }, {
+      name: 'Marketing',
+      value: 90,
+      color: '#195099'
+    }, {
+      name: 'Meta',
+      value: 33,
+      color: '#9DBFEB'
+    }, {
+      name: 'js',
+      value: 12,
+      color: '#0F67D9'
+    }, {
+      name: 'FOREX',
+      value: 66,
+      color: '#7FA5D5'
+    }, {
+      name: 'UI',
+      value: 33,
+      color: '#8ABBFB'
+    }, {
+      name: 'Vector',
+      value: 56,
+      color: '#85B6F5'
+    }, {
+      name: 'CAD',
+      value: 28,
+      color: '#6486B4'
+    }, {
+      name: 'Python',
+      value: 66,
+      color: '#2A7BE4'
+    }, {
+      name: 'Adobe',
+      value: 66,
+      color: '#68A0E9'
+    }, {
+      name: 'C#',
+      value: 20,
+      color: '#385780'
+    }, {
+      name: 'Branding',
+      value: 88,
+      color: '#74A2DE'
+    }, {
+      name: 'Bitcoin',
+      value: 80,
+      color: '#4E7AB4'
+    }, {
+      name: 'AI',
+      value: 34,
+      color: '#71AFFF'
+    }];
+    var generateChart = function generateChart(data) {
+      var bubble = function bubble(bubbleData) {
+        return d3.pack().size([width, height]).padding(itemsSpacing)(d3.hierarchy({
+          children: bubbleData
+        }).sum(function (d) {
+          return d.value;
+        }));
+      };
+      tooltip.style('visibility', 'hidden');
+      svg.attr('width', '100%').attr('height', '100%').attr('viewBox', "-20 10 ".concat(width, " ").concat(height));
+      var root = bubble(data);
+      var node = svg.selectAll().data(root.children).enter().append('g').style('cursor', 'pointer').style('pointer-events', 'all').attr('text-anchor', 'middle').on('mousemove', function (e) {
+        return tooltip.style('top', "".concat(e.clientY - 40, "px")).style('left', "".concat(e.clientX - 40, "px"));
+      }).attr('transform', function (d) {
+        return "translate(".concat(d.x, ", ").concat(d.y, ")");
+      });
+      var circle = node.append('circle').style('fill', function (d) {
+        return d.data.color;
+      }).on('mouseover', function (e, d) {
+        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (diagram) {
+          return diagram.r * 1.1;
+        });
+        tooltip.style('visibility', 'visible').style('z-index', '100000').style('background-color', tooltipStyles.backgroundColor).style('border', "1px solid ".concat(d.data.color));
+        tooltipDot.style('background-color', d.data.color);
+        tooltipName.text(d.data.name).style('color', tooltipStyles.tooltipNameColor);
+        tooltipValue.text(d.data.value).style('color', tooltipStyles.tooltipValueColor);
+      }).on('mouseout', function (e) {
+        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (d) {
+          return d.r;
+        });
+        tooltip.style('visibility', 'hidden');
+      });
+      var label = node.append('text').style('fill', labelStyles.fill).style('font-size', labelStyles.fontSize).style('pointer-events', 'none').style('opacity', 0).attr('dy', '.35em').text(function (d) {
+        return d.data.name;
+      });
+      node.transition().ease(d3.easeExpInOut).duration(1000);
+      circle.transition().ease(d3.easeExpInOut).duration(1000).attr('r', function (d) {
+        return d.r;
+      });
+      label.transition().delay(400).ease(d3.easeExpInOut).duration(2000).style('opacity', 1);
+    };
+    generateChart(trendingKeywordsData);
+  }
+};
+
+/* -------------------------------------------------------------------------- */
 /*                                  bar-chart                                 */
 /* -------------------------------------------------------------------------- */
 
@@ -4915,6 +6038,8 @@ var barChartInit = function barChartInit() {
   };
   chartJsInit(barChartElement, getOptions);
 };
+
+/* eslint-disable */
 
 /* -------------------------------------------------------------------------- */
 /*                            Chart Bubble                                    */
@@ -5436,8 +6561,8 @@ var chartJsInit = function chartJsInit(chartEl, config) {
   var ctx = chartEl.getContext('2d');
   var chart = new window.Chart(ctx, config());
   var themeController = document.body;
-  themeController.addEventListener('clickControl', function (_ref17) {
-    var control = _ref17.detail.control;
+  themeController.addEventListener('clickControl', function (_ref15) {
+    var control = _ref15.detail.control;
     if (control === 'theme') {
       chart.destroy();
       chart = new window.Chart(ctx, config());
@@ -5469,6 +6594,8 @@ var getBubbleDataset = function getBubbleDataset(count, rmin, rmax, min, max) {
   });
 };
 
+/* eslint-disable */
+
 /* -------------------------------------------------------------------------- */
 /*                            Chart Scatter                                   */
 /* -------------------------------------------------------------------------- */
@@ -5499,362 +6626,6 @@ var productShareDoughnutInit = function productShareDoughnutInit() {
     };
   };
   chartJsInit(marketShareDoughnutElement, getOptions);
-};
-
-/* -------------------------------------------------------------------------- */
-/*                          D3 Packed Bubble Chart                            */
-/* -------------------------------------------------------------------------- */
-
-var D3PackedBubbleInit = function D3PackedBubbleInit() {
-  var $d3PackedBubble = document.querySelector('.d3-packed-bubble-chart');
-  if ($d3PackedBubble) {
-    var width = 960;
-    var height = 960;
-    var itemsSpacing = 30;
-    var svg = d3.select('.d3-packed-bubble-svg');
-    var tooltip = d3.select('.d3-packed-bubble-tooltip');
-    var tooltipDot = tooltip.select('.d3-tooltip-dot');
-    var tooltipName = tooltip.select('.d3-tooltip-name');
-    var tooltipValue = tooltip.select('.d3-tooltip-value');
-    var tooltipStyles = {
-      backgroundColor: utils.getColor('gray-100'),
-      tooltipNameColor: utils.getColor('gray-700'),
-      tooltipValueColor: utils.getColor('gray-700')
-    };
-    var labelStyles = {
-      fill: '#ffffff',
-      fontSize: '1.8rem'
-    };
-    var packedBubbleData = [{
-      name: 'Blockchain',
-      value: 160,
-      color: '#2A7BE4'
-    }, {
-      name: 'NFT',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'HTML',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'Crypto',
-      value: 57,
-      color: '#2A7BE4'
-    }, {
-      name: 'Photoshop',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'UX',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'AWS',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: '3D',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'Writing',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'sql',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'Blender',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'UI/UX',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'Blockchain',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'css',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'Marketing',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'Meta',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'js',
-      value: 12,
-      color: '#0F67D9'
-    }, {
-      name: 'FOREX',
-      value: 66,
-      color: '#7FA5D5'
-    }, {
-      name: 'UI',
-      value: 33,
-      color: '#8ABBFB'
-    }, {
-      name: 'Vector',
-      value: 56,
-      color: '#85B6F5'
-    }, {
-      name: 'CAD',
-      value: 28,
-      color: '#6486B4'
-    }, {
-      name: 'Python',
-      value: 66,
-      color: '#2A7BE4'
-    }, {
-      name: 'Adobe',
-      value: 66,
-      color: '#68A0E9'
-    }, {
-      name: 'C#',
-      value: 20,
-      color: '#385780'
-    }, {
-      name: 'Branding',
-      value: 88,
-      color: '#74A2DE'
-    }, {
-      name: 'Bitcoin',
-      value: 80,
-      color: '#4E7AB4'
-    }, {
-      name: 'AI',
-      value: 34,
-      color: '#71AFFF'
-    }];
-    var generateChart = function generateChart(data) {
-      var bubble = function bubble(bubbleData) {
-        return d3.pack().size([width, height]).padding(itemsSpacing)(d3.hierarchy({
-          children: bubbleData
-        }).sum(function (d) {
-          return d.value;
-        }));
-      };
-      tooltip.style('visibility', 'hidden');
-      svg.attr('width', '100%').attr('height', '100%').attr('viewBox', "-20 10 ".concat(width, " ").concat(height));
-      var root = bubble(data);
-      var node = svg.selectAll().data(root.children).enter().append('g').style('cursor', 'pointer').style('pointer-events', 'all').attr('text-anchor', 'middle').on('mousemove', function (e) {
-        return tooltip.style('top', "".concat(e.clientY - 40, "px")).style('left', "".concat(e.clientX - 40, "px"));
-      }).attr('transform', function (d) {
-        return "translate(".concat(d.x, ", ").concat(d.y, ")");
-      });
-      var circle = node.append('circle').style('fill', function (d) {
-        return d.data.color;
-      }).on('mouseover', function (e, d) {
-        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (diagram) {
-          return diagram.r * 1.1;
-        });
-        tooltip.style('visibility', 'visible').style('z-index', '100000').style('background-color', tooltipStyles.backgroundColor).style('border', "1px solid ".concat(d.data.color));
-        tooltipDot.style('background-color', d.data.color);
-        tooltipName.text(d.data.name).style('color', tooltipStyles.tooltipNameColor);
-        tooltipValue.text(d.data.value).style('color', tooltipStyles.tooltipValueColor);
-      }).on('mouseout', function (e) {
-        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (d) {
-          return d.r;
-        });
-        tooltip.style('visibility', 'hidden');
-      });
-      var label = node.append('text').style('fill', labelStyles.fill).style('font-size', labelStyles.fontSize).style('pointer-events', 'none').style('opacity', 0).attr('dy', '.35em').text(function (d) {
-        return d.data.name;
-      });
-      node.transition().ease(d3.easeExpInOut).duration(1000);
-      circle.transition().ease(d3.easeExpInOut).duration(1000).attr('r', function (d) {
-        return d.r;
-      });
-      label.transition().delay(400).ease(d3.easeExpInOut).duration(2000).style('opacity', 1);
-    };
-    generateChart(packedBubbleData);
-  }
-};
-
-/* -------------------------------------------------------------------------- */
-/*                           Trending Keywords                                */
-/* -------------------------------------------------------------------------- */
-
-var trendingKeywordsInit = function trendingKeywordsInit() {
-  var $d3TrendingKeywords = document.querySelector('.d3-trending-keywords');
-  if ($d3TrendingKeywords) {
-    var width = 960;
-    var height = 960;
-    var itemsSpacing = 30;
-    var svg = d3.select('.d3-trending-keywords-svg');
-    var tooltip = d3.select('.d3-trending-keywords-tooltip');
-    var tooltipDot = tooltip.select('.d3-tooltip-dot');
-    var tooltipName = tooltip.select('.d3-tooltip-name');
-    var tooltipValue = tooltip.select('.d3-tooltip-value');
-    var tooltipStyles = {
-      backgroundColor: utils.getColor('gray-100'),
-      tooltipNameColor: utils.getColor('gray-700'),
-      tooltipValueColor: utils.getColor('gray-700')
-    };
-    var labelStyles = {
-      fill: '#ffffff',
-      fontSize: '1.8rem'
-    };
-    var trendingKeywordsData = [{
-      name: 'Blockchain',
-      value: 160,
-      color: '#2A7BE4'
-    }, {
-      name: 'NFT',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'HTML',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'Crypto',
-      value: 57,
-      color: '#2A7BE4'
-    }, {
-      name: 'Photoshop',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'UX',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'AWS',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: '3D',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'Writing',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'sql',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'Blender',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'UI/UX',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'Blockchain',
-      value: 117,
-      color: '#2A7BE4'
-    }, {
-      name: 'css',
-      value: 20,
-      color: '#1956A6'
-    }, {
-      name: 'Marketing',
-      value: 90,
-      color: '#195099'
-    }, {
-      name: 'Meta',
-      value: 33,
-      color: '#9DBFEB'
-    }, {
-      name: 'js',
-      value: 12,
-      color: '#0F67D9'
-    }, {
-      name: 'FOREX',
-      value: 66,
-      color: '#7FA5D5'
-    }, {
-      name: 'UI',
-      value: 33,
-      color: '#8ABBFB'
-    }, {
-      name: 'Vector',
-      value: 56,
-      color: '#85B6F5'
-    }, {
-      name: 'CAD',
-      value: 28,
-      color: '#6486B4'
-    }, {
-      name: 'Python',
-      value: 66,
-      color: '#2A7BE4'
-    }, {
-      name: 'Adobe',
-      value: 66,
-      color: '#68A0E9'
-    }, {
-      name: 'C#',
-      value: 20,
-      color: '#385780'
-    }, {
-      name: 'Branding',
-      value: 88,
-      color: '#74A2DE'
-    }, {
-      name: 'Bitcoin',
-      value: 80,
-      color: '#4E7AB4'
-    }, {
-      name: 'AI',
-      value: 34,
-      color: '#71AFFF'
-    }];
-    var generateChart = function generateChart(data) {
-      var bubble = function bubble(bubbleData) {
-        return d3.pack().size([width, height]).padding(itemsSpacing)(d3.hierarchy({
-          children: bubbleData
-        }).sum(function (d) {
-          return d.value;
-        }));
-      };
-      tooltip.style('visibility', 'hidden');
-      svg.attr('width', '100%').attr('height', '100%').attr('viewBox', "-20 10 ".concat(width, " ").concat(height));
-      var root = bubble(data);
-      var node = svg.selectAll().data(root.children).enter().append('g').style('cursor', 'pointer').style('pointer-events', 'all').attr('text-anchor', 'middle').on('mousemove', function (e) {
-        return tooltip.style('top', "".concat(e.clientY - 40, "px")).style('left', "".concat(e.clientX - 40, "px"));
-      }).attr('transform', function (d) {
-        return "translate(".concat(d.x, ", ").concat(d.y, ")");
-      });
-      var circle = node.append('circle').style('fill', function (d) {
-        return d.data.color;
-      }).on('mouseover', function (e, d) {
-        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (diagram) {
-          return diagram.r * 1.1;
-        });
-        tooltip.style('visibility', 'visible').style('z-index', '100000').style('background-color', tooltipStyles.backgroundColor).style('border', "1px solid ".concat(d.data.color));
-        tooltipDot.style('background-color', d.data.color);
-        tooltipName.text(d.data.name).style('color', tooltipStyles.tooltipNameColor);
-        tooltipValue.text(d.data.value).style('color', tooltipStyles.tooltipValueColor);
-      }).on('mouseout', function (e) {
-        d3.select(e.target).transition().ease(d3.easeExpInOut).duration(200).attr('r', function (d) {
-          return d.r;
-        });
-        tooltip.style('visibility', 'hidden');
-      });
-      var label = node.append('text').style('fill', labelStyles.fill).style('font-size', labelStyles.fontSize).style('pointer-events', 'none').style('opacity', 0).attr('dy', '.35em').text(function (d) {
-        return d.data.name;
-      });
-      node.transition().ease(d3.easeExpInOut).duration(1000);
-      circle.transition().ease(d3.easeExpInOut).duration(1000).attr('r', function (d) {
-        return d.r;
-      });
-      label.transition().delay(400).ease(d3.easeExpInOut).duration(2000).style('opacity', 1);
-    };
-    generateChart(trendingKeywordsData);
-  }
 };
 
 /* -------------------------------------------------------------------------- */
@@ -6245,10 +7016,10 @@ var audienceChartInit = function audienceChartInit() {
 var avgEnrollmentRateInit = function avgEnrollmentRateInit() {
   var $echartsLineAvgEnrollmentLms = document.querySelector('.echart-avg-enrollment-rate');
   function getFormatter(params) {
-    return params.map(function (_ref18) {
-      var seriesName = _ref18.seriesName,
-        value = _ref18.value,
-        borderColor = _ref18.borderColor;
+    return params.map(function (_ref16) {
+      var seriesName = _ref16.seriesName,
+        value = _ref16.value,
+        borderColor = _ref16.borderColor;
       return "<span class= \"fas fa-circle fs-11\" style=\"color: ".concat(borderColor, "\"></span>\n            <span class='text-600'>\n              ").concat(seriesName, " : <strong>").concat(value, "</strong>\n            </span>");
     }).join('<br/>');
   }
@@ -6363,7 +7134,6 @@ var avgEnrollmentRateInit = function avgEnrollmentRateInit() {
             showMinLabel: false,
             show: true,
             color: utils.getColor('gray-400'),
-            margin: 15,
             formatter: function formatter(value) {
               return "".concat(Math.round(value / 1000 * 10) / 10, "k");
             }
@@ -6425,8 +7195,7 @@ var avgEnrollmentRateInit = function avgEnrollmentRateInit() {
           right: '10px',
           left: '30px',
           bottom: '15%',
-          top: '5%',
-          outerBoundsMode: 'none'
+          top: '5%'
         }
       };
     };
@@ -6524,13 +7293,13 @@ var bandwidthSavedInit = function bandwidthSavedInit() {
         }]
       };
     };
-    var _initChart = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartsBandwidthSaved)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart);
+    window.addEventListener('scroll', initChart);
   }
 };
 
@@ -6612,7 +7381,7 @@ var basicEchartsInit = function basicEchartsInit() {
 var bounceRateChartInit = function bounceRateChartInit() {
   var $echartsBounceRateChart = document.querySelector('.echart-bounce-rate');
   var tooltipFormatter = function tooltipFormatter(params) {
-    return "\n    <div>\n      <p class='mb-0 text-600'>".concat(window.dayjs(params[0].axisValue).format('DD, MMMM'), "</p>\n      <div class=\"d-flex align-items-center\">\n        <p class=\"mb-0 text-600\">\n          Rate : <span class='text-800'>").concat(params[0].value, "%</span>\n        </p>\n      </div>\n    </div>\n  ");
+    return "<div>\n          <p class='mb-0 text-600'>".concat(window.dayjs(params[0].axisValue).format('DD, MMMM'), "</p>\n          <div class=\"d-flex align-items-center\">\n            <p class=\"mb-0 text-600\">\n              Rate : <span class='text-800'>").concat(params[0].value, "%</span>\n            </p>\n          </div>\n        </div>");
   };
   var dataset = {
     week: [41, 45, 37, 44, 35, 39, 43],
@@ -6631,9 +7400,7 @@ var bounceRateChartInit = function bounceRateChartInit() {
             color: utils.getGrays()['900'],
             fontSize: 13,
             fontWeight: 600
-          },
-          left: 'left',
-          top: 'top'
+          }
         },
         tooltip: {
           trigger: 'axis',
@@ -6725,8 +7492,7 @@ var bounceRateChartInit = function bounceRateChartInit() {
           right: '10px',
           left: '40px',
           bottom: '10%',
-          top: '13%',
-          outerBoundsMode: 'none'
+          top: '13%'
         }
       };
     };
@@ -6758,11 +7524,11 @@ var browsedCoursesInit = function browsedCoursesInit() {
   var $echartsBrowsedCourses = document.querySelector('.echart-browsed-courses');
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var tooltipFormatter = function tooltipFormatter(params) {
-    return "\n    <div>\n      <p class='mb-2 text-600'>\n      ".concat(window.dayjs(params[0].axisValue).isValid() ? window.dayjs(params[0].axisValue).format('MMMM YYYY') : params[0].axisValue, "\n      </p>\n      ").concat(params.map(function (_ref19) {
-      var seriesName = _ref19.seriesName,
-        value = _ref19.value,
-        borderColor = _ref19.borderColor;
-      return "\n          <span class= \"fas fa-circle fs-11\" style=\"color: ".concat(borderColor, "\"></span>\n          <span class='text-600'>\n            ").concat(seriesName, " : <strong>").concat(value, "</strong>\n          </span>\n        ");
+    return "\n    <div>\n      <p class='mb-2 text-600'>\n      ".concat(window.dayjs(params[0].axisValue).isValid() ? window.dayjs(params[0].axisValue).format('MMMM YYYY') : params[0].axisValue, "\n      </p>\n      ").concat(params.map(function (_ref17) {
+      var seriesName = _ref17.seriesName,
+        value = _ref17.value,
+        borderColor = _ref17.borderColor;
+      return "<span class= \"fas fa-circle fs-11\" style=\"color: ".concat(borderColor, "\"></span>\n            <span class='text-600'>\n              ").concat(seriesName, " : <strong>").concat(value, "</strong>\n            </span>");
     }).join('<br />'), "\n    </div>");
   };
   if ($echartsBrowsedCourses) {
@@ -6862,13 +7628,13 @@ var browsedCoursesInit = function browsedCoursesInit() {
         }
       };
     };
-    var _initChart2 = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartsBrowsedCourses)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart2);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart2);
+    window.addEventListener('scroll', initChart);
     newCourseBrowsedEl.addEventListener('click', function () {
       newCourseBrowsedEl.classList.toggle('opacity-50');
       chart.dispatchAction({
@@ -7004,8 +7770,7 @@ var candleChartInit = function candleChartInit() {
         dataZoom: [{
           type: 'inside',
           start: zoomStart,
-          end: zoomEnd,
-          minValueSpan: 3
+          end: zoomEnd
         }],
         series: [{
           name: 'candlestick',
@@ -7099,7 +7864,6 @@ var closedVsGoalInit = function closedVsGoalInit() {
         },
         legend: {
           left: 'left',
-          top: 'top',
           data: ['Closed Amount', 'Revenue Date'],
           itemWidth: 10,
           itemHeight: 10,
@@ -7217,8 +7981,7 @@ var closedVsGoalInit = function closedVsGoalInit() {
           right: '25px',
           left: '100px',
           bottom: '60px',
-          top: '35px',
-          outerBoundsMode: 'none'
+          top: '35px'
         }
       };
     };
@@ -7259,10 +8022,8 @@ var courseEnrollmentsInit = function courseEnrollmentsInit() {
         legend: {
           data: ['Free Course', 'Paid Course', 'On sale Course'],
           left: 'left',
-          top: 'top',
           itemWidth: 10,
           itemHeight: 10,
-          itemGap: 10,
           borderRadius: 0,
           icon: 'circle',
           inactiveColor: utils.getGrays()['400'],
@@ -7378,13 +8139,13 @@ var courseEnrollmentsInit = function courseEnrollmentsInit() {
         }
       };
     };
-    var _initChart3 = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartBarCourseEnrollments)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart3);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart3);
+    window.addEventListener('scroll', initChart);
   }
 };
 
@@ -7456,13 +8217,13 @@ var courseStatusInit = function courseStatusInit() {
         }
       };
     };
-    var _initChart4 = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartsCourseStatus)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart4);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart4);
+    window.addEventListener('scroll', initChart);
   }
 };
 
@@ -7481,7 +8242,7 @@ var revenueChartInit = function revenueChartInit() {
     }
   };
   var tooltipFormatter = function tooltipFormatter(params) {
-    return "\n    <div class=\"card\">\n      <div class=\"card-header bg-body-tertiary py-2\">\n        <h6 class=\"text-600 mb-0\">".concat(params[0].axisValue, "</h6>\n      </div>\n      <div class=\"card-body py-2\">\n        <h6 class=\"text-600 fw-normal\">\n          <span class=\"fas fa-circle text-primary me-2\"></span>Revenue: \n          <span class=\"fw-medium\">$").concat(params[0].data, "</span></h6>\n        <h6 class=\"text-600 mb-0 fw-normal\"> \n          <span class=\"fas fa-circle text-warning me-2\"></span>Revenue Goal: \n          <span class=\"fw-medium\">$").concat(params[1].data, "</span></h6>\n      </div>\n    </div>\n  ");
+    return "<div class=\"card\">\n                <div class=\"card-header bg-body-tertiary py-2\">\n                  <h6 class=\"text-600 mb-0\">".concat(params[0].axisValue, "</h6>\n                </div>\n              <div class=\"card-body py-2\">\n                <h6 class=\"text-600 fw-normal\">\n                  <span class=\"fas fa-circle text-primary me-2\"></span>Revenue: \n                  <span class=\"fw-medium\">$").concat(params[0].data, "</span></h6>\n                <h6 class=\"text-600 mb-0 fw-normal\"> \n                  <span class=\"fas fa-circle text-warning me-2\"></span>Revenue Goal: \n                  <span class=\"fw-medium\">$").concat(params[1].data, "</span></h6>\n              </div>\n            </div>");
   };
   var getDefaultOptions = function getDefaultOptions(data1, data2) {
     return function () {
@@ -7628,7 +8389,7 @@ var echartsCustomerSatisfactionInit = function echartsCustomerSatisfactionInit()
           center: ['50%', '45%'],
           itemStyle: {
             borderWidth: 2,
-            borderColor: utils.isDark() === 'dark' ? '#121E2D' : utils.getGrays()['100']
+            borderColor: localStorage.getItem('theme') === 'dark' ? '#121E2D' : utils.getGrays()['100']
           },
           data: [{
             value: 1100,
@@ -7709,7 +8470,7 @@ var dealStorageFunnelInit = function dealStorageFunnelInit() {
             borderRadius: 5,
             backgroundColor: utils.getSubtleColors().primary,
             padding: [6, 16, 6, 16],
-            width: 60
+            width: 115
           },
           axisTick: {
             show: false
@@ -7757,11 +8518,10 @@ var dealStorageFunnelInit = function dealStorageFunnelInit() {
           data: data
         }],
         grid: {
-          right: '64px',
+          right: '65px',
           left: '0',
           bottom: '0',
-          top: '0',
-          outerBoundsMode: 'none'
+          top: '0'
         }
       };
     };
@@ -7783,7 +8543,7 @@ var echartsDistributionOfPerformanceInit = function echartsDistributionOfPerform
     };
     var getDefaultOptions = function getDefaultOptions() {
       return {
-        color: [utils.getColor('primary'), utils.isDark() === 'dark' ? '#236EA1' : '#7DD7FE'],
+        color: [utils.getColor('primary'), localStorage.getItem('theme') === 'dark' ? '#236EA1' : '#7DD7FE'],
         legend: {
           data: ['Agent Support', 'Group Support'],
           icon: 'circle',
@@ -7796,7 +8556,6 @@ var echartsDistributionOfPerformanceInit = function echartsDistributionOfPerform
             fontSize: '13px'
           },
           left: 0,
-          top: 0,
           itemGap: 16
         },
         tooltip: {
@@ -7865,13 +8624,16 @@ var echartsDistributionOfPerformanceInit = function echartsDistributionOfPerform
           top: '15%',
           bottom: 0,
           left: 0,
-          right: 0
+          right: 0,
+          containLabel: true
         }
       };
     };
     echartSetOption(chart, userOptions, getDefaultOptions);
   }
 };
+
+/* eslint-disable */
 var getPosition = function getPosition(pos, params, dom, rect, size) {
   return {
     top: pos[1] - size.contentSize[1] - 10,
@@ -7882,19 +8644,19 @@ var echartSetOption = function echartSetOption(chart, userOptions, getDefaultOpt
   var themeController = document.body;
   // Merge user options with lodash
   chart.setOption(window._.merge(getDefaultOptions(), userOptions));
-  themeController.addEventListener('clickControl', function (_ref20) {
-    var control = _ref20.detail.control;
+  themeController.addEventListener('clickControl', function (_ref18) {
+    var control = _ref18.detail.control;
     if (control === 'theme') {
       chart.setOption(window._.merge(getDefaultOptions(), userOptions));
     }
   });
 };
 var tooltipFormatter = function tooltipFormatter(params) {
-  var tooltipItem = '';
+  var tooltipItem = "";
   params.forEach(function (el) {
-    tooltipItem += "<div class='ms-1'>\n        <h6 class=\"text-700\">\n          <span class=\"fas fa-circle me-1 fs-11\" style=\"color:".concat(el.borderColor ? el.borderColor : el.color, "\"></span>\n          ").concat(el.seriesName, " : ").concat(_typeof(el.value) === 'object' ? el.value[1] : el.value, "\n        </h6>\n      </div>");
+    tooltipItem = tooltipItem + "<div class='ms-1'>\n        <h6 class=\"text-700\"><span class=\"fas fa-circle me-1 fs-11\" style=\"color:".concat(el.borderColor ? el.borderColor : el.color, "\"></span>\n          ").concat(el.seriesName, " : ").concat(_typeof(el.value) === 'object' ? el.value[1] : el.value, "\n        </h6>\n      </div>");
   });
-  return "\n    <div>\n      <p class='mb-2 text-600'>\n        ".concat(window.dayjs(params[0].axisValue).isValid() ? window.dayjs(params[0].axisValue).format('MMMM DD') : params[0].axisValue, "\n      </p>\n      ").concat(tooltipItem, "\n    </div>");
+  return "<div>\n            <p class='mb-2 text-600'>\n              ".concat(window.dayjs(params[0].axisValue).isValid() ? window.dayjs(params[0].axisValue).format('MMMM DD') : params[0].axisValue, "\n            </p>\n            ").concat(tooltipItem, "\n          </div>");
 };
 var resizeEcharts = function resizeEcharts() {
   var $echarts = document.querySelectorAll('[data-echart-responsive]');
@@ -7961,8 +8723,6 @@ var grossRevenueChartInit = function grossRevenueChartInit() {
       return {
         title: {
           text: 'Sales over time',
-          left: 'left',
-          top: 'top',
           textStyle: {
             fontWeight: 500,
             fontSize: 13,
@@ -8080,8 +8840,7 @@ var grossRevenueChartInit = function grossRevenueChartInit() {
           right: '8px',
           left: '40px',
           bottom: '15%',
-          top: '20%',
-          outerBoundsMode: 'none'
+          top: '20%'
         }
       };
     };
@@ -8141,7 +8900,6 @@ var leadConversionInit = function leadConversionInit() {
         legend: {
           data: ['Campaigns', 'Lead', 'Opportunity', 'Deal'],
           left: '0%',
-          top: 0,
           icon: 'circle',
           inactiveColor: utils.getGrays()['400'],
           textStyle: {
@@ -8230,9 +8988,10 @@ var leadConversionInit = function leadConversionInit() {
         }],
         grid: {
           right: 5,
-          left: 0,
+          left: 5,
           bottom: 8,
-          top: 60
+          top: 60,
+          containLabel: true
         }
       };
     };
@@ -8336,10 +9095,10 @@ var linePaymentChartInit = function linePaymentChartInit() {
           }),
           symbol: 'emptyCircle',
           itemStyle: {
-            color: utils.isDark() === 'light' ? utils.getColors().white : utils.getColors().primary
+            color: localStorage.getItem('theme') === 'light' ? utils.getColors().white : utils.getColors().primary
           },
           lineStyle: {
-            color: utils.isDark() === 'light' ? utils.rgbaColor(utils.getColors().white, 0.8) : utils.getColors().primary
+            color: localStorage.getItem('theme') === 'light' ? utils.rgbaColor(utils.getColors().white, 0.8) : utils.getColors().primary
           },
           areaStyle: {
             color: {
@@ -8350,10 +9109,10 @@ var linePaymentChartInit = function linePaymentChartInit() {
               y2: 1,
               colorStops: [{
                 offset: 0,
-                color: utils.isDark() === 'light' ? 'rgba(255, 255, 255, 0.5)' : utils.rgbaColor(utils.getColors().primary, 0.5)
+                color: localStorage.getItem('theme') === 'light' ? 'rgba(255, 255, 255, 0.5)' : utils.rgbaColor(utils.getColors().primary, 0.5)
               }, {
                 offset: 1,
-                color: utils.isDark() === 'light' ? 'rgba(255, 255, 255, 0)' : utils.rgbaColor(utils.getColors().primary, 0)
+                color: localStorage.getItem('theme') === 'light' ? 'rgba(255, 255, 255, 0)' : utils.rgbaColor(utils.getColors().primary, 0)
               }]
             }
           },
@@ -8960,8 +9719,8 @@ var locationBySessionInit = function locationBySessionInit() {
           borderWidth: 1,
           transitionDuration: 0,
           formatter: function formatter(params) {
-            var _params$data;
-            return "<strong>".concat((_params$data = params.data) === null || _params$data === void 0 ? void 0 : _params$data.name, " :</strong> ").concat(((params.data && params.data.value / total) * 100).toFixed(2), "%");
+            var _params$data, _params$data2;
+            return "<strong>".concat((_params$data = params.data) === null || _params$data === void 0 ? void 0 : _params$data.name, " :</strong> ").concat((((_params$data2 = params.data) === null || _params$data2 === void 0 ? void 0 : _params$data2.value) / total * 100).toFixed(2), "%");
           }
         },
         visualMap: {
@@ -9002,7 +9761,7 @@ var locationBySessionInit = function locationBySessionInit() {
     };
     echartSetOption(chart, userOptions, getDefaultOptions);
     var zoomLevel = 1;
-    (_document$querySelect2 = document.querySelector('.location-by-session-map-reset')) === null || _document$querySelect2 === void 0 || _document$querySelect2.addEventListener('click', function () {
+    (_document$querySelect2 = document.querySelector('.location-by-session-map-reset')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.addEventListener('click', function () {
       zoomLevel = 1;
       chart.dispatchAction({
         type: 'restore'
@@ -9013,7 +9772,7 @@ var locationBySessionInit = function locationBySessionInit() {
         }
       });
     });
-    (_document$querySelect3 = document.querySelector('.location-by-session-map-zoom')) === null || _document$querySelect3 === void 0 || _document$querySelect3.addEventListener('click', function () {
+    (_document$querySelect3 = document.querySelector('.location-by-session-map-zoom')) === null || _document$querySelect3 === void 0 ? void 0 : _document$querySelect3.addEventListener('click', function () {
       if (zoomLevel < maxZoomLevel) {
         zoomLevel += 1;
       }
@@ -9023,7 +9782,7 @@ var locationBySessionInit = function locationBySessionInit() {
         }
       });
     });
-    (_document$querySelect4 = document.querySelector('.location-by-session-map-zoomOut')) === null || _document$querySelect4 === void 0 || _document$querySelect4.addEventListener('click', function () {
+    (_document$querySelect4 = document.querySelector('.location-by-session-map-zoomOut')) === null || _document$querySelect4 === void 0 ? void 0 : _document$querySelect4.addEventListener('click', function () {
       if (zoomLevel > minZoomLevel) {
         zoomLevel -= 1;
       }
@@ -9313,7 +10072,6 @@ var marketingExpensesInit = function marketingExpensesInit() {
             show: false
           },
           label: {
-            distanceToLabelLine: -10,
             formatter: '{per|{d}%}',
             rich: {
               per: {
@@ -9327,13 +10085,13 @@ var marketingExpensesInit = function marketingExpensesInit() {
         }]
       };
     };
-    var _initChart5 = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartsMarketingExp)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart5);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart5);
+    window.addEventListener('scroll', initChart);
   }
 };
 
@@ -9436,7 +10194,7 @@ var echartsNumberOfTicketsInit = function echartsNumberOfTicketsInit() {
     };
     var getDefaultOptions = function getDefaultOptions() {
       return {
-        color: [utils.getColor('primary'), utils.isDark() === 'dark' ? '#1E4C88' : '#94BCF1', utils.isDark() === 'dark' ? '#1A3A64' : '#C0D8F7', utils.isDark() === 'dark' ? '#225FAE' : '#6AA3ED'],
+        color: [utils.getColor('primary'), localStorage.getItem('theme') === 'dark' ? '#1E4C88' : '#94BCF1', localStorage.getItem('theme') === 'dark' ? '#1A3A64' : '#C0D8F7', localStorage.getItem('theme') === 'dark' ? '#225FAE' : '#6AA3ED'],
         tooltip: {
           trigger: 'item',
           padding: [7, 10],
@@ -9520,7 +10278,8 @@ var echartsNumberOfTicketsInit = function echartsNumberOfTicketsInit() {
           top: '10%',
           bottom: 0,
           left: 0,
-          right: 0
+          right: 0,
+          containLabel: true
         }
       };
     };
@@ -9662,7 +10421,6 @@ var echartsReceivedTicketsInit = function echartsReceivedTicketsInit() {
             fontSize: '13px'
           },
           left: 0,
-          top: 0,
           itemGap: 16
         },
         tooltip: {
@@ -9735,12 +10493,11 @@ var echartsReceivedTicketsInit = function echartsReceivedTicketsInit() {
         },
         barWidth: '13.03px',
         grid: {
-          top: '12%',
+          top: '13%',
           bottom: 0,
-          left: -3,
+          left: 0,
           right: 0,
-          outerBoundsMode: 'same',
-          outerBoundsContain: 'axisLabel'
+          containLabel: true
         }
       };
     };
@@ -9860,8 +10617,7 @@ var reportForThisWeekInit = function reportForThisWeekInit() {
           right: '0',
           left: '40px',
           bottom: '10%',
-          top: '15%',
-          outerBoundsMode: 'none'
+          top: '15%'
         }
       };
     };
@@ -9913,9 +10669,7 @@ var returningCustomerRateInit = function returningCustomerRateInit() {
             fontSize: 13,
             fontFamily: 'poppins',
             color: utils.getColor('gray-900')
-          },
-          left: 'left',
-          top: 'top'
+          }
         },
         legend: {
           show: false,
@@ -10062,8 +10816,7 @@ var returningCustomerRateInit = function returningCustomerRateInit() {
           right: '7px',
           left: '35px',
           bottom: '8%',
-          top: '15%',
-          outerBoundsMode: 'none'
+          top: '15%'
         }
       };
     };
@@ -10109,6 +10862,8 @@ var returningCustomerRateInit = function returningCustomerRateInit() {
 
 var salesByPosLocationInit = function salesByPosLocationInit() {
   var ECHART_RADAR_SALES_BY_POS_LOCATION = '.echart-radar-sales-by-pos-location';
+
+  // eslint-disable-next-line
   var $echartsRadarSalesByPosLocation = document.querySelector(ECHART_RADAR_SALES_BY_POS_LOCATION);
   function getformatter(params) {
     //const indicators = ['Marketing','Sales', 'Dev', 'Support', 'Tech', 'Admin']
@@ -10261,7 +11016,6 @@ var echartsSatisfactionSurveyInit = function echartsSatisfactionSurveyInit() {
             fontSize: '13px'
           },
           left: 0,
-          top: 0,
           itemGap: 16
         },
         tooltip: {
@@ -10327,12 +11081,11 @@ var echartsSatisfactionSurveyInit = function echartsSatisfactionSurveyInit() {
         },
         barWidth: '13.03px',
         grid: {
-          top: '12%',
+          top: '13%',
           bottom: 0,
-          left: -3,
+          left: 0,
           right: 0,
-          outerBoundsMode: 'same',
-          outerBoundsContain: 'axisLabel'
+          containLabel: true
         }
       };
     };
@@ -11004,8 +11757,8 @@ var sessionByCountryMapInit = function sessionByCountryMapInit() {
           borderWidth: 1,
           transitionDuration: 0,
           formatter: function formatter(params) {
-            var _params$data2;
-            return "<strong>".concat((_params$data2 = params.data) === null || _params$data2 === void 0 ? void 0 : _params$data2.name, " :</strong> ").concat(((params.data && params.data.value / total) * 100).toFixed(2), "%");
+            var _params$data3, _params$data4;
+            return "<strong>".concat((_params$data3 = params.data) === null || _params$data3 === void 0 ? void 0 : _params$data3.name, " :</strong> ").concat((((_params$data4 = params.data) === null || _params$data4 === void 0 ? void 0 : _params$data4.value) / total * 100).toFixed(2), "%");
           }
         },
         toolbox: {
@@ -11051,7 +11804,7 @@ var sessionByCountryMapInit = function sessionByCountryMapInit() {
       };
     };
     echartSetOption(chart, userOptions, getDefaultOptions);
-    (_document$querySelect5 = document.querySelector('.session-by-country-map-reset')) === null || _document$querySelect5 === void 0 || _document$querySelect5.addEventListener('click', function () {
+    (_document$querySelect5 = document.querySelector('.session-by-country-map-reset')) === null || _document$querySelect5 === void 0 ? void 0 : _document$querySelect5.addEventListener('click', function () {
       chart.dispatchAction({
         type: 'restore'
       });
@@ -11193,7 +11946,7 @@ var ticketVolumeChartInit = function ticketVolumeChartInit() {
     var ticketVolumeLegend = document.querySelectorAll('[data-ticket-volume]');
     var getDefaultOptions = function getDefaultOptions() {
       return {
-        color: [utils.getColors().primary, utils.isDark() === 'dark' ? '#235FAD' : '#6AA2EC', utils.isDark() === 'dark' ? '#1C4477' : '#AACAF4', utils.isDark() === 'dark' ? '#152C48' : '#DFEBFB'],
+        color: [utils.getColors().primary, localStorage.getItem('theme') === 'dark' ? '#235FAD' : '#6AA2EC', localStorage.getItem('theme') === 'dark' ? '#1C4477' : '#AACAF4', localStorage.getItem('theme') === 'dark' ? '#152C48' : '#DFEBFB'],
         legend: {
           data: ['On Hold Tickets', 'Open Tickets', 'Due Tickets', 'Unassigned Tickets'],
           show: false
@@ -11272,7 +12025,7 @@ var ticketVolumeChartInit = function ticketVolumeChartInit() {
           data: [15, 10, 7, 7, 5, 6, 15, 10, 7, 12],
           emphasis: {
             itemStyle: {
-              color: utils.isDark() === 'dark' ? '#2567BD' : '#5595E9'
+              color: localStorage.getItem('theme') === 'dark' ? '#2567BD' : '#5595E9'
             }
           }
         }, {
@@ -11282,7 +12035,7 @@ var ticketVolumeChartInit = function ticketVolumeChartInit() {
           data: [5, 4, 4, 6, 6, 8, 7, 4, 3, 5],
           emphasis: {
             itemStyle: {
-              color: utils.isDark() === 'dark' ? '#205396' : '#7FB0EF'
+              color: localStorage.getItem('theme') === 'dark' ? '#205396' : '#7FB0EF'
             }
           }
         }, {
@@ -11295,7 +12048,7 @@ var ticketVolumeChartInit = function ticketVolumeChartInit() {
           },
           emphasis: {
             itemStyle: {
-              color: utils.isDark() === 'dark' ? '#1A3F6F' : '#AACAF4'
+              color: localStorage.getItem('theme') === 'dark' ? '#1A3F6F' : '#AACAF4'
             }
           }
         }],
@@ -11500,9 +12253,7 @@ var topProductsInit = function topProductsInit() {
           inactiveColor: utils.getGrays()['400'],
           textStyle: {
             color: utils.getGrays()['700']
-          },
-          top: 'top',
-          itemGap: 10
+          }
         },
         xAxis: {
           type: 'category',
@@ -11572,8 +12323,7 @@ var topProductsInit = function topProductsInit() {
           right: '0',
           left: '30px',
           bottom: '10%',
-          top: '20%',
-          outerBoundsMode: 'none'
+          top: '20%'
         }
       };
     };
@@ -11715,11 +12465,11 @@ var totalSalesEcommerce = function totalSalesEcommerce() {
   var $echartsLineTotalSalesEcomm = document.querySelector(ECHART_LINE_TOTAL_SALES_ECOMM);
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   function getFormatter(params) {
-    return params.map(function (_ref21) {
-      var value = _ref21.value,
-        borderColor = _ref21.borderColor,
-        seriesName = _ref21.seriesName;
-      return "\n          <span class= \"fas fa-circle\" style=\"color: ".concat(borderColor, "\"></span>\n          <span class='text-600'>").concat(seriesName === 'lastMonth' ? 'Last Month' : 'Previous Year', ": ").concat(value, "</span>\n        ");
+    return params.map(function (_ref19) {
+      var value = _ref19.value,
+        borderColor = _ref19.borderColor,
+        seriesName = _ref19.seriesName;
+      return "<span class= \"fas fa-circle\" style=\"color: ".concat(borderColor, "\"></span>\n    <span class='text-600'>").concat(seriesName === 'lastMonth' ? 'Last Month' : 'Previous Year', ": ").concat(value, "</span>");
     }).join('<br/>');
   }
   if ($echartsLineTotalSalesEcomm) {
@@ -11787,6 +12537,7 @@ var totalSalesEcommerce = function totalSalesEcommerce() {
             // showMaxLabel: false
           }
         },
+
         yAxis: {
           type: 'value',
           axisPointer: {
@@ -12009,12 +12760,10 @@ var totalSalesInit = function totalSalesInit() {
           }
         }],
         grid: {
-          right: utils.getItemFromStore('isRTL') ? '10px' : '7%',
-          left: utils.getItemFromStore('isRTL') ? '5%' : 0,
-          bottom: '5%',
-          top: '3%',
-          outerBoundsMode: 'same',
-          outerBoundsContain: 'axisLabel'
+          right: '28px',
+          left: '40px',
+          bottom: '15%',
+          top: '5%'
         }
       };
     };
@@ -12069,8 +12818,7 @@ var trafficChannelChartInit = function trafficChannelChartInit() {
         legend: {
           data: ['Display', 'Direct', 'Organic Search', 'Paid Search', 'Other'],
           left: 5,
-          top: 0,
-          padding: [0, 0, 10],
+          // bottom: 10,
           itemWidth: 10,
           itemHeight: 10,
           borderRadius: 0,
@@ -12200,7 +12948,7 @@ var echartsUnresolvedTicketsInit = function echartsUnresolvedTicketsInit() {
     };
     var getDefaultOptions = function getDefaultOptions() {
       return {
-        color: [utils.getColor('primary'), utils.getColor('info'), utils.isDark() === 'dark' ? '#229BD2' : '#73D3FE', utils.isDark() === 'dark' ? '#195979' : '#A9E4FF'],
+        color: [utils.getColor('primary'), utils.getColor('info'), localStorage.getItem('theme') === 'dark' ? '#229BD2' : '#73D3FE', localStorage.getItem('theme') === 'dark' ? '#195979' : '#A9E4FF'],
         tooltip: {
           trigger: 'item',
           padding: [7, 10],
@@ -12283,12 +13031,11 @@ var echartsUnresolvedTicketsInit = function echartsUnresolvedTicketsInit() {
         }],
         barWidth: '15px',
         grid: {
-          top: '7%',
+          top: '8%',
           bottom: 10,
           left: 0,
           right: 2,
-          outerBoundsMode: 'same',
-          outerBoundsContain: 'axisLabel'
+          containLabel: true
         }
       };
     };
@@ -12864,8 +13611,8 @@ var userByLocationInit = function userByLocationInit() {
           borderWidth: 1,
           transitionDuration: 0,
           formatter: function formatter(params) {
-            var _params$data3, _params$data4;
-            return "<strong>".concat((_params$data3 = params.data) === null || _params$data3 === void 0 ? void 0 : _params$data3.name, " :</strong> ").concat((_params$data4 = params.data) === null || _params$data4 === void 0 ? void 0 : _params$data4.value);
+            var _params$data5, _params$data6;
+            return "<strong>".concat((_params$data5 = params.data) === null || _params$data5 === void 0 ? void 0 : _params$data5.name, " :</strong> ").concat((_params$data6 = params.data) === null || _params$data6 === void 0 ? void 0 : _params$data6.value);
           }
         },
         visualMap: {
@@ -12906,7 +13653,7 @@ var userByLocationInit = function userByLocationInit() {
     };
     echartSetOption(chart, userOptions, getDefaultOptions);
     var zoomLevel = 1;
-    (_document$querySelect6 = document.querySelector('.user-by-location-map-zoom')) === null || _document$querySelect6 === void 0 || _document$querySelect6.addEventListener('click', function () {
+    (_document$querySelect6 = document.querySelector('.user-by-location-map-zoom')) === null || _document$querySelect6 === void 0 ? void 0 : _document$querySelect6.addEventListener('click', function () {
       if (zoomLevel < maxZoomLevel) {
         zoomLevel += 1;
       }
@@ -12916,7 +13663,7 @@ var userByLocationInit = function userByLocationInit() {
         }
       });
     });
-    (_document$querySelect7 = document.querySelector('.user-by-location-map-zoomOut')) === null || _document$querySelect7 === void 0 || _document$querySelect7.addEventListener('click', function () {
+    (_document$querySelect7 = document.querySelector('.user-by-location-map-zoomOut')) === null || _document$querySelect7 === void 0 ? void 0 : _document$querySelect7.addEventListener('click', function () {
       if (zoomLevel > minZoomLevel) {
         zoomLevel -= 1;
       }
@@ -12943,7 +13690,7 @@ var usersByTimeChartInit = function usersByTimeChartInit() {
     }
   }
   var tooltipFormatter = function tooltipFormatter(params) {
-    return "\n      <div>\n        <p class='mb-0 text-600'>".concat(window.dayjs(params.name).format('MMM DD, YYYY'), "</p>\n        <div class=\"d-flex align-items-center\">\n          <p class=\"mb-0 text-600\">\n            ").concat(window.dayjs().hour(params.data[1]).format('hA'), " : <span class='text-800 fw-semi-bold'>").concat(params.data[2], "</span>\n          </p>\n        </div>\n      </div>\n  ");
+    return "<div>\n          <p class='mb-0 text-600'>".concat(window.dayjs(params.name).format('MMM DD, YYYY'), "</p>\n          <div class=\"d-flex align-items-center\">\n            <p class=\"mb-0 text-600\">\n              ").concat(window.dayjs().hour(params.data[1]).format('hA'), " : <span class='text-800 fw-semi-bold'>").concat(params.data[2], "</span>\n            </p>\n          </div>\n        </div>");
   };
   if ($echartUsersByTimeChart) {
     var userOptions = utils.getData($echartUsersByTimeChart, 'options');
@@ -13008,8 +13755,8 @@ var usersByTimeChartInit = function usersByTimeChartInit() {
         visualMap: {
           type: 'piecewise',
           orient: 'horizontal',
-          left: -10,
-          bottom: 2,
+          left: 'left',
+          bottom: '3%',
           itemSymbol: 'diamond',
           itemWidth: '10px',
           itemHeight: '10px',
@@ -13180,15 +13927,17 @@ var weeklyGoalsInit = function weeklyGoalsInit() {
         }]
       };
     };
-    var _initChart6 = function initChart() {
+    var initChart = function initChart() {
       if (utils.isScrolledIntoView($echartsBandwidthSaved)) {
         echartSetOption(chart, userOptions, getDefaultOptions);
-        window.removeEventListener('scroll', _initChart6);
+        window.removeEventListener('scroll', initChart);
       }
     };
-    window.addEventListener('scroll', _initChart6);
+    window.addEventListener('scroll', initChart);
   }
 };
+
+/* eslint-disable */
 
 /* -------------------------------------------------------------------------- */
 /*                                Weekly Sales                                */
@@ -13203,7 +13952,7 @@ var weeklySalesInit = function weeklySalesInit() {
     var data = [120, 200, 150, 80, 70, 110, 120];
 
     // Max value of data
-    // const yMax = Math.max(...data);
+    var yMax = Math.max.apply(Math, data);
 
     // const dataBackground = data.map(() => yMax);
     var chart = window.echarts.init($echartBarWeeklySales);
@@ -13325,6 +14074,7 @@ docReady(quantityInit);
 docReady(navbarComboInit);
 docReady(swiperInit);
 docReady(ratingInit);
+docReady(draggableInit);
 docReady(kanbanInit);
 docReady(fullCalendarInit);
 docReady(appCalendarInit);
@@ -13400,10 +14150,8 @@ docReady(select2Init);
 docReady(hideOnCollapseInit);
 docReady(unresolvedTicketsTabInit);
 docReady(inputmaskInit);
-docReady(emojiMartInit);
+docReady(picmoInit);
 docReady(nouisliderInit);
 docReady(bulkSelectInit);
 docReady(advanceAjaxTableInit);
 docReady(listInit);
-docReady(sortableInit);
-docReady(flatpickrIntit);

@@ -51,7 +51,7 @@ trait CommonFunctions
         if ($ext === 'pdf') {
            // $this->validatePdfSize($file); // enforce letter width & height ≤ 11"
         } elseif ($ext === 'docx') {
-            $this->validateDocxSize($file); // optional: just max size, or approximate letter height
+           // $this->validateDocxSize($file); // optional: just max size, or approximate letter height
         } else {
             throw new \Exception("Unsupported file type. Only PDF and DOCX allowed.");
         }

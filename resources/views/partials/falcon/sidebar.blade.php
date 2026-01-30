@@ -573,6 +573,20 @@
                         </li>
                         @endrole
 
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}"
+                               href="{{ route('admin.questions.index') }}">
+                                <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-layer-group"></span>
+                                </span>
+                                    <span class="nav-link-text ps-1">Question Builders</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endrole
+
 {{--                        <li class="nav-item"><a class="nav-link" href="dashboard/crm.html">--}}
 {{--                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span></div>--}}
 {{--                            </a><!-- more inner pages--></li>--}}

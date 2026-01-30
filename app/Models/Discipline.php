@@ -48,4 +48,5 @@ class Discipline extends Model
     {
         return $this->hasMany(Level::class);
     }
+
 }

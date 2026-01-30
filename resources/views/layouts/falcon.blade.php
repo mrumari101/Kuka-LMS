@@ -201,8 +201,6 @@
 <script src="{{ asset('falcon/js/list.min.js')}}"></script>
 <script src="{{ asset('falcon/js/theme.js')}}"></script>
 
-
-
 @stack('script')
 </body>
 </html>

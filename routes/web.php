@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ChapterController;
 use App\Http\Controllers\Admin\TopicController;
 use App\Http\Controllers\Admin\ReadingController;
 use App\Http\Controllers\Admin\DifficultyLevelController;
+use App\Http\Controllers\Admin\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,7 @@ Route::middleware(['auth', 'role:admin'])
 
 
 
+
         Route::prefix('chapters')->group(function () {
             Route::get('/', [ChapterController::class, 'index'])->name('chapters.index');
             Route::get('/create', [ChapterController::class, 'create'])->name('chapters.create');
@@ -119,6 +121,19 @@ Route::middleware(['auth', 'role:admin'])
             Route::post('/update/{difficultyLevel}', [DifficultyLevelController::class, 'update'])->name('difficulty-levels.update');
             Route::post('/delete/{difficultyLevel}', [DifficultyLevelController::class, 'destroy'])->name('difficulty-levels.delete');
         });
+
+        Route::prefix('questions')->group(function () {
+            Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
+            Route::get('/create', [QuestionController::class, 'create'])->name('questions.create');
+            Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
+            Route::get('/edit/{question}', [QuestionController::class, 'show'])->name('questions.edit');
+            Route::post('/update/{question}', [QuestionController::class, 'update'])->name('questions.update');
+            Route::post('/delete/{question}', [QuestionController::class, 'destroy'])->name('questions.delete');
+        });
+
+
+
+
 
 
     });
