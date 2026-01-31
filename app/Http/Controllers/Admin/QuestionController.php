@@ -47,7 +47,7 @@ class QuestionController extends Controller
         return view('admin.questions.create', compact('disciplines','difficultyLevels'));
     }
 
-    public function store(\Illuminate\Http\Request $request)
+    public function store(QuestionRequest $request)
     {
 
 //        echo '<pre>';

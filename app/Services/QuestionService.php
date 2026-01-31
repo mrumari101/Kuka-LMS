@@ -87,34 +87,61 @@ class QuestionService
             );
 
             // 2️⃣ Upload file (PDF/DOCX)
-            $path = "questions";
-            $filePath = $this->FileUpload($data['question_file'], $path);
-            $data['question_file'] = $filePath;
+//            $path = "questions";
+//            $filePath = $this->FileUpload($data['question_file'], $path);
+//            $data['question_file'] = $filePath;
+            // 🔹 File upload (only if exists)
+
+                if (!empty($data['question_file']) && $data['question_type'] === 'mcq') {
+                    $data['question_file'] = $this->FileUpload(
+                        $data['question_file'],
+                        'questions'
+                    );
+                }
+
 
             $data['question_uid']=$questionUid;
             $data['question_no']=$questionNo;
             $question = $this->questionRepository->create($data);
 
             // 2. MCQ options
-            $descriptions = $data['description'];
-            $correctFlags = $data['is_correct'] ?? [];
+//            $descriptions = $data['description'];
+//            $correctFlags = $data['is_correct'] ?? [];
+//
+//            foreach ($descriptions as $index => $text) {
+//                McqOption::create([
+//                    'question_id'  => $question->id,
+//                    'option_index' => $index,
+//                    'description'  => $text,
+//                    'is_correct'   => !empty($correctFlags[$index]),
+//                ]);
+//            }
 
-            foreach ($descriptions as $index => $text) {
-                McqOption::create([
-                    'question_id'  => $question->id,
-                    'option_index' => $index,
-                    'description'  => $text,
-                    'is_correct'   => !empty($correctFlags[$index]),
-                ]);
+
+            // 🔹 MCQ options (ONLY if MCQ)
+            if ($data['question_type'] === 'mcq') {
+
+                $descriptions = $data['description'] ?? [];
+                $correctFlags = $data['is_correct'] ?? [];
+
+                // Defensive check (exam-safe)
+                if (count($descriptions) < 2 || array_sum($correctFlags) !== 1) {
+                    throw new \Exception('Invalid MCQ options configuration.');
+                }
+
+                foreach ($descriptions as $index => $text) {
+                    McqOption::create([
+                        'question_id'  => $question->id,
+                        'option_index' => $index,
+                        'description'  => $text,
+                        'is_correct'   => !empty($correctFlags[$index]),
+                    ]);
+                }
             }
 
-         return $question;
+            return $question;
 
         });
-
-
-
-
     }
 
 

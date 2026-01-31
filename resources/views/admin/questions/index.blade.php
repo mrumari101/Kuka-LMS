@@ -46,7 +46,7 @@
                                     <thead class="bg-200">
                                     <tr>
                                         <th class="align-middle white-space-nowrap">
-                                            Sr.
+                                            QID.
                                         </th>
                                         <th class="text-black dark__text-white align-middle">Question Type</th>
                                         <th class="text-black dark__text-white align-middle">Code</th>

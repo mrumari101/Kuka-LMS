@@ -1,10 +1,10 @@
 @extends('layouts.falcon')
 
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <x-alert type="danger" :message="$error" />
-        @endforeach
-    @endif
+{{--    @if ($errors->any())--}}
+{{--        @foreach ($errors->all() as $error)--}}
+{{--            <x-alert type="danger" :message="$error" />--}}
+{{--        @endforeach--}}
+{{--    @endif--}}
 {{--@php die @endphp--}}
 
 
@@ -142,10 +142,10 @@
                         <label class="form-label" for="question_typ">
                             Question Type <span class="text-danger">*</span>
                         </label>
-                        <select class="form-select @error('status') is-invalid @enderror" name="question_type" id="question_type" aria-label="Default select example">
+                        <select class="form-select @error('question_type') is-invalid @enderror" name="question_type" id="question_type" aria-label="Default select example">
                             <option selected="selected">Select Question Type</option>
-                            <option value="MCQ" {{ old('question_type') == 'MCQ' ? 'selected' : '' }}>MCQ</option>
-                            <option value="Descriptive" {{ old('question_type') == 'Descriptive' ? 'selected' : '' }}>Descriptive</option>
+                            <option value="mcq" {{ old('question_type') == 'MCQ' ? 'selected' : '' }}>MCQ</option>
+                            <option value="descriptive" {{ old('question_type') == 'Descriptive' ? 'selected' : '' }}>Descriptive</option>
                         </select>
                         @error('question_type')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -169,13 +169,13 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label" for="description">
-                            Description <span class="text-danger">*</span>
+                        <label class="form-label" for="question_description">
+                            Description <span class="text-danger"> Description/Doc one should be filled * </span>
                         </label>
                         <x-text-editor-field
-                            id="description"
+                            id="question_description"
                             name="question_description"
-                            label="Description"
+                            label="Question description"
                             placeholder="Write your content..."
                             value="{!! old('question_description')  !!}"
                         />
@@ -186,7 +186,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">
-                            File (PDF/DOCX) <span class="text-danger">*</span>
+                            File (PDF/DOCX) <span class="text-danger">Description/Doc one should be filled * </span>
                         </label>
 
                         <input class="form-control @error('file') is-invalid @enderror" name="question_file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
@@ -314,40 +314,148 @@
                             </tr>
                             </thead>
 
+                            @php
+                                $oldDescriptions = old('description');
+                                $oldCorrect = old('is_correct', []);
+
+                                if (!$oldDescriptions || count($oldDescriptions) < 2) {
+                                    $oldDescriptions = ['', ''];
+                                    $oldCorrect = [1, 0];
+                                }
+                            @endphp
+
                             <tbody id="recipeTable">
-                            <tr draggable="true">
-                                <!-- drag -->
-                                <td class="text-center text-400 drag-handle" style="cursor: grab;">
-                                    <span class="fas fa-grip-vertical"></span>
-                                </td>
 
-                                <!-- correct -->
-                                <td class="text-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input correct-radio" type="radio" name="correct_ui" checked>
-                                        <input type="hidden" name="is_correct[]" value="1" class="is-correct-input">
-                                    </div>
-                                </td>
+                            @foreach($oldDescriptions as $index => $value)
+                                <tr draggable="true">
+                                    <!-- drag -->
+                                    <td class="text-center text-400 drag-handle" style="cursor: grab;">
+                                        <span class="fas fa-grip-vertical"></span>
+                                    </td>
 
-                                <!-- description -->
-                                <td>
-                                    <input
-                                        type="text"
-                                        name="description[]"
-                                        class="form-control"
-                                        placeholder="Enter description"
-                                        required
-                                    >
-                                </td>
+                                    <!-- correct -->
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input
+                                                class="form-check-input correct-radio"
+                                                type="radio"
+                                                name="correct_ui"
+                                                {{ (!empty($oldCorrect[$index])) ? 'checked' : '' }}
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="is_correct[]"
+                                                value="{{ !empty($oldCorrect[$index]) ? 1 : 0 }}"
+                                                class="is-correct-input"
+                                            >
+                                        </div>
+                                    </td>
 
-                                <!-- action -->
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-sm btn-secondary" disabled>
-                                        <span class="fas fa-lock"></span>
-                                    </button>
-                                </td>
-                            </tr>
+                                    <!-- description -->
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="description[]"
+                                            value="{{ $value }}"
+                                            class="form-control @error("description.$index") is-invalid @enderror"
+                                            placeholder="Enter description"
+                                            required
+                                        >
+
+                                        @error("description.$index")
+                                        <div class="invalid-feedback d-block">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </td>
+
+                                    <!-- action -->
+                                    <td class="text-center">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm {{ $index < 2 ? 'btn-secondary' : 'btn-danger removeRow' }}"
+                                            {{ $index < 2 ? 'disabled' : '' }}
+                                        >
+                                            <span class="fas {{ $index < 2 ? 'fa-lock' : 'fa-trash' }}"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                             </tbody>
+
+
+                            {{--                            <tbody id="recipeTable">--}}
+{{--                            <tr draggable="true">--}}
+{{--                                <!-- drag -->--}}
+{{--                                <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
+{{--                                    <span class="fas fa-grip-vertical"></span>--}}
+{{--                                </td>--}}
+
+{{--                                <!-- correct -->--}}
+{{--                                <td class="text-center">--}}
+{{--                                    <div class="form-check">--}}
+{{--                                        <input class="form-check-input correct-radio" type="radio" name="correct_ui" checked>--}}
+{{--                                        <input type="hidden" name="is_correct[]" value="1" class="is-correct-input">--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+
+{{--                                <!-- description -->--}}
+{{--                                <td>--}}
+{{--                                    <input--}}
+{{--                                        type="text"--}}
+{{--                                        name="description[]"--}}
+{{--                                        class="form-control"--}}
+{{--                                        placeholder="Enter description"--}}
+{{--                                        required--}}
+{{--                                    >--}}
+{{--                                </td>--}}
+
+{{--                                <!-- action -->--}}
+{{--                                <td class="text-center">--}}
+{{--                                    <button type="button" class="btn btn-sm btn-secondary" disabled>--}}
+{{--                                        <span class="fas fa-lock"></span>--}}
+{{--                                    </button>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr draggable="true">--}}
+{{--                                <!-- drag -->--}}
+{{--                                <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
+{{--                                    <span class="fas fa-grip-vertical"></span>--}}
+{{--                                </td>--}}
+
+{{--                                <!-- correct -->--}}
+{{--                                <td class="text-center">--}}
+{{--                                    <div class="form-check">--}}
+{{--                                        <input class="form-check-input correct-radio" type="radio" name="correct_ui">--}}
+{{--                                        <input type="hidden" name="is_correct[]" value="0" class="is-correct-input">--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+
+{{--                                <!-- description -->--}}
+{{--                                <td>--}}
+{{--                                    <input--}}
+{{--                                        type="text"--}}
+{{--                                        name="description[]"--}}
+{{--                                        class="form-control"--}}
+{{--                                        placeholder="Enter description"--}}
+{{--                                        required--}}
+{{--                                    >--}}
+{{--                                </td>--}}
+
+{{--                                <!-- action -->--}}
+{{--                                <td class="text-center">--}}
+{{--                                    <button type="button" class="btn btn-sm btn-secondary" disabled>--}}
+{{--                                        <span class="fas fa-lock"></span>--}}
+{{--                                    </button>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+
+
+
+
+
+{{--                            </tbody>--}}
 
                             <tfoot>
                             <tr>
@@ -676,59 +784,57 @@
     });
 </script>
 
+
+
 {{--<script>--}}
 {{--    document.addEventListener('DOMContentLoaded', function () {--}}
 
 {{--        const tableBody = document.getElementById('recipeTable');--}}
 {{--        const addRowBtn = document.getElementById('addRow');--}}
 
+{{--        let draggedRow = null;--}}
+
 {{--        function syncTableState() {--}}
 {{--            [...tableBody.rows].forEach((row, index) => {--}}
-
-{{--                // Radio value--}}
 {{--                const radio = row.querySelector('.correct-radio');--}}
-{{--                radio.value = index;--}}
+{{--                const hidden = row.querySelector('.is-correct-input');--}}
+{{--                const btn = row.querySelector('button');--}}
 
-{{--                // Highlight correct row--}}
 {{--                if (radio.checked) {--}}
-{{--                    row.classList.add('table-success', 'correct-row');--}}
-{{--                    row.querySelector('button').disabled = true;--}}
-{{--                    row.querySelector('button').classList.add('btn-secondary');--}}
-{{--                    row.querySelector('button').classList.remove('btn-danger');--}}
-{{--                    row.querySelector('button').innerHTML = '<span class="fas fa-lock"></span>';--}}
+{{--                    hidden.value = 1;--}}
+{{--                    row.classList.add('table-success');--}}
+{{--                    btn.disabled = true;--}}
+{{--                    btn.className = 'btn btn-sm btn-secondary';--}}
+{{--                    btn.innerHTML = '<span class="fas fa-lock"></span>';--}}
 {{--                } else {--}}
-{{--                    row.classList.remove('table-success', 'correct-row');--}}
-{{--                    row.querySelector('button').disabled = false;--}}
-{{--                    row.querySelector('button').classList.add('btn-danger');--}}
-{{--                    row.querySelector('button').classList.remove('btn-secondary');--}}
-{{--                    row.querySelector('button').innerHTML = '<span class="fas fa-trash"></span>';--}}
+{{--                    hidden.value = 0;--}}
+{{--                    row.classList.remove('table-success');--}}
+{{--                    btn.disabled = false;--}}
+{{--                    btn.className = 'btn btn-sm btn-danger remove-row';--}}
+{{--                    btn.innerHTML = '<span class="fas fa-trash"></span>';--}}
 {{--                }--}}
 {{--            });--}}
 {{--        }--}}
 
+{{--        // Add row--}}
 {{--        addRowBtn.addEventListener('click', function () {--}}
 {{--            const row = document.createElement('tr');--}}
+{{--            row.setAttribute('draggable', true);--}}
 
 {{--            row.innerHTML = `--}}
+{{--            <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
+{{--                <span class="fas fa-grip-vertical"></span>--}}
+{{--            </td>--}}
+
 {{--            <td class="text-center">--}}
 {{--                <div class="form-check">--}}
-{{--                    <input--}}
-{{--                        class="form-check-input correct-radio"--}}
-{{--                        type="radio"--}}
-{{--                        name="correct_answer"--}}
-{{--                        required--}}
-{{--                    >--}}
+{{--                    <input class="form-check-input correct-radio" type="radio" name="correct_ui">--}}
+{{--                    <input type="hidden" name="is_correct[]" value="0" class="is-correct-input">--}}
 {{--                </div>--}}
 {{--            </td>--}}
 
 {{--            <td>--}}
-{{--                <input--}}
-{{--                    type="text"--}}
-{{--                    name="description[]"--}}
-{{--                    class="form-control form-control-sm"--}}
-{{--                    placeholder="Enter description"--}}
-{{--                    required--}}
-{{--                >--}}
+{{--                <input type="text" name="description[]" class="form-control" required>--}}
 {{--            </td>--}}
 
 {{--            <td class="text-center">--}}
@@ -742,12 +848,14 @@
 {{--            syncTableState();--}}
 {{--        });--}}
 
+{{--        // Radio change--}}
 {{--        tableBody.addEventListener('change', function (e) {--}}
 {{--            if (e.target.classList.contains('correct-radio')) {--}}
 {{--                syncTableState();--}}
 {{--            }--}}
 {{--        });--}}
 
+{{--        // Remove row--}}
 {{--        tableBody.addEventListener('click', function (e) {--}}
 {{--            if (e.target.closest('.remove-row')) {--}}
 {{--                e.target.closest('tr').remove();--}}
@@ -755,9 +863,37 @@
 {{--            }--}}
 {{--        });--}}
 
+{{--        // Drag & drop--}}
+{{--        tableBody.addEventListener('dragstart', e => {--}}
+{{--            draggedRow = e.target.closest('tr');--}}
+{{--            draggedRow.classList.add('table-active');--}}
+{{--        });--}}
+
+{{--        tableBody.addEventListener('dragend', () => {--}}
+{{--            draggedRow?.classList.remove('table-active');--}}
+{{--            draggedRow = null;--}}
+{{--            syncTableState();--}}
+{{--        });--}}
+
+{{--        tableBody.addEventListener('dragover', e => {--}}
+{{--            e.preventDefault();--}}
+{{--            const targetRow = e.target.closest('tr');--}}
+{{--            if (!targetRow || targetRow === draggedRow) return;--}}
+
+{{--            const rect = targetRow.getBoundingClientRect();--}}
+{{--            const next = (e.clientY - rect.top) > rect.height / 2;--}}
+{{--            tableBody.insertBefore(draggedRow, next ? targetRow.nextSibling : targetRow);--}}
+{{--        });--}}
+
 {{--        syncTableState();--}}
 {{--    });--}}
 {{--</script>--}}
+
+
+
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -765,32 +901,104 @@
         const tableBody = document.getElementById('recipeTable');
         const addRowBtn = document.getElementById('addRow');
 
-        let draggedRow = null;
+        const MIN = 2;
+        const MAX = 5;
 
+        let draggedRow = null;
         function syncTableState() {
-            [...tableBody.rows].forEach((row, index) => {
+            const rows = [...tableBody.rows];
+
+            // Ensure one correct exists
+            let checkedRow = rows.find(r =>
+                r.querySelector('.correct-radio').checked
+            );
+
+            if (!checkedRow && rows.length) {
+                rows[0].querySelector('.correct-radio').checked = true;
+                checkedRow = rows[0];
+            }
+
+            rows.forEach((row) => {
                 const radio = row.querySelector('.correct-radio');
                 const hidden = row.querySelector('.is-correct-input');
                 const btn = row.querySelector('button');
 
-                if (radio.checked) {
-                    hidden.value = 1;
-                    row.classList.add('table-success');
+                const isChecked = radio.checked;
+                hidden.value = isChecked ? 1 : 0;
+
+                row.classList.toggle('table-success', isChecked);
+
+                // 🚫 lock delete if correct OR min reached
+                if (isChecked || rows.length <= MIN) {
                     btn.disabled = true;
                     btn.className = 'btn btn-sm btn-secondary';
                     btn.innerHTML = '<span class="fas fa-lock"></span>';
+                    btn.title = isChecked
+                        ? 'Correct option cannot be deleted'
+                        : 'At least two options required';
                 } else {
-                    hidden.value = 0;
-                    row.classList.remove('table-success');
                     btn.disabled = false;
                     btn.className = 'btn btn-sm btn-danger remove-row';
                     btn.innerHTML = '<span class="fas fa-trash"></span>';
+                    btn.title = 'Remove option';
                 }
             });
+
+            // 🔒 Disable Add button at max limit
+            if (rows.length >= MAX) {
+                addRowBtn.disabled = true;
+                addRowBtn.classList.add('disabled');
+                addRowBtn.title = 'Maximum 5 options allowed';
+            } else {
+                addRowBtn.disabled = false;
+                addRowBtn.classList.remove('disabled');
+                addRowBtn.title = '';
+            }
         }
+
+
+        // function syncTableState() {
+        //     const rows = [...tableBody.rows];
+        //
+        //     // Ensure one correct always exists
+        //     let checkedRow = rows.find(r =>
+        //         r.querySelector('.correct-radio').checked
+        //     );
+        //
+        //     if (!checkedRow && rows.length) {
+        //         rows[0].querySelector('.correct-radio').checked = true;
+        //         checkedRow = rows[0];
+        //     }
+        //
+        //     rows.forEach((row, index) => {
+        //         const radio = row.querySelector('.correct-radio');
+        //         const hidden = row.querySelector('.is-correct-input');
+        //         const btn = row.querySelector('button');
+        //
+        //         const isChecked = radio.checked;
+        //         hidden.value = isChecked ? 1 : 0;
+        //
+        //         row.classList.toggle('table-success', isChecked);
+        //
+        //         // 🚫 LOCK DELETE if:
+        //         // 1) Row is selected (correct)
+        //         // 2) OR row count <= MIN
+        //         if (isChecked || rows.length <= MIN) {
+        //             btn.disabled = true;
+        //             btn.className = 'btn btn-sm btn-secondary';
+        //             btn.innerHTML = '<span class="fas fa-lock"></span>';
+        //         } else {
+        //             btn.disabled = false;
+        //             btn.className = 'btn btn-sm btn-danger remove-row';
+        //             btn.innerHTML = '<span class="fas fa-trash"></span>';
+        //         }
+        //     });
+        // }
 
         // Add row
         addRowBtn.addEventListener('click', function () {
+            if (tableBody.rows.length >= MAX) return;
+
             const row = document.createElement('tr');
             row.setAttribute('draggable', true);
 
@@ -830,10 +1038,13 @@
 
         // Remove row
         tableBody.addEventListener('click', function (e) {
-            if (e.target.closest('.remove-row')) {
-                e.target.closest('tr').remove();
-                syncTableState();
-            }
+            const btn = e.target.closest('.remove-row');
+            if (!btn) return;
+
+            if (tableBody.rows.length <= MIN) return;
+
+            btn.closest('tr').remove();
+            syncTableState();
         });
 
         // Drag & drop
@@ -858,129 +1069,11 @@
             tableBody.insertBefore(draggedRow, next ? targetRow.nextSibling : targetRow);
         });
 
+        // Initial sync (IMPORTANT for validation old values)
         syncTableState();
     });
 </script>
 
-
-
-
-
-
-
-{{--<script>--}}
-
-
-{{--    // price calculation--}}
-{{--    const addBtn = document.querySelector('#addBtn');--}}
-{{--    addBtn.addEventListener('click', (event) => {--}}
-{{--        new_link()--}}
-{{--    });--}}
-
-
-{{--    document.addEventListener('click', function(event) {--}}
-{{--        // Handle plus button--}}
-{{--        if (event.target.closest('button.btn-plus')) {--}}
-{{--            const inputElement = getDivFromTheElement(event.target);--}}
-{{--            let inputVal = Number(inputElement.value);--}}
-{{--            const maxVal = Number(inputElement.getAttribute('max'));--}}
-
-{{--            if (inputVal < maxVal) {--}}
-{{--                inputElement.value = inputVal + 1;--}}
-{{--                updateQuantity(inputElement);--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        // Handle minus button--}}
-{{--        if (event.target.closest('button.btn-minus')) {--}}
-{{--            const inputElement = getDivFromTheElement(event.target);--}}
-{{--            let inputVal = Number(inputElement.value);--}}
-{{--            const minVal = Number(inputElement.getAttribute('min'));--}}
-
-{{--            if (inputVal > minVal) {--}}
-{{--                inputElement.value = inputVal - 1;--}}
-{{--                updateQuantity(inputElement);--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        // ✅ Handle delete button--}}
-{{--        // if (event.target.closest('.product-removal')) {--}}
-{{--        //     const productRow = event.target.closest('.item');--}}
-{{--        //     if (productRow) {--}}
-{{--        //         productRow.remove();--}}
-{{--        //     }--}}
-{{--        // }--}}
-{{--        if (event.target.closest('.product-removal')) {--}}
-{{--            const productSection = event.target.closest('.item-list'); // Remove entire <tbody>--}}
-{{--            if (productSection) {--}}
-{{--                productSection.remove();--}}
-{{--            }--}}
-{{--        }--}}
-{{--    });--}}
-
-{{--    function updateQuantity(quantityInput) {--}}
-{{--        var productRow = quantityInput.closest('.item');--}}
-{{--        var productList = quantityInput.closest('.item-list');--}}
-{{--        var price = parseFloat(productRow.querySelector('.item-price')?.value || 0);--}}
-
-{{--        var quantity = parseFloat(quantityInput.value);--}}
-{{--        var linePrice = price * quantity;--}}
-{{--        Array.from(productRow.getElementsByClassName('item-line-price')).forEach(function (e) {--}}
-{{--            e.value = linePrice.toFixed(2);--}}
-{{--            // recalculateCart();--}}
-{{--        });--}}
-{{--    }--}}
-
-{{--    // Function to get the input element from the parent hierarchy--}}
-{{--    function getDivFromTheElement(element) {--}}
-{{--        let temp = element.parentNode.querySelector('input.item-quantity');--}}
-
-{{--        if (!temp) {--}}
-{{--            const upperParent = element.parentNode;--}}
-{{--            return getDivFromTheElement(upperParent);--}}
-{{--        }--}}
-{{--        return temp;--}}
-{{--    }--}}
-
-
-{{--    var count = 2;--}}
-{{--    function new_link() {--}}
-{{--        var delLink =--}}
-{{--            ` <tbody class="before:block before:h-3 item-list">--}}
-{{--            <tr class="item">--}}
-{{--                <td class="border border-slate-200 dark:border-zink-500">--}}
-{{--                     <select name="product_id[]" id="itemName${count}" data-choices required--}}
-{{--            --}}{{--                        class="form-input border-slate-200 dark:border-zink-500--}}
-{{--            --}}{{--                               focus:outline-none focus:border-custom-500--}}
-{{--            --}}{{--                               disabled:bg-slate-100 dark:disabled:bg-zink-600--}}
-{{--            --}}{{--                               dark:text-zink-100 dark:bg-zink-700">--}}
-{{--            --}}{{--                      @if ($products->count() > 0)--}}
-{{--            --}}{{--                <option value="">---SELECT INGREDIENT---</option>--}}
-{{--            --}}{{--@foreach ($products as $item)--}}
-{{--            --}}{{--                <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->productUnit->name }})</option>--}}
-{{--            --}}{{--                          @endforeach--}}
-{{--            --}}{{--                @endif--}}
-{{--            --}}{{--                </select>--}}
-{{--            </td>--}}
-{{--            <td class="w-40 border border-slate-200 dark:border-zink-500">--}}
-{{--                <div class="flex justify-center text-center input-step">--}}
-{{--                    <input type="number" name="quantity[]" required class="w-full text-center ltr:pl-2 rtl:pr-2 h-9 border-y product-quantity dark:bg-zink-700 focus:shadow-none dark:border-zink-500 item-quantity" value="1" min="1" max="100" step="0.0001">--}}
-{{--                </div>--}}
-{{--            </td>--}}
-
-{{--           <td class="border border-slate-200 dark:border-zink-500 px-3.5 py-1.5 text-center">--}}
-{{--                <button type="button" class="px-2 py-1.5 text-xs text-red-500 bg-red-100 btn hover:text-white hover:bg-red-600 focus:text-white focus:bg-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:ring active:ring-red-100 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:focus:bg-red-500 dark:focus:text-white dark:active:bg-red-500 dark:active:text-white dark:ring-red-400/20 product-removal"><i data-lucide="trash-2" class="inline-block w-3 h-3 mr-1 align-middle"></i> <span class="align-middle">Delete</span></button>--}}
-{{--            </td>--}}
-{{--        </tr>--}}
-
-{{--    </tbody>`--}}
-{{--        document.getElementById("invoiceTable").insertAdjacentHTML("beforeBegin", delLink);--}}
-{{--        count++;--}}
-
-{{--        lucide.createIcons();--}}
-{{--    }--}}
-
-{{--</script>--}}
 
 
 
