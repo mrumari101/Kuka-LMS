@@ -126,7 +126,8 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
             Route::get('/create', [QuestionController::class, 'create'])->name('questions.create');
             Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
-            Route::get('/edit/{question}', [QuestionController::class, 'show'])->name('questions.edit');
+            Route::get('/show/{question}', [QuestionController::class, 'show'])->name('questions.show');
+            Route::get('/edit/{question}', [QuestionController::class, 'edit'])->name('questions.edit');
             Route::post('/update/{question}', [QuestionController::class, 'update'])->name('questions.update');
             Route::post('/delete/{question}', [QuestionController::class, 'destroy'])->name('questions.delete');
         });

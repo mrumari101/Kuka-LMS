@@ -48,83 +48,85 @@ class QuestionService
         //  $relations = ['restaurant', 'orders'];
         return $this->questionRepository->all(
             $conditions,
-            ['id','question_uid','question_no', 'question_description', 'question_file', 'solution_description', 'solution_file', 'status','chapter_id'],
+            ['id','question_uid','question_no','mcq_description', 'mcq_file', 'question_description', 'question_file', 'solution_description', 'solution_file', 'question_type', 'status','chapter_id'],
             $relations,
             'id',
             'desc',
             null
         );
     }
-
-
-    public function create($data)
+    public function create(array $data)
     {
-
         return DB::transaction(function () use ($data) {
 
-            $discipline_id = $data['discipline_id'];
-            $level_id    = $data['level_id'];
-            $chapter_id    = $data['chapter_id'];
-           // $topic_id      = $data['topic_id'] ?? 0;
-            $difficulty_level_id = $data['difficulty_level_id'];
-            $discipline = $this->disciplineService->get($discipline_id);
-            $level =$this->levelService->get($level_id);
-            $chapter =$this->chapterService->get($chapter_id);
+            /* ---------------------------------
+             | Resolve dependencies
+             |----------------------------------*/
+            $discipline = $this->disciplineService->get($data['discipline_id']);
+            $level      = $this->levelService->get($data['level_id']);
+            $chapter    = $this->chapterService->get($data['chapter_id']);
+            $difficulty = $this->difficultyLevelService->get($data['difficulty_level_id']);
 
-          //  $topic =$this->topicService->get($topic_id);
-            $difficultyLevel =$this->difficultyLevelService->get($difficulty_level_id);
-
-
-
-
-            // 1️⃣ Generate UID + reading number (LOCKED)
+            /* ---------------------------------
+             | Generate UID + Question No
+             |----------------------------------*/
             [$questionUid, $questionNo] = QuestionUidService::generate(
                 $discipline,
                 $level,
                 $chapter,
-                $difficultyLevel,
-               // $topic
+                $difficulty
             );
 
-            // 2️⃣ Upload file (PDF/DOCX)
-//            $path = "questions";
-//            $filePath = $this->FileUpload($data['question_file'], $path);
-//            $data['question_file'] = $filePath;
-            // 🔹 File upload (only if exists)
+            /* ---------------------------------
+             | File uploads (based on type)
+             |----------------------------------*/
 
-                if (!empty($data['question_file']) && $data['question_type'] === 'mcq') {
+            // MCQ
+            if ($data['question_type'] === 'mcq') {
+
+                if (!empty($data['mcq_file'])) {
+                    $data['mcq_file'] = $this->FileUpload(
+                        $data['mcq_file'],
+                        'questions/mcq'
+                    );
+                }
+            }
+
+            // Descriptive
+            if ($data['question_type'] === 'descriptive') {
+
+                if (!empty($data['question_file'])) {
                     $data['question_file'] = $this->FileUpload(
                         $data['question_file'],
-                        'questions'
+                        'questions/descriptive'
                     );
                 }
 
+                if (!empty($data['solution_file'])) {
+                    $data['solution_file'] = $this->FileUpload(
+                        $data['solution_file'],
+                        'questions/solutions'
+                    );
+                }
+            }
 
-            $data['question_uid']=$questionUid;
-            $data['question_no']=$questionNo;
+            /* ---------------------------------
+             | Create Question
+             |----------------------------------*/
+            $data['question_uid'] = $questionUid;
+            $data['question_no']  = $questionNo;
+
             $question = $this->questionRepository->create($data);
 
-            // 2. MCQ options
-//            $descriptions = $data['description'];
-//            $correctFlags = $data['is_correct'] ?? [];
-//
-//            foreach ($descriptions as $index => $text) {
-//                McqOption::create([
-//                    'question_id'  => $question->id,
-//                    'option_index' => $index,
-//                    'description'  => $text,
-//                    'is_correct'   => !empty($correctFlags[$index]),
-//                ]);
-//            }
-
-
-            // 🔹 MCQ options (ONLY if MCQ)
+            /* ---------------------------------
+             | MCQ Options (ONLY for MCQ)
+             |----------------------------------*/
             if ($data['question_type'] === 'mcq') {
 
                 $descriptions = $data['description'] ?? [];
-                $correctFlags = $data['is_correct'] ?? [];
+                $correctFlags = array_map('intval', $data['is_correct'] ?? []);
 
-                // Defensive check (exam-safe)
+                // Extra safety (never trust frontend fully)
                 if (count($descriptions) < 2 || array_sum($correctFlags) !== 1) {
                     throw new \Exception('Invalid MCQ options configuration.');
                 }
@@ -140,9 +142,97 @@ class QuestionService
             }
 
             return $question;
-
         });
     }
+
+
+
+//    public function create($data)
+//    {
+//
+//        return DB::transaction(function () use ($data) {
+//
+//            $discipline_id = $data['discipline_id'];
+//            $level_id    = $data['level_id'];
+//            $chapter_id    = $data['chapter_id'];
+//           // $topic_id      = $data['topic_id'] ?? 0;
+//            $difficulty_level_id = $data['difficulty_level_id'];
+//            $discipline = $this->disciplineService->get($discipline_id);
+//            $level =$this->levelService->get($level_id);
+//            $chapter =$this->chapterService->get($chapter_id);
+//
+//          //  $topic =$this->topicService->get($topic_id);
+//            $difficultyLevel =$this->difficultyLevelService->get($difficulty_level_id);
+//
+//
+//
+//
+//            // 1️⃣ Generate UID + reading number (LOCKED)
+//            [$questionUid, $questionNo] = QuestionUidService::generate(
+//                $discipline,
+//                $level,
+//                $chapter,
+//                $difficultyLevel,
+//               // $topic
+//            );
+//
+//            // 2️⃣ Upload file (PDF/DOCX)
+////            $path = "questions";
+////            $filePath = $this->FileUpload($data['question_file'], $path);
+////            $data['question_file'] = $filePath;
+//            // 🔹 File upload (only if exists)
+//
+//                if (!empty($data['question_file']) && $data['question_type'] === 'mcq') {
+//                    $data['question_file'] = $this->FileUpload(
+//                        $data['question_file'],
+//                        'questions'
+//                    );
+//                }
+//
+//
+//            $data['question_uid']=$questionUid;
+//            $data['question_no']=$questionNo;
+//            $question = $this->questionRepository->create($data);
+//
+//            // 2. MCQ options
+////            $descriptions = $data['description'];
+////            $correctFlags = $data['is_correct'] ?? [];
+////
+////            foreach ($descriptions as $index => $text) {
+////                McqOption::create([
+////                    'question_id'  => $question->id,
+////                    'option_index' => $index,
+////                    'description'  => $text,
+////                    'is_correct'   => !empty($correctFlags[$index]),
+////                ]);
+////            }
+//
+//
+//            // 🔹 MCQ options (ONLY if MCQ)
+//            if ($data['question_type'] === 'mcq') {
+//
+//                $descriptions = $data['description'] ?? [];
+//                $correctFlags = $data['is_correct'] ?? [];
+//
+//                // Defensive check (exam-safe)
+//                if (count($descriptions) < 2 || array_sum($correctFlags) !== 1) {
+//                    throw new \Exception('Invalid MCQ options configuration.');
+//                }
+//
+//                foreach ($descriptions as $index => $text) {
+//                    McqOption::create([
+//                        'question_id'  => $question->id,
+//                        'option_index' => $index,
+//                        'description'  => $text,
+//                        'is_correct'   => !empty($correctFlags[$index]),
+//                    ]);
+//                }
+//            }
+//
+//            return $question;
+//
+//        });
+//    }
 
 
     public function get($questionId)

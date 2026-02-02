@@ -23,11 +23,11 @@
 
 
 
-{{--    @if ($errors->any())--}}
-{{--        @foreach ($errors->all() as $error)--}}
-{{--            <x-alert type="danger" :message="$error" />--}}
-{{--        @endforeach--}}
-{{--    @endif--}}
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <x-alert type="danger" :message="$error" />
+        @endforeach
+    @endif
 
     <x-breadcrumb
         title="Dashboard"
@@ -137,21 +137,6 @@
                         @enderror
                     </div>
 
-
-                    <div class="mb-3">
-                        <label class="form-label" for="question_typ">
-                            Question Type <span class="text-danger">*</span>
-                        </label>
-                        <select class="form-select @error('question_type') is-invalid @enderror" name="question_type" id="question_type" aria-label="Default select example">
-                            <option selected="selected">Select Question Type</option>
-                            <option value="mcq" {{ old('question_type') == 'MCQ' ? 'selected' : '' }}>MCQ</option>
-                            <option value="descriptive" {{ old('question_type') == 'Descriptive' ? 'selected' : '' }}>Descriptive</option>
-                        </select>
-                        @error('question_type')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <div class="mb-3">
                         <label class="form-label" for="status">
                             Status <span class="text-danger">*</span>
@@ -167,10 +152,157 @@
                     </div>
 
 
+                    <div class="mb-3">
+                        <label class="form-label" for="question_typ">
+                            Question Type <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select @error('question_type') is-invalid @enderror" name="question_type" id="question_type" aria-label="Default select example">
+                            <option selected="">Select Question Type</option>
+                            <option value="mcq" {{ old('question_type') == 'mcq' ? 'selected' : '' }}>MCQ</option>
+                            <option value="descriptive" {{ old('question_type') == 'descriptive' ? 'selected' : '' }}>Descriptive</option>
+                        </select>
+                        @error('question_type')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+
+                  <div id="mcqDiv" style="display:none">
+                    <div class="mb-3">
+                        <label class="form-label" for="mcq_description">
+                            Mcq Description <span class="text-danger"> Description/Doc one should be filled * </span>
+                        </label>
+                        <x-text-editor-field
+                            id="mcq_description"
+                            name="mcq_description"
+                            label="Mcq description"
+                            placeholder="Write your content..."
+                            value="{!! old('mcq_description')  !!}"
+                        />
+                        @error('mcq_description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="mb-3">
+                        <label class="form-label">
+                            Mcq File (PDF/DOCX) <span class="text-danger">Description/Doc one should be filled * </span>
+                        </label>
+
+                        <input class="form-control @error('mcq_file') is-invalid @enderror" name="mcq_file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                        <div class="small text-muted">
+                            Upload specs: PDF/DOCX · Max size as defined · Letter size (21.59cm × H up to 11)
+                        </div>
+                        @error('mcq_file')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="status">
+                            MCQ Options <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered align-middle fs--1">
+                                <thead class="bg-200 text-uppercase">
+                                <tr>
+                                    <th style="width: 40px;"></th>
+                                    <th style="width: 140px;">Correct</th>
+                                    <th>Description</th>
+                                    <th class="text-center" style="width: 120px;">Action</th>
+                                </tr>
+                                </thead>
+
+                                @php
+                                    $oldDescriptions = old('description');
+                                    $oldCorrect = old('is_correct', []);
+
+                                    if (!$oldDescriptions || count($oldDescriptions) < 2) {
+                                        $oldDescriptions = ['', ''];
+                                        $oldCorrect = [1, 0];
+                                    }
+                                @endphp
+
+                                <tbody id="recipeTable">
+
+                                @foreach($oldDescriptions as $index => $value)
+                                    <tr draggable="true">
+                                        <!-- drag -->
+                                        <td class="text-center text-400 drag-handle" style="cursor: grab;">
+                                            <span class="fas fa-grip-vertical"></span>
+                                        </td>
+
+                                        <!-- correct -->
+                                        <td class="text-center">
+                                            <div class="form-check">
+                                                <input
+                                                    class="form-check-input correct-radio"
+                                                    type="radio"
+                                                    name="correct_ui"
+                                                    {{ (!empty($oldCorrect[$index])) ? 'checked' : '' }}
+                                                >
+                                                <input
+                                                    type="hidden"
+                                                    name="is_correct[]"
+                                                    value="{{ !empty($oldCorrect[$index]) ? 1 : 0 }}"
+                                                    class="is-correct-input"
+                                                >
+                                            </div>
+                                        </td>
+
+                                        <!-- description -->
+                                        <td>
+                                            <input
+                                                type="text"
+                                                name="description[]"
+                                                value="{{ $value }}"
+                                                class="form-control @error("description.$index") is-invalid @enderror"
+                                                placeholder="Enter description"
+                                                required
+                                            >
+
+                                            @error("description.$index")
+                                            <div class="invalid-feedback d-block">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </td>
+
+                                        <!-- action -->
+                                        <td class="text-center">
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm {{ $index < 2 ? 'btn-secondary' : 'btn-danger removeRow' }}"
+                                                {{ $index < 2 ? 'disabled' : '' }}
+                                            >
+                                                <span class="fas {{ $index < 2 ? 'fa-lock' : 'fa-trash' }}"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <button id="addRow" type="button" class="btn btn-sm btn-outline-primary">
+                                            <span class="fas fa-plus me-1"></span>Add Row
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div id="descriptiveDiv" style="display:none">
+                    <div class="mb-3">
                         <label class="form-label" for="question_description">
-                            Description <span class="text-danger"> Description/Doc one should be filled * </span>
+                           Question Description <span class="text-danger"> Description/Doc one should be filled * </span>
                         </label>
                         <x-text-editor-field
                             id="question_description"
@@ -186,7 +318,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">
-                            File (PDF/DOCX) <span class="text-danger">Description/Doc one should be filled * </span>
+                            Question File (PDF/DOCX) <span class="text-danger">Description/Doc one should be filled * </span>
                         </label>
 
                         <input class="form-control @error('file') is-invalid @enderror" name="question_file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
@@ -198,346 +330,40 @@
                         @enderror
                     </div>
 
-
-{{--                    <div class="mb-3">--}}
-{{--                        <label class="form-label" for="status">--}}
-{{--                            Status <span class="text-danger">*</span>--}}
-{{--                        </label>--}}
-
-{{--                        <div class="dropzone dropzone-single p-0 dz-clickable"--}}
-{{--                             data-dropzone--}}
-{{--                             data-options='{"maxFiles":1,"acceptedFiles":"image/*"}'>--}}
-
-{{--                            <div class="dz-preview dz-preview-single"></div>--}}
-
-{{--                            <div class="dz-message fs-10" data-dz-message>--}}
-{{--                                <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="20" alt="">--}}
-{{--                                <span class="d-none d-lg-inline">--}}
-{{--                                      Drag your image here<br>or,--}}
-{{--                                    </span>--}}
-{{--                                <span class="btn btn-link p-0 fs-10">Browse</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-
-
-{{--                        --}}{{--                    <div class="dropzone dropzone-single p-0 dz-clickable" data-dropzone="data-dropzone" data-options="{&quot;maxFiles&quot;:1,&quot;acceptedFiles&quot;:&quot;image/*&quot;}">--}}
-
-{{--                        <div class="dz-preview dz-preview-single"></div>--}}
-{{--                        <div class="dz-message fs-10" data-dz-message="data-dz-message">--}}
-{{--                            <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="20" alt="">--}}
-{{--                            <span class="d-none d-lg-inline">--}}
-{{--                                Drag your image here<br>or, </span><span class="btn btn-link p-0 fs-10">Browse</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    </div>--}}
-
-
-
-
-
-{{--                    <h6 class="my-4 text-900 fw-semi-bold">Recipe</h6>--}}
-
-{{--                    <div class="table-responsive">--}}
-{{--                        <table class="table table-bordered align-middle fs--1">--}}
-{{--                            <thead class="bg-200 text-uppercase">--}}
-{{--                            <tr>--}}
-{{--                                <th style="width: 160px;">Correct</th>--}}
-{{--                                <th>Description</th>--}}
-{{--                                <th class="text-center" style="width: 120px;">Action</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-
-{{--                            <tbody id="recipeTable">--}}
-{{--                            <tr class="correct-row">--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input--}}
-{{--                                            class="form-check-input correct-radio"--}}
-{{--                                            type="radio"--}}
-{{--                                            name="correct_answer"--}}
-{{--                                            checked--}}
-{{--                                            required--}}
-{{--                                        >--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-
-{{--                                <td>--}}
-{{--                                    <input--}}
-{{--                                        type="text"--}}
-{{--                                        name="description[]"--}}
-{{--                                        class="form-control form-control-sm"--}}
-{{--                                        placeholder="Enter description"--}}
-{{--                                        required--}}
-{{--                                    >--}}
-{{--                                </td>--}}
-
-{{--                                <td class="text-center">--}}
-{{--                                    <button--}}
-{{--                                        type="button"--}}
-{{--                                        class="btn btn-sm btn-secondary"--}}
-{{--                                        disabled--}}
-{{--                                    >--}}
-{{--                                        <span class="fas fa-lock"></span>--}}
-{{--                                    </button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                            </tbody>--}}
-
-{{--                            <tfoot>--}}
-{{--                            <tr>--}}
-{{--                                <td colspan="3">--}}
-{{--                                    <button id="addRow" type="button" class="btn btn-sm btn-outline-primary">--}}
-{{--                                        <span class="fas fa-plus me-1"></span>Add Row--}}
-{{--                                    </button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                            </tfoot>--}}
-{{--                        </table>--}}
-{{--                    </div>--}}
-
+                    <div class="mb-3">
+                        <label class="form-label" for="solution_description">
+                           Solution Description <span class="text-danger"> Description/Doc one should be filled * </span>
+                        </label>
+                        <x-text-editor-field
+                            id="solution_description"
+                            name="solution_description"
+                            label="Solution description"
+                            placeholder="Write your content..."
+                            value="{!! old('solution_description')  !!}"
+                        />
+                        @error('solution_description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="status">
-                            MCQ Options <span class="text-danger">*</span>
+                        <label class="form-label">
+                            Solution File (PDF/DOCX) <span class="text-danger">Description/Doc one should be filled * </span>
                         </label>
 
-                    <div class="table-responsive">
-
-                        <table class="table table-bordered align-middle fs--1">
-                            <thead class="bg-200 text-uppercase">
-                            <tr>
-                                <th style="width: 40px;"></th>
-                                <th style="width: 140px;">Correct</th>
-                                <th>Description</th>
-                                <th class="text-center" style="width: 120px;">Action</th>
-                            </tr>
-                            </thead>
-
-                            @php
-                                $oldDescriptions = old('description');
-                                $oldCorrect = old('is_correct', []);
-
-                                if (!$oldDescriptions || count($oldDescriptions) < 2) {
-                                    $oldDescriptions = ['', ''];
-                                    $oldCorrect = [1, 0];
-                                }
-                            @endphp
-
-                            <tbody id="recipeTable">
-
-                            @foreach($oldDescriptions as $index => $value)
-                                <tr draggable="true">
-                                    <!-- drag -->
-                                    <td class="text-center text-400 drag-handle" style="cursor: grab;">
-                                        <span class="fas fa-grip-vertical"></span>
-                                    </td>
-
-                                    <!-- correct -->
-                                    <td class="text-center">
-                                        <div class="form-check">
-                                            <input
-                                                class="form-check-input correct-radio"
-                                                type="radio"
-                                                name="correct_ui"
-                                                {{ (!empty($oldCorrect[$index])) ? 'checked' : '' }}
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="is_correct[]"
-                                                value="{{ !empty($oldCorrect[$index]) ? 1 : 0 }}"
-                                                class="is-correct-input"
-                                            >
-                                        </div>
-                                    </td>
-
-                                    <!-- description -->
-                                    <td>
-                                        <input
-                                            type="text"
-                                            name="description[]"
-                                            value="{{ $value }}"
-                                            class="form-control @error("description.$index") is-invalid @enderror"
-                                            placeholder="Enter description"
-                                            required
-                                        >
-
-                                        @error("description.$index")
-                                        <div class="invalid-feedback d-block">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </td>
-
-                                    <!-- action -->
-                                    <td class="text-center">
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm {{ $index < 2 ? 'btn-secondary' : 'btn-danger removeRow' }}"
-                                            {{ $index < 2 ? 'disabled' : '' }}
-                                        >
-                                            <span class="fas {{ $index < 2 ? 'fa-lock' : 'fa-trash' }}"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                            </tbody>
-
-
-                            {{--                            <tbody id="recipeTable">--}}
-{{--                            <tr draggable="true">--}}
-{{--                                <!-- drag -->--}}
-{{--                                <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
-{{--                                    <span class="fas fa-grip-vertical"></span>--}}
-{{--                                </td>--}}
-
-{{--                                <!-- correct -->--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input class="form-check-input correct-radio" type="radio" name="correct_ui" checked>--}}
-{{--                                        <input type="hidden" name="is_correct[]" value="1" class="is-correct-input">--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-
-{{--                                <!-- description -->--}}
-{{--                                <td>--}}
-{{--                                    <input--}}
-{{--                                        type="text"--}}
-{{--                                        name="description[]"--}}
-{{--                                        class="form-control"--}}
-{{--                                        placeholder="Enter description"--}}
-{{--                                        required--}}
-{{--                                    >--}}
-{{--                                </td>--}}
-
-{{--                                <!-- action -->--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <button type="button" class="btn btn-sm btn-secondary" disabled>--}}
-{{--                                        <span class="fas fa-lock"></span>--}}
-{{--                                    </button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                            <tr draggable="true">--}}
-{{--                                <!-- drag -->--}}
-{{--                                <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
-{{--                                    <span class="fas fa-grip-vertical"></span>--}}
-{{--                                </td>--}}
-
-{{--                                <!-- correct -->--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input class="form-check-input correct-radio" type="radio" name="correct_ui">--}}
-{{--                                        <input type="hidden" name="is_correct[]" value="0" class="is-correct-input">--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-
-{{--                                <!-- description -->--}}
-{{--                                <td>--}}
-{{--                                    <input--}}
-{{--                                        type="text"--}}
-{{--                                        name="description[]"--}}
-{{--                                        class="form-control"--}}
-{{--                                        placeholder="Enter description"--}}
-{{--                                        required--}}
-{{--                                    >--}}
-{{--                                </td>--}}
-
-{{--                                <!-- action -->--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <button type="button" class="btn btn-sm btn-secondary" disabled>--}}
-{{--                                        <span class="fas fa-lock"></span>--}}
-{{--                                    </button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-
-
-
-
-
-{{--                            </tbody>--}}
-
-                            <tfoot>
-                            <tr>
-                                <td colspan="4">
-                                    <button id="addRow" type="button" class="btn btn-sm btn-outline-primary">
-                                        <span class="fas fa-plus me-1"></span>Add Row
-                                    </button>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </table>
+                        <input class="form-control @error('file') is-invalid @enderror" name="solution_file" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                        <div class="small text-muted">
+                            Upload specs: PDF/DOCX · Max size as defined · Letter size (21.59cm × H up to 11)
+                        </div>
+                        @error('solution_file')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    </div>
-
-
-
-
-
-
-                    {{--                        <h6 class="my-5 underline text-16">Recipe:</h6>--}}
-{{--                        <div class="overflow-x-auto" bis_skin_checked="1">--}}
-{{--                            <table class="w-full whitespace-nowrap">--}}
-{{--                                <thead>--}}
-{{--                                <tr>--}}
-{{--                                    <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500">Ingredient Name</th>--}}
-{{--                                    <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500">Quantity</th>--}}
-{{--                                    --}}{{--                                            <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500">Cost</th>--}}
-{{--                                    --}}{{--                                            <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500">Price</th>--}}
-{{--                                    <th class="px-3.5 py-2.5 font-medium text-sm text-slate-500 uppercase border border-slate-200 dark:text-zink-200 dark:border-zink-500">Action</th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                                <tbody class="before:block before:h-3 item-list">--}}
-{{--                                <tr class="item">--}}
-{{--                                    <td class="border border-slate-200 dark:border-zink-500">--}}
-{{--                                        <select name="product_id[]" id="itemName1" required--}}
-{{--                                                class="form-input border-slate-200 dark:border-zink-500--}}
-{{--                                                focus:outline-none focus:border-custom-500--}}
-{{--                                                disabled:bg-slate-100 dark:disabled:bg-zink-600--}}
-{{--                                                dark:text-zink-100 dark:bg-zink-700">--}}
-{{--                                            @if ($products->count() > 0)--}}
-{{--                                                <option value="">---SELECT INGREDIENT---</option>--}}
-{{--                                                @foreach ($products as $item)--}}
-{{--                                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->productUnit->name }})</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
-{{--                                        </select>--}}
-{{--                                    </td>--}}
-{{--                                    <td class="w-40 border border-slate-200 dark:border-zink-500">--}}
-{{--                                        <div class="flex justify-center text-center input-step" bis_skin_checked="1">--}}
-{{--                                            <input type="number" name="quantity[]" required class="w-full text-center ltr:pl-2 rtl:pr-2 h-9 border-y product-quantity dark:bg-zink-700 focus:shadow-none dark:border-zink-500 item-quantity" value="1" min="1" max="100"  step="0.0001" fdprocessedid="p0dnsn">--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-{{--                                    --}}{{--                                            <td class="w-40 border border-slate-200 dark:border-zink-500">--}}
-{{--                                    --}}{{--                                                <input type="number" name="price[]" min="0" id="itemName1" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 item-price" placeholder="00.00" required="" fdprocessedid="fuhoja">--}}
-{{--                                    --}}{{--                                            </td>--}}
-
-{{--                                    <td class="border border-slate-200 px-3.5 py-1.5 text-center dark:border-zink-500">--}}
-{{--                                        --}}{{--                                                <button type="button" class="px-2 py-1.5 text-xs text-red-500 bg-red-100 btn hover:text-white hover:bg-red-600 focus:text-white focus:bg-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:ring active:ring-red-100 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:focus:bg-red-500 dark:focus:text-white dark:active:bg-red-500 dark:active:text-white dark:ring-red-400/20 product-removal" fdprocessedid="m5zt5c"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" class="lucide lucide-trash-2 inline-block mr-1 align-middle size-3"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg> <span class="align-middle">Delete</span></button>--}}
-{{--                                    </td>--}}
-
-{{--                                </tr>--}}
-
-{{--                                </tbody>--}}
-
-
-{{--                                <tbody class="before:block before:h-4" id="invoiceTable">--}}
-{{--                                <tr>--}}
-{{--                                    <td colspan="6">--}}
-{{--                                        <a href="javascript:void(0)" id="addBtn"><button type="button" class="bg-white border-dashed text-custom-500 btn border-custom-500 hover:text-custom-500 hover:bg-custom-50 hover:border-custom-600 focus:text-custom-600 focus:bg-custom-50 focus:border-custom-600 active:text-custom-600 active:bg-custom-50 active:border-custom-600 dark:bg-zink-700 dark:ring-custom-400/20 dark:hover:bg-custom-800/20 dark:focus:bg-custom-800/20 dark:active:bg-custom-800/20" fdprocessedid="m6rou"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" class="lucide lucide-plus inline-block mr-1 align-middle size-3"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> <span class="align-middle">Add Ingredient</span></button></a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                </tbody>--}}
-
-{{--                            </table>--}}
-{{--                        </div>--}}
-
-
-
+                  </div>
 
 
                     <div class="d-flex justify-content-start gap-2 mt-4">
-                        <a href="{{ route('admin.topics.index') }}"
+                        <a href="{{ route('admin.questions.index') }}"
                            class="btn btn-falcon-default btn-sm">
                             <span class="fas fa-arrow-left me-1"></span>
                             Cancel
@@ -553,6 +379,115 @@
         </div>
     </div>
 </div>
+
+
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const el = document.querySelector('.is-invalid');
+            el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el?.focus();
+        });
+    </script>
+@endif
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const questionType = document.getElementById('question_type');
+        const mcqDiv = document.getElementById('mcqDiv');
+        const descriptiveDiv = document.getElementById('descriptiveDiv');
+
+        function toggle(container, show) {
+            container.style.display = show ? 'block' : 'none';
+
+            container.querySelectorAll('input, textarea, select').forEach(el => {
+                el.disabled = !show;
+            });
+
+            // TinyMCE safe handling
+            container.querySelectorAll('textarea.tinymce').forEach(el => {
+                const editor = tinymce.get(el.id);
+                if (editor) {
+                    show
+                        ? editor.mode.set('design')
+                        : editor.mode.set('readonly');
+                }
+            });
+        }
+
+        function applyVisibility() {
+
+            const type = questionType.value;
+
+            if (!type) {
+                toggle(mcqDiv, false);
+                toggle(descriptiveDiv, false);
+                return;
+            }
+
+            if (type === 'mcq') {
+                toggle(mcqDiv, true);
+                toggle(descriptiveDiv, false);
+            }
+
+            if (type === 'descriptive') {
+                toggle(mcqDiv, false);
+                toggle(descriptiveDiv, true);
+            }
+        }
+
+        questionType.addEventListener('change', applyVisibility);
+        applyVisibility(); // initial load (handles old())
+    });
+</script>
+
+
+
+{{--<script>--}}
+{{--    document.addEventListener('DOMContentLoaded', function () {--}}
+
+{{--        function toggleContainer(container, enable) {--}}
+{{--            container.style.display = enable ? 'block' : 'none';--}}
+
+{{--            container.querySelectorAll('input, textarea, select').forEach(el => {--}}
+
+{{--                // Handle TinyMCE textarea--}}
+{{--                if (el.tagName === 'TEXTAREA' && el.classList.contains('tinymce')) {--}}
+{{--                    const editor = tinymce.get(el.id);--}}
+
+{{--                    if (editor) {--}}
+{{--                        enable ? editor.mode.set('design') : editor.mode.set('readonly');--}}
+{{--                    }--}}
+{{--                }--}}
+
+{{--                el.disabled = !enable;--}}
+{{--            });--}}
+{{--        }--}}
+
+{{--        const questionType = document.getElementById('question_type');--}}
+{{--        const mcqDiv = document.getElementById('mcqDiv');--}}
+{{--        const descriptiveDiv = document.getElementById('descriptiveDiv');--}}
+
+{{--        function toggleByType() {--}}
+{{--            if (questionType.value === 'mcq') {--}}
+{{--                toggleContainer(mcqDiv, true);--}}
+{{--                toggleContainer(descriptiveDiv, false);--}}
+{{--            } else {--}}
+{{--                toggleContainer(mcqDiv, false);--}}
+{{--                toggleContainer(descriptiveDiv, true);--}}
+{{--            }--}}
+{{--        }--}}
+
+{{--        questionType.addEventListener('change', toggleByType);--}}
+{{--        toggleByType(); // init--}}
+{{--    });--}}
+{{--</script>--}}
+
+
+
+
 
 <script>
     document.getElementById('discipline_id').addEventListener('change', function () {
@@ -786,114 +721,6 @@
 
 
 
-{{--<script>--}}
-{{--    document.addEventListener('DOMContentLoaded', function () {--}}
-
-{{--        const tableBody = document.getElementById('recipeTable');--}}
-{{--        const addRowBtn = document.getElementById('addRow');--}}
-
-{{--        let draggedRow = null;--}}
-
-{{--        function syncTableState() {--}}
-{{--            [...tableBody.rows].forEach((row, index) => {--}}
-{{--                const radio = row.querySelector('.correct-radio');--}}
-{{--                const hidden = row.querySelector('.is-correct-input');--}}
-{{--                const btn = row.querySelector('button');--}}
-
-{{--                if (radio.checked) {--}}
-{{--                    hidden.value = 1;--}}
-{{--                    row.classList.add('table-success');--}}
-{{--                    btn.disabled = true;--}}
-{{--                    btn.className = 'btn btn-sm btn-secondary';--}}
-{{--                    btn.innerHTML = '<span class="fas fa-lock"></span>';--}}
-{{--                } else {--}}
-{{--                    hidden.value = 0;--}}
-{{--                    row.classList.remove('table-success');--}}
-{{--                    btn.disabled = false;--}}
-{{--                    btn.className = 'btn btn-sm btn-danger remove-row';--}}
-{{--                    btn.innerHTML = '<span class="fas fa-trash"></span>';--}}
-{{--                }--}}
-{{--            });--}}
-{{--        }--}}
-
-{{--        // Add row--}}
-{{--        addRowBtn.addEventListener('click', function () {--}}
-{{--            const row = document.createElement('tr');--}}
-{{--            row.setAttribute('draggable', true);--}}
-
-{{--            row.innerHTML = `--}}
-{{--            <td class="text-center text-400 drag-handle" style="cursor: grab;">--}}
-{{--                <span class="fas fa-grip-vertical"></span>--}}
-{{--            </td>--}}
-
-{{--            <td class="text-center">--}}
-{{--                <div class="form-check">--}}
-{{--                    <input class="form-check-input correct-radio" type="radio" name="correct_ui">--}}
-{{--                    <input type="hidden" name="is_correct[]" value="0" class="is-correct-input">--}}
-{{--                </div>--}}
-{{--            </td>--}}
-
-{{--            <td>--}}
-{{--                <input type="text" name="description[]" class="form-control" required>--}}
-{{--            </td>--}}
-
-{{--            <td class="text-center">--}}
-{{--                <button type="button" class="btn btn-sm btn-danger remove-row">--}}
-{{--                    <span class="fas fa-trash"></span>--}}
-{{--                </button>--}}
-{{--            </td>--}}
-{{--        `;--}}
-
-{{--            tableBody.appendChild(row);--}}
-{{--            syncTableState();--}}
-{{--        });--}}
-
-{{--        // Radio change--}}
-{{--        tableBody.addEventListener('change', function (e) {--}}
-{{--            if (e.target.classList.contains('correct-radio')) {--}}
-{{--                syncTableState();--}}
-{{--            }--}}
-{{--        });--}}
-
-{{--        // Remove row--}}
-{{--        tableBody.addEventListener('click', function (e) {--}}
-{{--            if (e.target.closest('.remove-row')) {--}}
-{{--                e.target.closest('tr').remove();--}}
-{{--                syncTableState();--}}
-{{--            }--}}
-{{--        });--}}
-
-{{--        // Drag & drop--}}
-{{--        tableBody.addEventListener('dragstart', e => {--}}
-{{--            draggedRow = e.target.closest('tr');--}}
-{{--            draggedRow.classList.add('table-active');--}}
-{{--        });--}}
-
-{{--        tableBody.addEventListener('dragend', () => {--}}
-{{--            draggedRow?.classList.remove('table-active');--}}
-{{--            draggedRow = null;--}}
-{{--            syncTableState();--}}
-{{--        });--}}
-
-{{--        tableBody.addEventListener('dragover', e => {--}}
-{{--            e.preventDefault();--}}
-{{--            const targetRow = e.target.closest('tr');--}}
-{{--            if (!targetRow || targetRow === draggedRow) return;--}}
-
-{{--            const rect = targetRow.getBoundingClientRect();--}}
-{{--            const next = (e.clientY - rect.top) > rect.height / 2;--}}
-{{--            tableBody.insertBefore(draggedRow, next ? targetRow.nextSibling : targetRow);--}}
-{{--        });--}}
-
-{{--        syncTableState();--}}
-{{--    });--}}
-{{--</script>--}}
-
-
-
-
-
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -955,45 +782,6 @@
                 addRowBtn.title = '';
             }
         }
-
-
-        // function syncTableState() {
-        //     const rows = [...tableBody.rows];
-        //
-        //     // Ensure one correct always exists
-        //     let checkedRow = rows.find(r =>
-        //         r.querySelector('.correct-radio').checked
-        //     );
-        //
-        //     if (!checkedRow && rows.length) {
-        //         rows[0].querySelector('.correct-radio').checked = true;
-        //         checkedRow = rows[0];
-        //     }
-        //
-        //     rows.forEach((row, index) => {
-        //         const radio = row.querySelector('.correct-radio');
-        //         const hidden = row.querySelector('.is-correct-input');
-        //         const btn = row.querySelector('button');
-        //
-        //         const isChecked = radio.checked;
-        //         hidden.value = isChecked ? 1 : 0;
-        //
-        //         row.classList.toggle('table-success', isChecked);
-        //
-        //         // 🚫 LOCK DELETE if:
-        //         // 1) Row is selected (correct)
-        //         // 2) OR row count <= MIN
-        //         if (isChecked || rows.length <= MIN) {
-        //             btn.disabled = true;
-        //             btn.className = 'btn btn-sm btn-secondary';
-        //             btn.innerHTML = '<span class="fas fa-lock"></span>';
-        //         } else {
-        //             btn.disabled = false;
-        //             btn.className = 'btn btn-sm btn-danger remove-row';
-        //             btn.innerHTML = '<span class="fas fa-trash"></span>';
-        //         }
-        //     });
-        // }
 
         // Add row
         addRowBtn.addEventListener('click', function () {

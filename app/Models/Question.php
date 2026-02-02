@@ -16,6 +16,8 @@ class Question extends Model
         'question_no',
         'difficulty_level_id',
         'question_type',
+        'mcq_description',
+        'mcq_file',
         'question_description',
         'question_file',
         'solution_description',
@@ -33,6 +35,11 @@ class Question extends Model
     public function chapter()
     {
         return $this->belongsTo(Chapter::class);
+    }
+
+    public function difficultyLevel()
+    {
+        return $this->belongsTo(DifficultyLevel::class);
     }
 
     public function mcqOptions()

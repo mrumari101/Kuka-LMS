@@ -64,7 +64,7 @@
                                         @foreach ($questions as $question)
                                     <tr>
                                         <td class="align-middle white-space-nowrap">{{ $question->question_uid }}</td> <!-- Serial number -->
-                                        <th class="align-middle">{{$question->question_type}}</th>
+                                        <th class="align-middle">{{Str::ucfirst($question->question_type)}}</th>
                                         <th class="align-middle">{{$question->code}}</th>
                                         <th class="align-middle">{{$question->chapter->level->discipline->name}}</th>
                                         <th class="align-middle">{{$question->chapter->level->name}}</th>
@@ -89,6 +89,16 @@
                                         </td>
                                         <td class="text-end">
                                             <div class="d-inline-flex align-items-center gap-2">
+
+                                                <a href="{{ route('admin.questions.show',['question'=>$question->id]) }}"
+                                                   class="btn btn-link p-0"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top"
+                                                   title="View">
+                                                    <span class="text-500 fas fa-eye"></span>
+                                                </a>
+
+
 
                                                 {{-- Edit --}}
                                                 <a href="{{ route('admin.questions.edit', $question->id) }}"

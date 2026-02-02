@@ -33,6 +33,9 @@ return new class extends Migration
 
             $table->string('question_type');
 
+            $table->longText('mcq_description')->nullable();
+            $table->string('mcq_file')->nullable();
+
             $table->longText('question_description')->nullable();
             $table->string('question_file')->nullable();
 

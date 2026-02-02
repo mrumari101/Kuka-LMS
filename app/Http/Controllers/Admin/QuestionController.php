@@ -56,7 +56,12 @@ class QuestionController extends Controller
 
 
         try {
-            $result = $this->questionService->create($request->all());
+            // ✅ ONLY validated data
+            $data = $request->validated();
+
+
+
+            $result = $this->questionService->create($data);
             return redirect()
                 ->route('admin.questions.index')
                 ->with('success', 'Question created successfully.');
@@ -66,6 +71,12 @@ class QuestionController extends Controller
     }
 
     public function show(Question $question)
+    {
+        return view('admin.questions.view', compact('question'));
+    }
+
+
+    public function edit(Question $question)
     {
         $disciplines = $this->disciplineService->all();
         $difficultyLevels = $this->difficultyLevelService->all();
